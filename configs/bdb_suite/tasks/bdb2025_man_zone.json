@@ -1,0 +1,217 @@
+{
+  "schema_version": "bdb-task-spec-v2",
+  "task_id": "bdb2025_man_zone",
+  "release_year": 2025,
+  "outcome_type": "binary",
+  "primary_metric": "brier",
+  "total_games": 136,
+  "development_games": 30,
+  "confirmatory_games": 106,
+  "outer_counts": {"train": 64, "calibration": 21, "test": 21},
+  "anchors": [10, 20, 30, 40, 50, 60],
+  "event_cutoff": {
+    "event": "frameType SNAP",
+    "fallback_rules": ["exclude a play with no SNAP frame", "left-pad fewer than 20 observed frames and mask the padding"]
+  },
+  "cohort": {
+    "description": "Man-versus-Zone prediction from the final 20 tracking frames through the snap",
+    "eligibility": ["isDropback is true", "pff_manZone is Man or Zone", "tracking contains a SNAP frame"],
+    "exclusions": ["non-dropbacks", "Other or missing coverage labels", "plays without a SNAP frame"],
+    "expected_examples": 9229,
+    "expected_games": 136
+  },
+  "features": {
+    "allowlist": [
+      "quarter", "down", "yardsToGo", "absoluteYardlineNumber", "gameClockSeconds",
+      "preSnapHomeScore", "preSnapVisitorScore", "preSnapHomeTeamWinProbability",
+      "preSnapVisitorTeamWinProbability", "expectedPoints", "possessionTeam", "defensiveTeam",
+      "offenseFormation", "receiverAlignment", "playClockAtSnap", "pre_snap_tracking"
+    ],
+    "denylist": [
+      "pff_manZone", "pff_passCoverage", "passResult", "passLength", "targetX", "targetY",
+      "playAction", "dropbackType", "dropbackDistance", "passLocationType", "timeToThrow",
+      "timeInTackleBox", "timeToSack", "passTippedAtLine", "unblockedPressure",
+      "rushLocationType", "yardsGained", "expectedPointsAdded", "pff_runConceptPrimary",
+      "pff_runConceptSecondary", "pff_runPassOption"
+    ],
+    "channels": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other"
+    ],
+    "coordinate_normalization": "mirror leftward plays in x and y, rotate vectors 180 degrees, center each frame on the football, and left-pad to 20 frames"
+  },
+  "outcome": {
+    "target": "pff_manZone equals Man",
+    "positive_label": "Man",
+    "negative_label": "Zone",
+    "null_model": "Jeffreys-smoothed training-subset Man prevalence"
+  },
+  "prepared_contract": {
+    "schema_version": "bdb-prepared-semantics-v2",
+    "task_id": "bdb2025_man_zone",
+    "outcome_type": "binary",
+    "primary_metric": "brier",
+    "examples": 9229,
+    "games": 136,
+    "tabular_feature_order": [
+      "quarter", "down", "yardsToGo", "absoluteYardlineNumber", "gameClockSeconds",
+      "preSnapHomeScore", "preSnapVisitorScore", "preSnapHomeTeamWinProbability",
+      "preSnapVisitorTeamWinProbability", "expectedPoints", "possessionTeam",
+      "defensiveTeam", "offenseFormation", "receiverAlignment", "playClockAtSnap"
+    ],
+    "channel_names": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other"
+    ],
+    "arrays": {
+      "player_tokens": {"axes": ["example", "time", "tracked_object", "channel"], "shape": [9229, 20, 23, 24], "dtype": "float32"},
+      "player_mask": {"axes": ["example", "time", "tracked_object"], "shape": [9229, 20, 23], "dtype": "bool"},
+      "frame_mask": {"axes": ["example", "time"], "shape": [9229, 20], "dtype": "bool"},
+      "y": {"axes": ["example"], "shape": [9229], "dtype": "int8"},
+      "target_values": null,
+      "target_mask": null,
+      "target_baseline": null
+    },
+    "support": null,
+    "mask_contract": {
+      "player_mask": {
+        "meaning": "true_iff_tracked_object_slot_is_observed",
+        "observed_frame_slot_layout": "stable_per_play_slots_with_sparse_observation",
+        "slot_identity": "alignment_only_never_a_model_feature",
+        "masked_token_value": 0.0,
+        "requires_observed_frame": true
+      },
+      "frame_mask": {"meaning": "true_iff_time_slot_is_observed_not_padding", "layout": "left_padded"},
+      "target_mask": null
+    },
+    "target_contract": {
+      "encoding": "zero_one",
+      "examples_target": "equals_y",
+      "model_output": "positive_class_probability"
+    },
+    "adapter_metadata": {
+      "cutoff": "SNAP frame",
+      "history_frames": 20,
+      "padding": "left, masked",
+      "stable_player_slots": "play_global_focal_independent_v1; nflId alignment only and never encoded",
+      "graph": "identity-preserving quarterback, receiver, and defender temporal relations",
+      "infer_offensive_qb_as_focal": true,
+      "time_to_snap": "derived from the masked 10 Hz frame index",
+      "team_identity_primary": "excluded",
+      "team_identity_sensitivity": "prespecified include_team_identity",
+      "structural_ablation": "final_snapshot_only",
+      "positive_label": "Man",
+      "tabular_columns": [
+        "quarter", "down", "yardsToGo", "absoluteYardlineNumber", "gameClockSeconds",
+        "preSnapHomeScore", "preSnapVisitorScore", "preSnapHomeTeamWinProbability",
+        "preSnapVisitorTeamWinProbability", "expectedPoints", "possessionTeam",
+        "defensiveTeam", "offenseFormation", "receiverAlignment", "playClockAtSnap"
+      ],
+      "forbidden_model_columns": [
+        "pff_manZone", "pff_passCoverage", "passResult", "passLength", "targetX", "targetY",
+        "playAction", "dropbackType", "dropbackDistance", "passLocationType", "timeToThrow",
+        "timeInTackleBox", "timeToSack", "passTippedAtLine", "unblockedPressure",
+        "rushLocationType", "yardsGained", "expectedPointsAdded", "pff_runConceptPrimary",
+        "pff_runConceptSecondary", "pff_runPassOption"
+      ],
+      "learned_preprocessing": "split-local only"
+    },
+    "semantic_hash": "b1ababd951e3b06b8cad81a10fa32b007e273ba533d7ba8ed2c1d4fd046d5739"
+  },
+  "history": {
+    "scope": "causal_tracking_history",
+    "endpoint": "SNAP frame, inclusive",
+    "max_frames": 20,
+    "padding": "left_masked",
+    "stable_player_slots": true,
+    "slot_policy": "play_global_focal_independent_v1"
+  },
+  "graph": {
+    "node_types": ["quarterback", "eligible_receiver", "defender", "football"],
+    "edge_types": ["receiver_defender", "defender_defender", "receiver_receiver", "quarterback_receiver"],
+    "construction": "identity-preserving defender-receiver mirroring and assignment relations at every pre-snap frame",
+    "masked_aggregation": "observed_nodes_and_edges_only"
+  },
+  "identity_policy": {
+    "player_ids": "stable_slot_assignment_only",
+    "player_id_feature": false,
+    "team_identity_primary": false,
+    "team_identity_sensitivity": true
+  },
+  "model_roles": {
+    "primary": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"],
+    "shared_tabular_summary": true,
+    "shared_neural_inputs": ["tokenization", "causal_history", "player_and_frame_masks", "time_to_event", "context", "output_head", "loss", "tuning_grid", "seeds", "training_protocol"],
+    "relational_pair_shared_inputs": ["graph_edges", "relational_temporal_encoder"],
+    "set_transformer_structure": {"relation_scope": "global_masked_all_player_self_attention", "typed_graph_edges_consumed": false, "temporal_encoder": "factorized_masked_temporal_attention"},
+    "parameter_match_tolerance_fraction": 0.05,
+    "flop_match_tolerance_fraction": 0.15,
+    "neural_parameter_cap": 350000
+  },
+  "output_head": {
+    "id": "binary_probability_v1",
+    "prediction": "pre-snap Man probability",
+    "training_loss": "log_loss"
+  },
+  "uncertainty": {
+    "primary_method": "out_of_game_venn_abers_calibration_v1",
+    "secondary_diagnostic": "raw_score_class_conditional_conformal_sets_v1",
+    "secondary_score_source": "raw_model_score",
+    "field_intersection": null,
+    "horizon_scale_learner": null,
+    "calibration_unit": "game",
+    "nominal_coverage": 0.9,
+    "report": ["labelwise_coverage", "singleton_rate", "doubleton_rate", "venn_abers_ambiguity"]
+  },
+  "joint_neural_target_selection": null,
+  "structural_ablation": {
+    "id": "final_snapshot_only",
+    "description": "retain only the SNAP frame while preserving player slots, relations, and output head",
+    "models": ["relnet", "attn_relnet"],
+    "anchors": [20, 60],
+    "repeats": 20
+  },
+  "sensitivities": [
+    {
+      "id": "include_team_identity",
+      "description": "add team identity to the otherwise unchanged models",
+      "selection": "frozen_prespecified",
+      "execution": {
+        "profile": "sensitivity20",
+        "repeats": 20,
+        "anchors": [20, 60],
+        "models": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"],
+        "prepared_variant": "primary"
+      }
+    }
+  ],
+  "models": {
+    "linear_structure": {"role": "linear_structure", "family": "glm", "display_name": "Linear-Structure", "alpha_grid": [10.0, 3.3333333333333335, 1.0, 0.3333333333333333, 0.1]},
+    "boosted_structure": {"role": "boosted_structure", "family": "lightgbm", "display_name": "Boosted-Structure", "grid_id": "bdb_suite_lgbm_four_v1"},
+    "relnet": {"role": "relnet", "family": "relnet", "display_name": "RelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "attn_relnet": {"role": "attn_relnet", "family": "attn_relnet", "display_name": "AttnRelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "set_transformer": {"role": "set_transformer", "family": "set_transformer", "display_name": "Global Set Transformer", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]}
+  },
+  "artifacts": {
+    "metrics": ["raw_brier", "game_equal_brier", "game_equal_calibrated_brier", "raw_log_loss", "skill", "calibration_bias", "rms_reliability", "mean_entropy", "p90_va_imprecision", "label0_set_coverage", "label1_set_coverage", "set_singleton_rate", "set_doubleton_rate", "set_empty_rate"],
+    "predictions": ["raw_probability", "venn_abers_probability", "venn_abers_p0", "venn_abers_p1", "set_includes_0", "set_includes_1", "conformal_set_size"]
+  },
+  "source_receipts": [],
+  "source_tree_receipts": [
+    {
+      "schema_version": "bdb-source-tree-receipt-v1",
+      "source_id": "nfl_big_data_bowl_2025",
+      "receipt_path": "configs/bdb_suite/sources/bdb2025_local.json",
+      "receipt_sha256": "d716ee67fbf5f56731590103b176a21d1bb781aefecda12c1777568e855baf83",
+      "tree_sha256": "9601409a6df8d0b57e22dea5362d419162195af7df663ed888f73a4ca5c89af0",
+      "destination": "data/bdb2025/raw",
+      "file_count": 13,
+      "byte_count": 8171097577
+    }
+  ],
+  "shared_game_registry_with": "bdb2024_tackle"
+}

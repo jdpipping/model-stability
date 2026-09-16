@@ -1,0 +1,143 @@
+{
+  "schema_version": "cassis2026-ggplot-figures-v1",
+  "figures": [
+    {
+      "file": "backup_full_rushing.png",
+      "bytes": 281679,
+      "sha256": "b26ed9350230e137fa9966682014619b5aa589b17227f99dc6333acedb124efd",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "backup_simultaneous_inference.png",
+      "bytes": 63433,
+      "sha256": "db87fd66f680e51da686f2e6917ff0293af4579aab7d6f690242b5cd4f10d9d1",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "completed_problem_scope.png",
+      "bytes": 106386,
+      "sha256": "49587b64572708a70c9366b2b718abc5e77d216066a6c059ebd1796a5ad41547",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "manzone_actual_plays.png",
+      "bytes": 103094,
+      "sha256": "a25e77d77510755973817d3b4e8803710e5794b1c5d5a483df3a3ce9d6324c03",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "manzone_results.png",
+      "bytes": 261608,
+      "sha256": "ed77426964d75547d71a164fce4d2fe55e5c33b32c0642185b1ca9159e5840a6",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "model_input_views.png",
+      "bytes": 109196,
+      "sha256": "9ba9316a46964b0590c12395020bd6cc2f82194d6aefb7646308af1a4b4cded1",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "model_selection_summary.png",
+      "bytes": 114904,
+      "sha256": "e148de9c84868e47c02c28e77f7d1bf1791a47688021d6a5a8904406b9802d88",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "neural_aggregation_rushing.png",
+      "bytes": 189694,
+      "sha256": "242768a0c4ad388bec473cfab52ebc4f082a3d37005a1285d9137375ca159749",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "neural_interactions_rushing.png",
+      "bytes": 139652,
+      "sha256": "e9e068f91d92849bd140b43055fba1f7730d53bb41c39060bdb7d2a0639bf002",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "neural_interactions.png",
+      "bytes": 165548,
+      "sha256": "24f4ba5c2ab36bd63169c11aa8dda83b3ae5d0a2427274bb1d4a8ac39488898e",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "repeated_game_splits.png",
+      "bytes": 85271,
+      "sha256": "ae185398dfb39d1391ddff7d3b41770904f6e2a10475c5b012e9e159e9c6f344",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "rushing_accuracy.png",
+      "bytes": 205948,
+      "sha256": "97045a51d5e29bf4acabad2eb6be49ae634be6f1bfa48673a1afb73019902e6f",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "rushing_actual_play.png",
+      "bytes": 70018,
+      "sha256": "a71f9779bd7e75f0594714e60ba3d636a948f47c14969d4cd16e57939c88d1e7",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "rushing_central_actual.png",
+      "bytes": 48911,
+      "sha256": "a4a3965a15a341be8caf187c1f3450bead07a9d22bf8655a502af8b1af39e003",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "rushing_conformal_actual.png",
+      "bytes": 65806,
+      "sha256": "4ec682948a207d9296e2cee921a808670514d9910e2aac7c7bd033b471a61ecd",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "rushing_coverage_width.png",
+      "bytes": 111825,
+      "sha256": "f7c989e19f9a0aa766d6651a8afb661747f3ed1f8c94ff54db97690d9a7693e5",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "rushing_crps_actual.png",
+      "bytes": 122597,
+      "sha256": "38c34cf42069958d84fa70193d53a9a406e1afb3b71687174f1fda2b0fc25a0d",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "rushing_distribution.png",
+      "bytes": 83945,
+      "sha256": "1b0226c088833348573abd8d194b7e416e9b113f872ad26a38b9b201fdcc28eb",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "rushing_winner_row.png",
+      "bytes": 57843,
+      "sha256": "4cf545844b1553c17c8be9b5a76ca02f0d33e004d3780362cc8f786dfdb89729",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "sample_units.png",
+      "bytes": 133608,
+      "sha256": "46088185a206e9756549a14abf9c2516acabc666c697cd4fc76dff7e06223715",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "supported_winner_matrix.png",
+      "bytes": 116439,
+      "sha256": "21eb68176ed44b163565ff57ac719cd176d09fe1b9047c869179eb74952444fe",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "tracking_intro_chubb.png",
+      "bytes": 78798,
+      "sha256": "872e4def33dd7f15456b0858a625570cabcb11e0224c5b0d628096e222d57e7f",
+      "generated_by": "build_figures.R / ggplot2"
+    },
+    {
+      "file": "trust_framework.png",
+      "bytes": 58019,
+      "sha256": "dc7317ab7eb4f346730493a99cae4d1b390362da0b1ecb4e2c2b724152cbc921",
+      "generated_by": "build_figures.R / ggplot2"
+    }
+  ]
+}

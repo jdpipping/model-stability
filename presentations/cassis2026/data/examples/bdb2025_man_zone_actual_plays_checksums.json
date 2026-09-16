@@ -1,0 +1,12 @@
+{
+  "schema_version": "cassis2026-example-checksums-v1",
+  "sha256": {
+    "configs/bdb_suite/sources/bdb2025_local.json": "a98f030212f5a8fcce8fa189482d3e51e4fa3746102500215679053e52790cb6",
+    "configs/bdb_suite/tasks/bdb2025_man_zone.json": "beef3cfbf3bde9f3a3e45125b731ad86b5f3f2dae689de630f929b8a4c4a4fd8",
+    "presentations/cassis2026/data/examples/bdb2025_game_2022090800_play_1563_snap.csv": "4a862f4573fbd8bd1e908a9de2a8b7695898f1c1b7470e6f5be92b787c12fdf7",
+    "presentations/cassis2026/data/examples/bdb2025_game_2022090800_play_2979_snap.csv": "10e3817d4c3571beac0cf675c17d954cc30b3fc5e09d5b4f8fbfc8d2772354f5",
+    "presentations/cassis2026/data/examples/bdb2025_man_zone_actual_play_metadata.csv": "a93fef39a4f65278f8e0c93292b789e8aa1a477c8a36b2caacfb85fbacf56ba5",
+    "presentations/cassis2026/data/examples/bdb2025_man_zone_actual_plays_provenance.json": "d843538d625f663111b7767d771fe4d6542df9241ebf95a1316bcbfb7e550ec8",
+    "presentations/cassis2026/extract_actual_play_examples.py": "fdaddf1dbe2dfd0d02a6849292aa9c012147845d862f65449b25a3b28d2bd96b"
+  }
+}

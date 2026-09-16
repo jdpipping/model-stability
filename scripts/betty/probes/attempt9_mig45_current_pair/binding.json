@@ -1,0 +1,177 @@
+{
+  "assertions": {
+    "allocation_shape": "independent_allocations",
+    "bdb2021_paired_repeat_match": true,
+    "full_diagnostic_equal": true,
+    "preflight_contract_equal": true,
+    "predictive_scores_inspected": false,
+    "terminal_green": true
+  },
+  "binding_hash": "3e81c1a177d85465524ab75765cf3e9d22a2f868b11d60e4139fb468eeb3a6a8",
+  "execution_receipts": {
+    "run_a": {
+      "path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_a_execution.json",
+      "sha256": "4b4fc76262c5b92e804e0039b2392394ba861601d4f2ff20b62ae47ae4629ced",
+      "sidecar_path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_a_execution.json.sha256",
+      "sidecar_sha256": "769702ef8be8ddee2a4034ab205f3b72f3d36b3e620a5d9dea1407a9e7d40d32",
+      "source_copy_path": "hpc/betty/probes/attempt9_mig45_current_pair/run_a_execution.json",
+      "source_copy_sidecar_path": "hpc/betty/probes/attempt9_mig45_current_pair/run_a_execution.json.sha256"
+    },
+    "run_b": {
+      "path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_b_execution.json",
+      "sha256": "2672946243b0ae7e45c3e3611bc0ecde40788b035b1156307de393a29466c7c9",
+      "sidecar_path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_b_execution.json.sha256",
+      "sidecar_sha256": "b71e2fd36db845a246cc927b4d811d4d1058ad5465bde5cefbdc2be8868ef2a2",
+      "source_copy_path": "hpc/betty/probes/attempt9_mig45_current_pair/run_b_execution.json",
+      "source_copy_sidecar_path": "hpc/betty/probes/attempt9_mig45_current_pair/run_b_execution.json.sha256"
+    }
+  },
+  "probe_id": "attempt9_mig45_current_pair",
+  "raw_comparison": {
+    "path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/comparison.json",
+    "probe_hash": "ad790e2cb3929ea5b535f69fcc93dd5d1e9ec77bc237489ad8f990c253b2efe1",
+    "schema_version": "bdb2021-attn-determinism-probe-v1",
+    "sha256": "5ab3df14ec6fdbd7b1b3e7510190d63ea413f6f3a830c1efba1a477a2901a79b",
+    "sidecar_path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/comparison.json.sha256",
+    "sidecar_sha256": "d6d2ccefb12f4b04192b69ba820fcf5c46e02715bf0981397b0c43a5b899dfe1",
+    "source_copy_path": "hpc/betty/probes/attempt9_mig45_current_pair/comparison.json",
+    "source_copy_sidecar_path": "hpc/betty/probes/attempt9_mig45_current_pair/comparison.json.sha256"
+  },
+  "sacct_jobs": [
+    {
+      "account": "ajw-wharton",
+      "alloc_tres": "billing=250,cpu=6,gres/gpu:45gb=1,gres/gpu=1,mem=56G,node=1",
+      "elapsed": "00:02:01",
+      "end": "2026-08-22T18:46:46",
+      "exit_code": "0:0",
+      "job_id": "7784273",
+      "node_list": "dgx028",
+      "partition": "b200-mig45",
+      "qos": "wharton-dgx-b200",
+      "start": "2026-08-22T18:44:45",
+      "state": "COMPLETED"
+    },
+    {
+      "account": "ajw-wharton",
+      "alloc_tres": "billing=250,cpu=6,gres/gpu:45gb=1,gres/gpu=1,mem=56G,node=1",
+      "elapsed": "00:02:01",
+      "end": "2026-08-22T18:46:46",
+      "exit_code": "0:0",
+      "job_id": "7784274",
+      "node_list": "dgx028",
+      "partition": "b200-mig45",
+      "qos": "wharton-dgx-b200",
+      "start": "2026-08-22T18:44:45",
+      "state": "COMPLETED"
+    },
+    {
+      "account": "ajw-wharton",
+      "alloc_tres": "billing=120,cpu=12,mem=66G,node=1",
+      "dependency": "afterok:7784273:7784274",
+      "elapsed": "00:01:12",
+      "end": "2026-08-22T18:48:57",
+      "exit_code": "0:0",
+      "job_id": "7784275",
+      "node_list": "epyc-2-10",
+      "partition": "genoa-std-mem",
+      "qos": "wharton-genoa",
+      "start": "2026-08-22T18:47:45",
+      "state": "COMPLETED"
+    }
+  ],
+  "schema_version": "bdb-betty-gpu-determinism-probe-binding-v2",
+  "scientific_run_bindings": {
+    "frozen_task": {
+      "path": "configs/bdb_suite/frozen/bdb2021_completion.json",
+      "sha256": "3306a54eb4db6bf7d0a09d2e4312df30bbf797c3d7c1bb1f0bce7ad316a86b14",
+      "source_copy_path": "hpc/betty/probes/attempt9_mig45_current_pair/bdb2021_completion.json",
+      "task_spec_hash": "f4e2cf180ad8732db1d1b1d43b8b5185224f0945d4d04e37e658ece0665a3cca"
+    },
+    "run_manifests": {
+      "run_a": {
+        "manifest_hash": "bc8fe1e808b7405b5246123ac1563ba7c70982e5b685e0570b0ea1b64653088a",
+        "path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_a/manifest.json",
+        "sha256": "c45766f1d4a41fe870e795d44cd212104b5b03778f8b64dcfc70e07495c718e5",
+        "sidecar_path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_a/manifest.json.sha256",
+        "sidecar_sha256": "59f7765fc489627c473537479d81c9d3d595a8ac062280b4e98a8450d54fb007",
+        "source_copy_path": "hpc/betty/probes/attempt9_mig45_current_pair/manifest.json",
+        "source_copy_sidecar_path": "hpc/betty/probes/attempt9_mig45_current_pair/manifest.json.sha256"
+      },
+      "run_b": {
+        "manifest_hash": "bc8fe1e808b7405b5246123ac1563ba7c70982e5b685e0570b0ea1b64653088a",
+        "path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_b/manifest.json",
+        "sha256": "c45766f1d4a41fe870e795d44cd212104b5b03778f8b64dcfc70e07495c718e5",
+        "sidecar_path": "data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_b/manifest.json.sha256",
+        "sidecar_sha256": "59f7765fc489627c473537479d81c9d3d595a8ac062280b4e98a8450d54fb007",
+        "source_copy_path": "hpc/betty/probes/attempt9_mig45_current_pair/manifest.json",
+        "source_copy_sidecar_path": "hpc/betty/probes/attempt9_mig45_current_pair/manifest.json.sha256"
+      }
+    }
+  },
+  "source_bindings": {
+    "bdb2021_adapter": {
+      "path": "bdb_study/adapters/bdb2021.py",
+      "sha256": "cada93da5d1a2ee9553289134324d673a9a6eadd27e903d7bd8fbe156e1df138"
+    },
+    "bdb_adapter_common": {
+      "path": "bdb_study/adapters/common.py",
+      "sha256": "91cbcf31cf807e8bf73fd8377a3e096ae04631398366e2f60b04fbe436c8d1df"
+    },
+    "bdb_determinism": {
+      "path": "bdb_study/determinism.py",
+      "sha256": "439e34c1c7e4c97692c3bdb5bdcef73a8848225a3a8789e0a972e27fc8047231"
+    },
+    "bdb_metrics": {
+      "path": "bdb_study/metrics.py",
+      "sha256": "695f36fe165d2e09bb4b3d64202e195279ef23107b02067ae02f7e73eb512e0a"
+    },
+    "bdb_models": {
+      "path": "bdb_study/models.py",
+      "sha256": "6da20b25efbc10edd572cb17dd1b0b3ab2ea34d824117af474cb0de74ec23573"
+    },
+    "bdb_representations": {
+      "path": "bdb_study/representations.py",
+      "sha256": "f8acdb021450fa5dad4ff4ae1e5c5ac3d93474746234359189e48f00ebc9b79b"
+    },
+    "bdb_requirements_lock": {
+      "path": "configs/bdb_suite/requirements-lock.txt",
+      "sha256": "019d119aff06aa73aca55f144fd78ea54d86d0804c31c2ef6a27483fe9108a67"
+    },
+    "bdb_runner": {
+      "path": "bdb_study/runner.py",
+      "sha256": "48373444fabb3318cf7bfc220f22bdf4b87d1360d723318f12fd34f8a9a83578"
+    },
+    "common": {
+      "path": "hpc/betty/common.sh",
+      "sha256": "921184268660366354976bc5bf82641ff50114a6e1d112530b3e36a21b7f18c9"
+    },
+    "compare_wrapper": {
+      "path": "hpc/betty/cpu.sbatch",
+      "sha256": "8f20100ea40fad2773302911e7fb48a3198458d91182028bf546d7379229e553"
+    },
+    "gpu_wrapper": {
+      "cpus_per_task": 6,
+      "gpu_memory_gb": 45,
+      "gpu_type": "b200",
+      "path": "hpc/betty/mig45_6cpu.sbatch",
+      "sha256": "a845be13cebe4c20e0d53ca6c8b9a6a042a1196336f0574760d3bbf58c2844e2"
+    },
+    "neural_models": {
+      "path": "neural_models.py",
+      "sha256": "8ea2929df39ed7cb719e8d67f0adcf83c8aa15de44102bfd11013b121903951e"
+    },
+    "probe": {
+      "path": "hpc/betty/probe_bdb2021_determinism.py",
+      "sha256": "aa5c7a21dc1a48634d591862847f3e6549b74c052514333b2cdd629016460cbb"
+    },
+    "project_requirements_lock": {
+      "path": "requirements-lock.txt",
+      "sha256": "1e1fa7b32c8e22102cfbb94041f09414e0d6fc92c7007d1ccbc0e42bfe39441a"
+    }
+  },
+  "submit_lines": {
+    "compare": "sbatch --parsable --dependency=afterok:7784273:7784274 --export=ALL,ZOO_BETTY_PROJECT_HOST=/vast/projects/ajw/wharton/jpipping/zoo-bdb-v2,ZOO_BETTY_PROJECT=/workspace/zoo-bdb-v2 --job-name=bdb21-det-m45-compare --time=00:15:00 hpc/betty/cpu.sbatch python3 hpc/betty/probe_bdb2021_determinism.py compare --project-root /workspace/zoo-bdb-v2 --run-a /workspace/zoo-bdb-v2/data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_a --run-b /workspace/zoo-bdb-v2/data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_b --allocation-shape independent_allocations --output /workspace/zoo-bdb-v2/data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/comparison.json",
+    "run_a": "sbatch --parsable --export=ALL,ZOO_BETTY_PROJECT_HOST=/vast/projects/ajw/wharton/jpipping/zoo-bdb-v2,ZOO_BETTY_PROJECT=/workspace/zoo-bdb-v2 --job-name=bdb21-det-m45-a --time=01:00:00 hpc/betty/mig45_6cpu.sbatch python3 hpc/betty/probe_bdb2021_determinism.py run-one --project-root /workspace/zoo-bdb-v2 --run-dir /workspace/zoo-bdb-v2/data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_a --receipt /workspace/zoo-bdb-v2/data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_a_execution.json --tf32-mode default",
+    "run_b": "sbatch --parsable --export=ALL,ZOO_BETTY_PROJECT_HOST=/vast/projects/ajw/wharton/jpipping/zoo-bdb-v2,ZOO_BETTY_PROJECT=/workspace/zoo-bdb-v2 --job-name=bdb21-det-m45-b --time=01:00:00 hpc/betty/mig45_6cpu.sbatch python3 hpc/betty/probe_bdb2021_determinism.py run-one --project-root /workspace/zoo-bdb-v2 --run-dir /workspace/zoo-bdb-v2/data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_b --receipt /workspace/zoo-bdb-v2/data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_b_execution.json --tf32-mode default"
+  }
+}

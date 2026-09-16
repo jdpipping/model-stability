@@ -1,0 +1,102 @@
+{
+  "schema_version": "bdb-protocol-amendment-v1",
+  "amendment_id": "20260821_global_set_transformer_primary",
+  "decision_time_utc": "2026-08-21T07:24:25Z",
+  "evidence_status": "outcome_blind_before_pilot_result_exposure",
+  "campaign_disposition": {
+    "withdrawn_campaign": "pilot10_attempt2",
+    "replacement_campaign": "pilot10_attempt3",
+    "withdrawal_boundary": "before_any_final_aggregate_or_scientific_result_was_inspected",
+    "full100_launched": false,
+    "attempt2_campaign_hash": "96c39edb8dc84282293c70fc456a77f3e18f2956a486c84df6f1b79e20de7f03",
+    "attempt2_terminal_job_id": 7725228,
+    "attempt2_submitted_job_ids": 710,
+    "attempt2_initially_active_cancellation_targets": 651,
+    "attempt2_receipt_sidecar_sha256": "a744ad5e825359fe961a5cda70b6d30d03c22035de43bd52b318cd6c3ac45ae7",
+    "attempt2_receipt_content_sha256": "a744ad5e825359fe961a5cda70b6d30d03c22035de43bd52b318cd6c3ac45ae7",
+    "attempt2_journal_sidecar_sha256": "84d381a98c292e6293cf05a308a333c650e4af6d8e864e829770b043fa4de81d",
+    "attempt2_journal_content_sha256": "84d381a98c292e6293cf05a308a333c650e4af6d8e864e829770b043fa4de81d",
+    "attempt2_embedded_journal_hash": "185f2ab1705f0c5e530941f576640989c59528558725c64fa040e176611051b7",
+    "pilot_outputs_created": 0,
+    "selected_development_receipts_created": 0,
+    "archived_uninspected_intermediates": {
+      "scores_opened_or_interpreted": false,
+      "total_files": 65,
+      "total_bytes": 1914039,
+      "inventories": [
+        {
+          "path": "data/bdb_suite_runs/archive/pilot10_attempt2_20260821/development",
+          "files": 57,
+          "bytes": 1908689,
+          "inventory_sha256": "97b937e2318872a5c112d4a95001ed9e382a489cd5d269088d7971c0492e6e43"
+        },
+        {
+          "path": "data/bdb_suite_runs/archive/pilot10_attempt2_20260821/development_runtime",
+          "files": 8,
+          "bytes": 5350,
+          "inventory_sha256": "c06f100c3bcbc6c1628cd40fcde58c4b4c7d7b66482eab1a1fc65ccd6aeb9bca"
+        }
+      ]
+    }
+  },
+  "reason": "Add a global permutation-invariant attention comparator that directly tests whether explicit typed football relations outperform unrestricted all-player set attention, while preserving the controlled RelNet-versus-AttnRelNet comparison.",
+  "primary_role_added": {
+    "role": "set_transformer",
+    "family": "set_transformer",
+    "display_name": "Global Set Transformer",
+    "representation": "the_same_causal_player_tokens_history_masks_time_context_output_head_loss_and_seeds_as_the_relational_neural_models",
+    "relation_scope": "global_masked_all_player_self_attention",
+    "development_grid": {
+      "learning_rates": [0.001, 0.0003],
+      "dropouts": [0.3, 0.1]
+    }
+  },
+  "unchanged_relational_test": {
+    "models": ["relnet", "attn_relnet"],
+    "structural_ablations_apply_only_to_these_models": true,
+    "parameter_match_tolerance_fraction": 0.05,
+    "flop_match_tolerance_fraction": 0.15,
+    "neural_parameter_cap": 350000
+  },
+  "bdb2026_joint_target_models": [
+    "relnet",
+    "attn_relnet",
+    "set_transformer"
+  ],
+  "profile_counts_per_task": {
+    "full50": {
+      "primary": 1200,
+      "structural_ablation": 0,
+      "frozen_sensitivity": 0,
+      "required": 1200
+    },
+    "pilot10": {
+      "primary": 300,
+      "structural_ablation": 0,
+      "frozen_sensitivity": 0,
+      "required": 300
+    },
+    "full100": {
+      "primary": 3000,
+      "structural_ablation": 80,
+      "frozen_sensitivity": 0,
+      "required": 3080
+    },
+    "sensitivity20": {
+      "primary": 0,
+      "structural_ablation": 0,
+      "frozen_sensitivity": 200,
+      "required": 200
+    }
+  },
+  "within_task_primary_multiplicity": {
+    "model_pairs": 10,
+    "anchors": 6,
+    "max_t_contrasts": 60
+  },
+  "cross_task_bdb2020_policy": {
+    "aligned_roles": ["glm", "lightgbm", "set_transformer"],
+    "legacy_only_role": "legacy_zoo_cnn",
+    "missing_roles_not_imputed": ["relnet", "attn_relnet"]
+  }
+}

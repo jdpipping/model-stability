@@ -1,0 +1,1362 @@
+/*-- scss:defaults --*/
+
+$body-bg: #ffffff;
+$body-color: #222222;
+$link-color: #C41230;
+$selection-bg: rgba(196, 18, 48, 0.18);
+
+$font-family-sans-serif: "Roboto", Arial, sans-serif !default;
+$presentation-heading-font: "Roboto Slab", "Times New Roman", serif !default;
+$font-family-monospace: "Source Code Pro", Menlo, Consolas, monospace;
+
+$presentation-font-size-root: 31px;
+$presentation-line-height: 1.25;
+$presentation-heading-color: #222222;
+$presentation-heading-font-weight: 500;
+$presentation-h2-font-size: 1.20em;
+$presentation-font-smaller: 0.60;
+$presentation-block-margin: 0.45em;
+
+$code-color: #b20e10 !default;
+$code-block-font-size: 0.67em;
+$code-block-border-color: #000000;
+$code-block-bg: #fafafa;
+
+/*-- scss:rules --*/
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../../../../../fonts/Roboto-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  src: url("../../../../../fonts/RobotoSlab-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Code Pro";
+  src: url("../../../../../fonts/SourceCodePro-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+:root {
+  --cmu-red: #C41230;
+  --ink: #222222;
+  --muted: #686868;
+  --light: #ececec;
+  --very-light: #f7f7f7;
+  --blue: #35618f;
+  --teal: #287271;
+  --gold: #d4a72c;
+}
+
+.reveal {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  box-sizing: border-box;
+  padding: 28px 64px 34px;
+}
+
+/* Keep the title anchored while vertically centering each slide's evidence in
+   the remaining canvas. This applies to ordinary, figure, and backup slides. */
+.reveal .slides section:not(#title-slide):not(.backup-divider) {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.reveal .slides section:not(#title-slide):not(.backup-divider) > h2 + :not(aside) {
+  margin-top: auto !important;
+}
+
+.reveal .slides section:not(#title-slide):not(.backup-divider) > :not(h2):not(aside):has(+ aside.notes) {
+  margin-bottom: auto !important;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  letter-spacing: -0.018em;
+  line-height: 1.08;
+  text-transform: none;
+}
+
+.reveal h2 {
+  padding-bottom: 10px;
+  margin: 0 0 0.30em;
+  max-width: 98%;
+}
+
+.reveal p,
+.reveal li {
+  line-height: 1.30;
+}
+
+.reveal strong {
+  font-weight: 700;
+}
+
+.reveal .red,
+.reveal .emph {
+  color: var(--cmu-red);
+}
+
+.reveal a {
+  color: var(--cmu-red);
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.13em;
+}
+
+.reveal code {
+  font-size: 0.9em !important;
+  line-height: 1.4;
+}
+
+.reveal .slide-number {
+  right: 22px;
+  bottom: 14px;
+  color: var(--cmu-red);
+  background: transparent;
+  font-size: 0.50em;
+  opacity: 0.92;
+}
+
+.reveal .footer {
+  left: 64px;
+  bottom: 13px;
+  color: #777777;
+  font-size: 0.42em;
+}
+
+.reveal .slide-menu-button {
+  display: none !important;
+}
+
+/* Quang Nguyen / CMSACamp title treatment, adapted for this talk. */
+.reveal .slides section#title-slide {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 96px;
+  text-align: left;
+}
+
+#title-slide .title {
+  color: var(--ink);
+  font-size: 2.55em;
+  font-weight: 500;
+  line-height: 1.04;
+  max-width: 1380px;
+  margin: 0 0 0.48em;
+}
+
+#title-slide .title-main {
+  display: block;
+}
+
+#title-slide .title-subtitle {
+  display: block;
+  max-width: 1280px;
+  margin-top: 0.42em;
+  color: var(--cmu-red);
+  font-size: 0.54em;
+  line-height: 1.18;
+}
+
+#title-slide .subtitle {
+  font-family: $font-family-sans-serif;
+  font-size: 1.10em;
+  color: var(--muted);
+  margin: 0 0 1.05em;
+}
+
+#title-slide .authors {
+  font-size: 0.88em;
+  line-height: 1.45;
+}
+
+#title-slide .affiliation {
+  color: var(--muted);
+  font-size: 0.88em;
+}
+
+/* Evidence-first slide layouts. */
+.reveal .figure-only h2,
+.reveal .tight-title h2 {
+  margin-bottom: 0.28em;
+}
+
+.reveal .figure-only p,
+.reveal .full-figure p {
+  margin: 0;
+}
+
+.reveal .figure-only img,
+.reveal .full-figure img,
+.reveal img.evidence {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  flex: 0 0 auto;
+  max-width: 100%;
+  max-height: 690px;
+  margin: 0.05em auto 0;
+  object-fit: contain;
+}
+
+.reveal .compact-figure img {
+  max-height: 500px;
+}
+
+.reveal .sample-size-repetitions {
+  width: 94%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .sample-size-repetitions .sample-size-intro {
+  margin: 0 0 0.8em;
+}
+
+.reveal .centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.reveal .center-text {
+  text-align: center;
+}
+
+.reveal .columns {
+  gap: 1.45rem;
+  align-items: center;
+}
+
+.reveal .column > :first-child {
+  margin-top: 0;
+}
+
+/* Big Data Bowl introduction adapted from the CMU seminar slide. */
+.reveal .tracking-intro-slide .bdb-figure {
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.reveal .tracking-intro-slide .bdb-figure img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 610px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.reveal .tracking-intro-slide .bdb-data-rate {
+  margin: 0.34em auto 0;
+  color: var(--muted);
+  font-size: 0.76em;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.reveal .tracking-intro-slide .bdb-data-rate strong {
+  color: var(--cmu-red);
+  font-family: $presentation-heading-font;
+  font-size: 1.20em;
+}
+
+/* Three dimensions revealed in sequence with identical visual weight. */
+.reveal .evaluation-framework .performance-list {
+  width: 90%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .performance-row {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 1.0em;
+  align-items: center;
+  min-height: 132px;
+  margin: 0.46em 0;
+  padding: 0.40em 0 0.52em;
+  border-top: 4px solid var(--ink);
+}
+
+.reveal .performance-term {
+  display: block;
+  font-family: $presentation-heading-font;
+  font-size: 1.28em;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.reveal .performance-row .performance-term {
+  color: var(--cmu-red);
+}
+
+.reveal .performance-row strong {
+  font-family: $presentation-heading-font;
+  font-size: 0.98em;
+}
+
+.reveal .performance-row p {
+  margin: 0.28em 0 0;
+  color: var(--muted);
+  font-size: 0.83em;
+}
+
+/* Genuine rushing play and its fitted distribution. */
+.reveal .rushing-example-slide .rushing-example-columns {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 0.85rem;
+}
+
+.reveal .rushing-example-slide .rushing-example-columns img {
+  display: block;
+  width: 100%;
+  max-height: 575px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.reveal .rushing-example-note {
+  width: 94%;
+  margin: 0.38em auto 0;
+  padding-top: 0.42em;
+  border-top: 1px solid #d3d3d3;
+  color: var(--muted);
+  font-size: 0.85em;
+  text-align: center;
+}
+
+.reveal .two-view.representation-views {
+  grid-template-rows: repeat(4, auto);
+  row-gap: 0;
+}
+
+/* Shared rows keep corresponding paragraphs aligned despite line wrapping. */
+.reveal .representation-views .view-block {
+  display: grid;
+  grid-row: 1 / span 4;
+  grid-template-rows: subgrid;
+}
+
+.reveal .representation-views .view-block p {
+  margin: 0.42em 0;
+  font-size: 0.88em;
+  line-height: 1.30;
+}
+
+/* Split conformal, taught before the problem-specific construction. */
+.reveal .conformal-lede {
+  width: 91%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: $presentation-heading-font;
+  font-size: 1.12em;
+  line-height: 1.22;
+}
+
+.reveal .conformal-overview {
+  width: 91%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .conformal-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  width: 100%;
+  margin: 1.4em 0 0;
+}
+
+.reveal .conformal-steps > div {
+  min-height: 260px;
+  padding-top: 0.48em;
+  border-top: 5px solid var(--ink);
+}
+
+.reveal .conformal-steps > div:nth-child(2),
+.reveal .conformal-steps > div:nth-child(3) {
+  border-color: var(--cmu-red);
+}
+
+.reveal .conformal-steps span {
+  display: block;
+  margin-bottom: 0.34em;
+  color: var(--cmu-red);
+  font-family: $presentation-heading-font;
+  font-size: 0.62em;
+  font-weight: 700;
+}
+
+.reveal .conformal-steps strong {
+  display: block;
+  font-family: $presentation-heading-font;
+  font-size: 0.98em;
+}
+
+.reveal .conformal-steps p {
+  margin: 0.40em 0 0;
+  color: var(--muted);
+  font-size: 0.90em;
+  line-height: 1.28;
+}
+
+.reveal .conformal-overview .calibration-definition {
+  margin: 0;
+  font-size: 1.08em;
+  line-height: 1.30;
+}
+
+/* Closing summary and pathwise limitation. */
+.reveal .closing-lede {
+  width: 92%;
+  max-width: 1380px;
+  margin: 0 auto 0.72em;
+  font-family: $presentation-heading-font;
+  font-size: 0.94em;
+  line-height: 1.22;
+}
+
+.reveal .closing-discussion {
+  width: 90%;
+  max-width: 1340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .closing-discussion .closing-question {
+  margin: 0 0 1.15em;
+  font-family: $presentation-heading-font;
+  font-size: 1.14em;
+  line-height: 1.30;
+}
+
+.reveal .closing-discussion .closing-points {
+  display: block;
+  margin: 0;
+  padding-left: 1.1em;
+  font-size: 1.06em;
+}
+
+.reveal .closing-discussion .closing-points > li {
+  margin: 0;
+  padding-left: 0.2em;
+  line-height: 1.4;
+}
+
+.reveal .closing-discussion .closing-points > li + li {
+  margin-top: 0.95em;
+}
+
+.reveal .closing-sample,
+.reveal .closing-future {
+  width: 92%;
+  max-width: 1380px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.30;
+}
+
+.reveal .closing-sample {
+  margin-top: 0.86em;
+  font-family: $presentation-heading-font;
+  font-size: 0.96em;
+}
+
+.reveal .closing-future {
+  margin-top: 0.80em;
+  padding-top: 0.65em;
+  border-top: 1px solid #d0d0d0;
+  color: var(--muted);
+  font-size: 0.87em;
+}
+
+.reveal .closing-future strong {
+  display: block;
+  color: var(--cmu-red);
+  font-family: $presentation-heading-font;
+}
+
+.reveal .closing-future p {
+  margin: 0.25em 0 0;
+}
+
+/* The worked calibration follows the same left-to-right sequence as its intro. */
+.reveal .calibration-walkthrough {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 38px;
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .calibration-walkthrough > div {
+  border-top: 4px solid var(--ink);
+  padding-top: 12px;
+}
+
+.reveal .calibration-walkthrough > div:last-child {
+  border-color: var(--cmu-red);
+}
+
+.reveal .calibration-walkthrough span {
+  display: inline-block;
+  color: var(--cmu-red);
+  margin-right: 0.45em;
+  font-size: 0.80em;
+  font-weight: 700;
+}
+
+.reveal .calibration-walkthrough strong {
+  font-family: $presentation-heading-font;
+  font-size: 0.91em;
+}
+
+.reveal .calibration-walkthrough p {
+  color: var(--muted);
+  font-size: 0.80em;
+  margin: 0.45em 0 0;
+}
+
+.reveal .calibration-example {
+  margin: 26px auto 0;
+  width: 98%;
+  align-items: center;
+}
+
+.reveal .calibration-example img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  margin: 0;
+}
+
+.reveal .calibration-example .column:last-child {
+  font-size: 0.78em;
+}
+
+.reveal .calibration-example .katex-display {
+  font-size: 0.96em;
+  margin: 0.55em 0;
+}
+
+/* Keep the example fixed in place while revealing padding and its explanation. */
+.reveal .rushing-calibration-slide .calibration-example {
+  display: flex;
+  width: 100%;
+  gap: 28px;
+}
+
+.reveal .rushing-calibration-slide .calibration-example > .column {
+  box-sizing: border-box;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.reveal .interval-reveal {
+  position: relative;
+  width: 100%;
+}
+
+.reveal .interval-reveal img {
+  display: block;
+  width: 100%;
+  max-height: none;
+  margin: 0;
+}
+
+.reveal .interval-reveal p {
+  margin: 0;
+}
+
+.reveal .interval-reveal .interval-expanded {
+  position: absolute;
+  inset: 0;
+}
+
+.reveal .calibration-example .interval-steps {
+  font-size: 0.88em;
+  padding-right: 12px;
+}
+
+.reveal .interval-steps > div + div {
+  margin-top: 42px;
+}
+
+.reveal .interval-steps h3 {
+  color: var(--cmu-red);
+  font-size: 1.04em;
+  margin: 0 0 0.38em;
+}
+
+.reveal .interval-steps p {
+  font-size: 1em;
+  margin: 0;
+  line-height: 1.30;
+}
+
+.reveal .interval-example-label {
+  width: 96%;
+  margin: 22px auto 0;
+  color: var(--muted);
+  font-size: 0.84em;
+  text-align: center;
+}
+
+.reveal .comparison-stack {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .comparison-row {
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 18px;
+}
+
+.reveal .comparison-row:first-child {
+  border-top: 3px solid var(--ink);
+  padding-top: 18px;
+}
+
+.reveal .comparison-row + .comparison-row {
+  margin-top: 18px;
+}
+
+.reveal .comparison-row.max-t-row {
+  border-bottom-color: var(--cmu-red);
+}
+
+.reveal .loss-comparison .max-t-summary {
+  margin-top: 0;
+  border-top: 0;
+}
+
+.reveal .comparison-row h3 {
+  font-size: 1.08em;
+  margin: 0 0 0.40em;
+}
+
+.reveal .comparison-row p {
+  font-size: 0.88em;
+  margin: 0.32em 0;
+}
+
+.reveal .comparison-row .katex-display {
+  margin: 0.45em 0;
+}
+
+.reveal .limitations-content {
+  width: 86%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .limitations-content .limitations-current {
+  font-size: 1.12em;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.reveal .limitations-next-steps {
+  display: block;
+  margin: 1.25em 0 0;
+  padding-left: 1.1em;
+  font-size: 1.08em;
+  line-height: 1.4;
+}
+
+.reveal .limitations-content .limitations-next-steps > li {
+  padding-left: 0.20em;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.reveal .limitations-content .limitations-next-steps > li + li {
+  margin-top: 0.85em;
+}
+
+/* Group exact inputs by meaning instead of printing dense raw field names. */
+.reveal .input-summary,
+.reveal .input-footnote {
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.84em;
+  line-height: 1.30;
+}
+
+.reveal .input-summary {
+  margin-bottom: 25px;
+}
+
+.reveal .input-table {
+  display: grid;
+  grid-template-columns: 0.30fr 0.70fr;
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 2px solid var(--ink);
+}
+
+.reveal .input-table > div {
+  padding: 20px 12px;
+  border-bottom: 1px solid #d4d4d4;
+  font-size: 0.81em;
+  line-height: 1.30;
+}
+
+.reveal .input-table .input-label {
+  font-family: $presentation-heading-font;
+  font-weight: 700;
+}
+
+.reveal .input-label span {
+  font-family: $font-family-sans-serif;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.reveal .input-footnote {
+  margin-top: 25px;
+  color: var(--muted);
+}
+
+/* Exact feature backup. */
+.reveal .feature-detail-columns {
+  width: 93%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 1.25rem;
+}
+
+.reveal .feature-detail-columns .column {
+  align-self: stretch;
+  padding-top: 0.32em;
+  border-top: 5px solid var(--ink);
+}
+
+.reveal .feature-detail-columns .column:last-child {
+  border-color: var(--cmu-red);
+}
+
+.reveal .feature-detail-columns h3 {
+  margin: 0.34em 0 0.30em;
+  font-size: 0.92em;
+}
+
+.reveal .feature-detail-columns p {
+  margin: 0.32em 0;
+  font-size: 0.62em;
+  line-height: 1.28;
+}
+
+.reveal .feature-detail-columns code {
+  font-size: 0.82em !important;
+}
+
+/* Keep conceptual slides close to ordinary Quarto: simple tables and prose,
+   while reserving custom graphics for data and real-play evidence. */
+.reveal .bdb-overview > p:first-of-type {
+  margin: 0.55em 0 0.62em;
+  font-size: 0.92em;
+}
+
+.reveal .bdb-overview table {
+  width: 74%;
+  margin: 0.20em 0 0.64em;
+  font-size: 0.76em;
+}
+
+.reveal .bdb-overview th,
+.reveal .bdb-overview td {
+  padding: 0.25em 0.62em;
+}
+
+.reveal .bdb-overview > p:last-of-type {
+  max-width: 1320px;
+  margin-top: 0.48em;
+  color: var(--muted);
+  font-size: 0.78em;
+  line-height: 1.34;
+}
+
+.reveal .conformal-explanation {
+  gap: 1.10rem;
+  align-items: center;
+}
+
+.reveal .conformal-explanation img {
+  display: block;
+  max-width: 100%;
+  max-height: 610px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.reveal .conformal-explanation .column:last-child {
+  font-size: 0.72em;
+  line-height: 1.27;
+}
+
+.reveal .conformal-explanation .column:last-child p {
+  margin: 0.38em 0;
+}
+
+.reveal .conformal-explanation .katex-display {
+  margin: 0.62em 0;
+  font-size: 0.88em;
+}
+
+.reveal .task-definitions table {
+  width: 100%;
+  margin: 0.18em auto 0;
+  table-layout: fixed;
+  font-size: 0.58em;
+  line-height: 1.15;
+}
+
+.reveal .task-definitions th,
+.reveal .task-definitions td {
+  padding: 0.34em 0.42em;
+  vertical-align: top;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.reveal .task-definitions th:nth-child(1),
+.reveal .task-definitions td:nth-child(1) { width: 24%; }
+.reveal .task-definitions th:nth-child(2),
+.reveal .task-definitions td:nth-child(2) { width: 16%; }
+.reveal .task-definitions th:nth-child(3),
+.reveal .task-definitions td:nth-child(3) { width: 20%; }
+.reveal .task-definitions th:nth-child(4),
+.reveal .task-definitions td:nth-child(4) { width: 27%; }
+.reveal .task-definitions th:nth-child(5),
+.reveal .task-definitions td:nth-child(5) { width: 13%; }
+
+.reveal .interval-guide table {
+  width: 100%;
+  margin: 0.70em auto 0;
+  font-size: 0.65em;
+  line-height: 1.24;
+}
+
+.reveal .interval-guide th,
+.reveal .interval-guide td {
+  padding: 0.55em 0.58em;
+  vertical-align: top;
+}
+
+.reveal .interval-guide th:first-child,
+.reveal .interval-guide td:first-child {
+  width: 25%;
+}
+
+.reveal .interval-guide th:nth-child(2),
+.reveal .interval-guide td:nth-child(2) {
+  width: 36%;
+}
+
+.reveal .assertion {
+  font-family: $presentation-heading-font;
+  font-size: 1.40em;
+  line-height: 1.18;
+  max-width: 1180px;
+  margin: 0.30em auto 0;
+  text-align: center;
+}
+
+.reveal .takeaway {
+  border-left: 5px solid var(--cmu-red);
+  padding: 0.05em 0 0.05em 0.58em;
+  font-family: $presentation-heading-font;
+  font-size: 1.02em;
+  line-height: 1.22;
+}
+
+.reveal #backup-model-matching .takeaway {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .eyebrow {
+  color: var(--muted);
+  font-size: 0.56em;
+  font-weight: 700;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.reveal .quiet {
+  color: var(--muted);
+}
+
+.reveal .small {
+  font-size: 0.72em;
+}
+
+.reveal .smaller {
+  font-size: 0.62em;
+}
+
+.reveal .tiny {
+  font-size: 0.48em;
+}
+
+.reveal .source-note {
+  color: var(--muted);
+  font-size: 0.43em;
+  line-height: 1.25;
+}
+
+.reveal .formula {
+  font-family: $presentation-heading-font;
+  font-size: 1.20em;
+  text-align: center;
+  margin: 0.45em auto;
+}
+
+.reveal .two-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 42px;
+  margin: 0.45em auto 0;
+  max-width: 1320px;
+}
+
+.reveal .view-block {
+  border-top: 5px solid var(--ink);
+  padding-top: 0.50em;
+}
+
+.reveal .view-block.red-line {
+  border-color: var(--cmu-red);
+}
+
+.reveal .view-block .view-heading {
+  display: block;
+  color: var(--ink);
+  font-family: $presentation-heading-font;
+  font-weight: 700;
+  font-size: 1.18em;
+  margin: 0 0 0.35em;
+}
+
+.reveal .view-block p {
+  font-size: 0.78em;
+  margin: 0.22em 0;
+}
+
+.reveal .model-table {
+  display: grid;
+  grid-template-columns: 0.92fr 1.25fr 1.65fr;
+  max-width: 1420px;
+  margin: 0.35em auto 0;
+  border-top: 2px solid var(--ink);
+}
+
+.reveal .model-table > div {
+  padding: 0.31em 0.42em;
+  border-bottom: 1px solid #d4d4d4;
+  font-size: 0.80em;
+  line-height: 1.22;
+}
+
+.reveal .model-table .head {
+  color: var(--muted);
+  font-size: 0.53em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.reveal .model-table .role {
+  font-family: $presentation-heading-font;
+  font-weight: 700;
+}
+
+.reveal .model-table .canonical {
+  color: var(--muted);
+  font-family: $font-family-sans-serif;
+  font-size: 0.72em;
+  font-weight: 500;
+}
+
+.reveal .model-table.model-roles {
+  margin-top: 0.72em;
+}
+
+.reveal .model-table.model-roles > div {
+  padding-top: 0.43em;
+  padding-bottom: 0.43em;
+  font-size: 0.76em;
+}
+
+.reveal .model-table.model-roles > .head {
+  font-size: 0.57em;
+}
+
+.reveal .model-table.rushing-models {
+  width: 94%;
+  margin-top: 0.82em;
+}
+
+.reveal .model-table.rushing-models > div {
+  padding-top: 0.56em;
+  padding-bottom: 0.56em;
+  font-size: 0.80em;
+}
+
+.reveal .model-table.rushing-models > .head {
+  font-size: 0.58em;
+}
+
+.reveal .panel-continuity {
+  width: 94%;
+  max-width: 1420px;
+  margin: 0.82em auto 0;
+  padding-top: 0.52em;
+  border-top: 2px solid var(--cmu-red);
+  color: var(--muted);
+  font-size: 0.90em;
+  text-align: center;
+}
+
+.reveal .task-question {
+  max-width: 1320px;
+  margin: 1.05em auto 1.25em;
+  font-family: $presentation-heading-font;
+  font-size: 1.46em;
+  line-height: 1.16;
+  text-align: center;
+}
+
+.reveal .task-setup {
+  display: grid;
+  grid-template-columns: 0.90fr 48px 1.32fr 48px 1.32fr;
+  gap: 18px;
+  align-items: center;
+  max-width: 1390px;
+  margin: 0 auto;
+}
+
+.reveal .task-step {
+  align-self: stretch;
+  min-height: 205px;
+  padding: 0.72em 0.62em 0.44em;
+  border-top: 5px solid var(--ink);
+}
+
+.reveal .task-step.red-step {
+  border-color: var(--cmu-red);
+}
+
+.reveal .task-step .task-label {
+  display: block;
+  margin-bottom: 0.48em;
+  color: var(--muted);
+  font-size: 0.49em;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.reveal .task-step strong {
+  display: block;
+  min-height: 2.25em;
+  font-family: $presentation-heading-font;
+  font-size: 0.92em;
+  line-height: 1.12;
+}
+
+.reveal .task-step p {
+  margin-top: 0.62em;
+  color: var(--muted);
+  font-size: 0.80em;
+  line-height: 1.28;
+}
+
+.reveal .task-arrow {
+  color: var(--cmu-red);
+  font-family: $presentation-heading-font;
+  font-size: 1.45em;
+  text-align: center;
+}
+
+.reveal .task-score {
+  max-width: 1320px;
+  margin: 1.08em auto 0;
+  color: var(--muted);
+  font-size: 0.76em;
+  text-align: center;
+}
+
+.reveal .conformal-formula {
+  margin: 0.08em auto 0;
+  font-size: 0.82em;
+}
+
+.reveal .conformal-formula .katex-display {
+  margin: 0.12em 0 0;
+}
+
+.reveal .paired-max-columns {
+  gap: 58px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1405px;
+}
+
+.reveal .paired-max-block {
+  padding-top: 0.42em;
+  border-top: 5px solid var(--ink);
+}
+
+.reveal .paired-max-block.max-t-block {
+  border-color: var(--cmu-red);
+}
+
+.reveal .paired-max-block h3 {
+  margin: 0 0 0.34em;
+  font-size: 1.05em;
+}
+
+.reveal .paired-max-block p {
+  margin: 0.42em 0;
+  font-size: 0.84em;
+  line-height: 1.28;
+}
+
+.reveal .paired-max-block .katex-display {
+  margin: 0.40em 0;
+  font-size: 0.93em;
+}
+
+.reveal .max-t-summary {
+  max-width: 1405px;
+  margin: 0.66em auto 0;
+  padding-top: 0.60em;
+  border-top: 3px solid var(--cmu-red);
+  color: var(--muted);
+  font-size: 0.83em;
+  line-height: 1.28;
+}
+
+.reveal .max-t-summary p {
+  margin: 0.32em 0;
+}
+
+.reveal .max-t-summary p:first-child {
+  color: var(--ink);
+  font-size: 1.16em;
+}
+
+.reveal .backup-links {
+  display: flex;
+  gap: 65px;
+  margin-top: 60px;
+  font-size: 0.86em;
+}
+
+.reveal .backup-content {
+  width: 94%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .backup-content .input-summary,
+.reveal .backup-content .input-table,
+.reveal .backup-content .input-footnote {
+  width: 100%;
+}
+
+.reveal .backup-content .input-summary {
+  font-size: 0.96em;
+  margin-bottom: 30px;
+}
+
+.reveal .backup-content .input-table > div {
+  padding: 22px 14px;
+  font-size: 0.88em;
+  line-height: 1.32;
+}
+
+.reveal .backup-content .input-footnote,
+.reveal .backup-note {
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: 0.88em;
+  line-height: 1.32;
+}
+
+.reveal .backup-coverage-table {
+  width: 100%;
+  margin: 0;
+  grid-template-columns: 0.90fr 1.20fr 1.65fr;
+}
+
+.reveal .backup-coverage-table > div {
+  padding: 24px 16px;
+  font-size: 0.92em;
+  line-height: 1.32;
+}
+
+.reveal .backup-coverage-table > .head {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  font-size: 0.74em;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Technical backups use the main deck's flat, horizontal text sections. */
+.reveal .backup-section {
+  border-bottom: 2px solid #d4d4d4;
+  padding: 22px 0;
+}
+
+.reveal .backup-section:first-child {
+  border-top: 3px solid var(--ink);
+}
+
+.reveal .backup-section h3 {
+  font-size: 1.08em;
+  margin: 0 0 0.40em;
+}
+
+.reveal .backup-section p {
+  font-size: 0.92em;
+  line-height: 1.32;
+  margin: 0.34em 0 0;
+}
+
+.reveal .backup-inference .backup-section {
+  padding: 18px 0;
+}
+
+.reveal .backup-inference .backup-section p {
+  font-size: 0.88em;
+}
+
+.reveal .backup-inference .katex-display {
+  font-size: 0.96em;
+  margin: 0.45em 0;
+}
+
+.reveal .backup-figure-group {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reveal .backup-max-t-note {
+  width: 94%;
+  margin: 0 auto 24px;
+  font-size: 0.96em;
+  text-align: left;
+}
+
+.reveal .backup-figure-group img {
+  max-height: 610px;
+}
+
+.reveal .playbook {
+  max-width: 1380px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 470px;
+  display: flex;
+  flex-direction: column;
+  counter-reset: playbook;
+}
+
+.reveal .playbook-row {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 76px 1fr;
+  column-gap: 28px;
+  align-items: center;
+  padding: 0.18em 0;
+  border-bottom: 1px solid #dedede;
+  font-size: 0.94em;
+}
+
+.reveal .playbook-row::before {
+  counter-increment: playbook;
+  content: counter(playbook, decimal-leading-zero);
+  color: var(--cmu-red);
+  font-family: $presentation-heading-font;
+  font-weight: 700;
+}
+
+.reveal .future-note {
+  max-width: 1380px;
+  margin: 0.90em auto 0;
+  color: var(--muted);
+  font-size: 0.67em;
+}
+
+.reveal .slides section.backup-divider {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+}
+
+.reveal .backup-divider-title {
+  color: var(--muted);
+  font-family: $presentation-heading-font;
+  font-size: 2.6em;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.reveal .notes {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .reveal .slides section {
+    padding-left: 42px;
+    padding-right: 42px;
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "byte_count": 178422486,
+  "catalog_receipts": [
+    {
+      "byte_count": 380576226,
+      "dataset_id": "nfl_bdb_2024_tracking",
+      "manifest_sha256": "22733f218a110a20a012dbe5eb342158e0a265daec18f9c2095a392ab042a097",
+      "row_count": 12187398,
+      "run_id": "20260719T024319Z-f4974f29c639",
+      "source_id": "nfl_big_data_bowl_2024"
+    },
+    {
+      "byte_count": 64785,
+      "dataset_id": "nfl_bdb_2024_players",
+      "manifest_sha256": "09e1c5260a1c16ff359ca6926f254dfd98124bc740653101f19f347d3615e790",
+      "row_count": 1683,
+      "run_id": "20260719T024255Z-350d82446b36",
+      "source_id": "nfl_big_data_bowl_2024"
+    },
+    {
+      "byte_count": 9288,
+      "dataset_id": "nfl_bdb_2024_games",
+      "manifest_sha256": "53458a8100ffb8325dc00573711f569f8a5c33988dc501e3fef49a631be5dab6",
+      "row_count": 136,
+      "run_id": "20260719T024046Z-59cff21460ab",
+      "source_id": "nfl_big_data_bowl_2024"
+    },
+    {
+      "byte_count": 2417086,
+      "dataset_id": "nfl_bdb_2024_plays",
+      "manifest_sha256": "26768f571077379082a8525508bbb35b63a59f12ed43f70c3f3e4551e2650662",
+      "row_count": 12486,
+      "run_id": "20260719T024256Z-c37a136c96de",
+      "source_id": "nfl_big_data_bowl_2024"
+    },
+    {
+      "byte_count": 137681,
+      "dataset_id": "nfl_bdb_2024_tackles",
+      "manifest_sha256": "f485d9809de03e2bd1596015c9c3f8714f27f65832975c7ed68ce74a5f43cfa3",
+      "row_count": 17426,
+      "run_id": "20260719T024257Z-97a9e2602008",
+      "source_id": "nfl_big_data_bowl_2024"
+    }
+  ],
+  "destination": "data/bdb2024/raw",
+  "file_count": 13,
+  "files": [
+    {
+      "bytes": 3122,
+      "path": "dataset_id=nfl_bdb_2024_games/snapshot_date=2026-07-18/run_id=20260719T024046Z-59cff21460ab/games.parquet",
+      "sha256": "9d0920f42d879415dccf6e43b5eda4d1ff8f981bda5c0024400d15ba8ef71df7"
+    },
+    {
+      "bytes": 28323,
+      "path": "dataset_id=nfl_bdb_2024_players/snapshot_date=2026-07-18/run_id=20260719T024255Z-350d82446b36/players.parquet",
+      "sha256": "dd3f88609f2a68600954b53e7e0c50a6f8b26ff02d88170731b16cf1c65d9e61"
+    },
+    {
+      "bytes": 1122179,
+      "path": "dataset_id=nfl_bdb_2024_plays/snapshot_date=2026-07-18/run_id=20260719T024256Z-c37a136c96de/plays.parquet",
+      "sha256": "b6036b345f0aed4c370c56e9114c17dfea85b243ed28f18c7db7d3777330e57a"
+    },
+    {
+      "bytes": 70498,
+      "path": "dataset_id=nfl_bdb_2024_tackles/snapshot_date=2026-07-18/run_id=20260719T024257Z-97a9e2602008/tackles.parquet",
+      "sha256": "3ca3e07aec0d7da445081ea2fafccb4a7147d64db22767ff4074ebb8ddcbfbff"
+    },
+    {
+      "bytes": 20474814,
+      "path": "dataset_id=nfl_bdb_2024_tracking/snapshot_date=2026-07-18/run_id=20260719T024319Z-f4974f29c639/tracking_week_1.parquet",
+      "sha256": "9f4484b75baaf5dbcf8f3189bd654cf363d7af7156ddf6ff61e50903ec9abcf6"
+    },
+    {
+      "bytes": 19993819,
+      "path": "dataset_id=nfl_bdb_2024_tracking/snapshot_date=2026-07-18/run_id=20260719T024319Z-f4974f29c639/tracking_week_2.parquet",
+      "sha256": "29f506ac87cc23af29462de534e2ddd5a4572ded47dd3bbfc27e94963936010d"
+    },
+    {
+      "bytes": 20589483,
+      "path": "dataset_id=nfl_bdb_2024_tracking/snapshot_date=2026-07-18/run_id=20260719T024319Z-f4974f29c639/tracking_week_3.parquet",
+      "sha256": "5b64f0583efde74c1ef5f13b066078ddc14244a2e5a25c5ff61b4c91c1ba9f5b"
+    },
+    {
+      "bytes": 20612679,
+      "path": "dataset_id=nfl_bdb_2024_tracking/snapshot_date=2026-07-18/run_id=20260719T024319Z-f4974f29c639/tracking_week_4.parquet",
+      "sha256": "1f6fa8896f5bfedf1e7fca1609184b18ca69fc524b7d8ecc80fdb6beebe764d1"
+    },
+    {
+      "bytes": 21508815,
+      "path": "dataset_id=nfl_bdb_2024_tracking/snapshot_date=2026-07-18/run_id=20260719T024319Z-f4974f29c639/tracking_week_5.parquet",
+      "sha256": "6e25ae0dd7f616b2afe122e6d44e752e0a7c150e92191ec9f1d860a125166d00"
+    },
+    {
+      "bytes": 18108695,
+      "path": "dataset_id=nfl_bdb_2024_tracking/snapshot_date=2026-07-18/run_id=20260719T024319Z-f4974f29c639/tracking_week_6.parquet",
+      "sha256": "2ca0352f974fdd867eecdfbc60d11374887b884b871a9f962c6dfb8546443323"
+    },
+    {
+      "bytes": 18758392,
+      "path": "dataset_id=nfl_bdb_2024_tracking/snapshot_date=2026-07-18/run_id=20260719T024319Z-f4974f29c639/tracking_week_7.parquet",
+      "sha256": "26bc017600e5a554dc5d228c3536261826898983901a80df3edec9e6e4711824"
+    },
+    {
+      "bytes": 20421383,
+      "path": "dataset_id=nfl_bdb_2024_tracking/snapshot_date=2026-07-18/run_id=20260719T024319Z-f4974f29c639/tracking_week_8.parquet",
+      "sha256": "1e92d6d6730fbc35c97be0b2f1be716b8a3df49460e115dc0504e316796622fc"
+    },
+    {
+      "bytes": 16730284,
+      "path": "dataset_id=nfl_bdb_2024_tracking/snapshot_date=2026-07-18/run_id=20260719T024319Z-f4974f29c639/tracking_week_9.parquet",
+      "sha256": "7e0bcafaae69a70e05b806674bd184049dbffa6a678f3ca29019fb1dfe75c9c2"
+    }
+  ],
+  "receipt_sha256": "224bc802f9f5673bfa2567d48052eea0e6d7d53e1d59c72e61e58cf49a508b48",
+  "release": 2024,
+  "schema_version": 1,
+  "source_id": "nfl_big_data_bowl_2024",
+  "source_path_observed": "/Users/Jonathan/wsabi/data/lake/raw/source_id=nfl_big_data_bowl_2024",
+  "tree_sha256": "21d226bf1d498b756984f100b2e1ae923c43fb875797ed7f31de05493b1623b5",
+  "verified_at_utc": "2026-08-19T20:08:48.638482+00:00"
+}

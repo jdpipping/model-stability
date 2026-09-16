@@ -1,0 +1,259 @@
+{
+  "schema_version": "bdb-task-spec-v2",
+  "task_id": "bdb2026_trajectory",
+  "release_year": 2026,
+  "outcome_type": "trajectory",
+  "primary_metric": "rmse",
+  "total_games": 272,
+  "development_games": 36,
+  "confirmatory_games": 236,
+  "outer_counts": {"train": 142, "calibration": 47, "test": 47},
+  "anchors": [10, 20, 40, 60, 100, 140],
+  "event_cutoff": {
+    "event": "last official input frame after pass release",
+    "fallback_rules": [
+      "exclude a requested player missing from any retained input frame",
+      "reject output frames that are not exactly 1 through num_frames_output"
+    ]
+  },
+  "cohort": {
+    "description": "Official variable-horizon future x/y prediction for every player_to_predict row",
+    "eligibility": [
+      "player_to_predict is true",
+      "the player key appears in the official output",
+      "all declared future frames are observed"
+    ],
+    "exclusions": [
+      "input-only context players",
+      "requested players without an exactly aligned output trajectory"
+    ],
+    "expected_plays": 14108,
+    "expected_examples": 46045,
+    "expected_output_rows": 562936
+  },
+  "features": {
+    "allowlist": [
+      "all_official_input_tracking",
+      "player_side",
+      "player_role",
+      "player_position",
+      "player_height",
+      "player_weight",
+      "absolute_yardline_number",
+      "ball_land_x",
+      "ball_land_y",
+      "num_frames_output"
+    ],
+    "denylist": [
+      "output_x",
+      "output_y",
+      "future_tracking",
+      "future_event"
+    ],
+    "channels": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other"
+    ],
+    "tabular_feature_order": [
+      "x", "y", "speed", "acceleration", "vx", "vy", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "absolute_yardline_number",
+      "player_weight", "player_height_inches", "ball_land_x_rel", "ball_land_y_rel",
+      "num_frames_output", "player_position", "player_side", "player_role"
+    ],
+    "coordinate_normalization": "reflect x and its vector component for leftward plays; center player tokens on the requested player in each input frame"
+  },
+  "outcome": {
+    "target": "masked official future x/y under a development-selected residual-or-absolute decoder",
+    "stored_target": "absolute official future x/y plus a separately stored constant-velocity baseline",
+    "null_model": "final-state constant-velocity trajectory",
+    "reconstruction": "absolute output is direct; residual output adds the constant-velocity baseline",
+    "neural_training_target": null,
+    "official_metric": "RMSE pooled over all required x and y coordinates"
+  },
+  "prepared_contract": {
+    "schema_version": "bdb-prepared-semantics-v2",
+    "task_id": "bdb2026_trajectory",
+    "outcome_type": "trajectory",
+    "primary_metric": "rmse",
+    "examples": 46045,
+    "games": 272,
+    "tabular_feature_order": [
+      "x", "y", "speed", "acceleration", "vx", "vy", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "absolute_yardline_number", "player_weight",
+      "player_height_inches", "ball_land_x_rel", "ball_land_y_rel", "num_frames_output",
+      "player_position", "player_side", "player_role"
+    ],
+    "channel_names": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other"
+    ],
+    "arrays": {
+      "player_tokens": {"axes": ["example", "time", "tracked_object", "channel"], "shape": [46045, 123, 17, 24], "dtype": "float32"},
+      "player_mask": {"axes": ["example", "time", "tracked_object"], "shape": [46045, 123, 17], "dtype": "bool"},
+      "frame_mask": {"axes": ["example", "time"], "shape": [46045, 123], "dtype": "bool"},
+      "y": null,
+      "target_values": {"axes": ["example", "horizon", "coordinate"], "shape": [46045, 94, 2], "dtype": "float32"},
+      "target_mask": {"axes": ["example", "horizon"], "shape": [46045, 94], "dtype": "bool"},
+      "target_baseline": {"axes": ["example", "horizon", "coordinate"], "shape": [46045, 94, 2], "dtype": "float32"}
+    },
+    "support": null,
+    "mask_contract": {
+      "player_mask": {
+        "meaning": "true_iff_tracked_object_slot_is_observed",
+        "observed_frame_slot_layout": "stable_per_play_slots_with_sparse_observation",
+        "slot_identity": "alignment_only_never_a_model_feature",
+        "masked_token_value": 0.0,
+        "requires_observed_frame": true
+      },
+      "frame_mask": {"meaning": "true_iff_time_slot_is_observed_not_padding", "layout": "left_padded"},
+      "target_mask": {
+        "meaning": "true_iff_official_future_coordinate_is_observed_and_scored",
+        "layout": "right_padded",
+        "masked_target_value": "nan"
+      }
+    },
+    "target_contract": {
+      "encoding": "absolute_xy",
+      "examples_target": "nan_placeholder",
+      "training_target": "development_selected_residual_or_absolute_from_stored_absolute_xy_and_baseline",
+      "model_output": "masked_xy_in_development_selected_residual_or_absolute_coordinates",
+      "coordinate_order": ["x", "y"],
+      "reconstruction": "absolute_identity_or_target_baseline_plus_residual_as_frozen"
+    },
+    "adapter_metadata": {
+      "tabular_feature_order": [
+        "x", "y", "speed", "acceleration", "vx", "vy", "dir_sin", "dir_cos",
+        "orientation_sin", "orientation_cos", "absolute_yardline_number", "player_weight",
+        "player_height_inches", "ball_land_x_rel", "ball_land_y_rel", "num_frames_output",
+        "player_position", "player_side", "player_role"
+      ],
+      "input_scope": "all official input frames and tracked players",
+      "global_context_scope": "official focal-player and play fields in tabular",
+      "stable_player_slots": "play_global_focal_independent_v1; nfl_id alignment only and never encoded",
+      "graph": "focal-player social graph with horizon-conditioned development-selected decoder",
+      "output_head": "shared_horizon_conditioned_development_selected_v1",
+      "structural_ablation": "remove_social_player_messages",
+      "trajectory_tube_domain": {
+        "field_rectangle_x": [0.0, 120.0],
+        "field_rectangle_y": [0.0, 53.333333333333336],
+        "reported_region": "radial_conformal_tube_intersected_with_field_rectangle"
+      }
+    },
+    "semantic_hash": "7cc57fc5ee72468478086cd96055ef8ca9de62335cd341f65b447bd9cde6dedf"
+  },
+  "history": {
+    "scope": "causal_tracking_history",
+    "endpoint": "last official input frame, inclusive",
+    "max_frames": 123,
+    "padding": "left_masked",
+    "stable_player_slots": true,
+    "slot_policy": "play_global_focal_independent_v1"
+  },
+  "graph": {
+    "node_types": ["requested_player", "teammate", "opponent"],
+    "edge_types": ["focal_teammate", "focal_opponent", "same_side_social", "opposing_side_social"],
+    "construction": "focal-player social graph across every official input frame with horizon supplied to the decoder",
+    "masked_aggregation": "observed_nodes_and_edges_only"
+  },
+  "identity_policy": {
+    "player_ids": "stable_slot_assignment_only",
+    "player_id_feature": false,
+    "team_identity_primary": false,
+    "team_identity_sensitivity": false
+  },
+  "model_roles": {
+    "primary": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"],
+    "shared_tabular_summary": true,
+    "shared_neural_inputs": ["tokenization", "causal_history", "player_and_frame_masks", "time_to_event", "context", "output_head", "loss", "tuning_grid", "seeds", "training_protocol"],
+    "relational_pair_shared_inputs": ["graph_edges", "relational_temporal_encoder"],
+    "set_transformer_structure": {"relation_scope": "global_masked_all_player_self_attention", "typed_graph_edges_consumed": false, "temporal_encoder": "factorized_masked_temporal_attention"},
+    "parameter_match_tolerance_fraction": 0.05,
+    "flop_match_tolerance_fraction": 0.15,
+    "neural_parameter_cap": 350000
+  },
+  "output_head": {
+    "id": "horizon_development_selected_xy_v1",
+    "scope": "matched_neural_models",
+    "prediction": "masked x/y in residual or absolute coordinates as selected on development games",
+    "training_loss": "development_selected_masked_coordinate_mse",
+    "decoder": "shared_horizon_conditioned",
+    "selected_training_target": null,
+    "reconstruction": "absolute_identity_or_constant_velocity_plus_residual_as_selected"
+  },
+  "uncertainty": {
+    "primary_method": "whole_path_scaled_radial_conformal_tube_v1",
+    "secondary_diagnostic": null,
+    "secondary_score_source": null,
+    "field_intersection": "disk_intersect_legal_field_rectangle",
+    "horizon_scale_learner": {
+      "source": "five_grouped_oof_development_game_folds",
+      "fold_statistic": "horizon_radial_error_median_and_observed_path_count",
+      "pooling": "count_weighted_median_across_folds",
+      "isotonic_projection": "observed_count_weighted_nondecreasing_pava",
+      "support_requirement": "pooled_positive_counts_form_nonempty_prefix_v1",
+      "unobserved_tail_policy": "carry_forward_last_fitted_pava_level_v1",
+      "floor_yards": 0.25,
+      "horizon_count": 94,
+      "artifact_fields": [
+        "dev_horizon_scale",
+        "dev_horizon_scale_sha256",
+        "dev_horizon_scale_observed_through",
+        "dev_horizon_scale_support_requirement",
+        "dev_horizon_scale_tail_policy"
+      ]
+    },
+    "calibration_unit": "game",
+    "nominal_coverage": 0.9,
+    "report": ["whole_path_coverage", "game_equal_whole_path_coverage", "mean_tube_diameter"]
+  },
+  "joint_neural_target_selection": {
+    "schema_version": "bdb-joint-neural-target-contract-v1",
+    "families": ["relnet", "attn_relnet", "set_transformer"],
+    "candidate_targets": ["residual", "absolute"],
+    "criterion": "pooled_equal_model_weight_grouped_oof_mean_rmse_v1",
+    "tie_rule": "first_target_in_frozen_order",
+    "receipt": null
+  },
+  "structural_ablation": {
+    "id": "remove_social_player_messages",
+    "description": "remove all non-focal social-player messages while retaining focal history and horizon decoder",
+    "models": ["relnet", "attn_relnet"],
+    "anchors": [20, 140],
+    "repeats": 20
+  },
+  "sensitivities": [
+    {
+      "id": "absolute_coordinate_decoder",
+      "description": "compare residual and absolute-coordinate decoding using development games only",
+      "selection": "development_games_only",
+      "execution": null
+    }
+  ],
+  "models": {
+    "linear_structure": {"role": "linear_structure", "family": "glm", "display_name": "Linear-Structure", "alpha_grid": [0.1, 0.01, 0.001, 0.0001, 0.00001]},
+    "boosted_structure": {"role": "boosted_structure", "family": "lightgbm", "display_name": "Boosted-Structure", "grid_id": "bdb_suite_lgbm_four_v1"},
+    "relnet": {"role": "relnet", "family": "relnet", "display_name": "RelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "attn_relnet": {"role": "attn_relnet", "family": "attn_relnet", "display_name": "AttnRelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "set_transformer": {"role": "set_transformer", "family": "set_transformer", "display_name": "Global Set Transformer", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]}
+  },
+  "artifacts": {
+    "metrics": ["official_pooled_rmse", "game_equal_rmse", "horizon_rmse", "path_equal_rmse", "skill", "path_coverage", "game_equal_path_coverage", "mean_tube_diameter", "game_equal_tube_diameter"],
+    "predictions": ["constant_velocity_baseline", "predicted_residual", "absolute_xy", "target_mask", "path_rmse", "path_covered", "mean_tube_diameter", "path_tube_radius", "path_tube_horizon_scale", "path_tube_field_bounds"]
+  },
+  "source_tree_receipts": [
+    {
+      "schema_version": "bdb-source-tree-receipt-v1",
+      "source_id": "nfl_big_data_bowl_2026",
+      "receipt_path": "configs/bdb_suite/sources/bdb2026_local.json",
+      "receipt_sha256": "e1b4e45414fe9d9313fbfa5811669cdf7e0f65e896692ded4f5a44bc824066a1",
+      "tree_sha256": "3654e97a762d2b3dca909de1a3d11d3971feb42889fa6ee0a09e91977eea700c",
+      "destination": "data/bdb2026/raw",
+      "file_count": 36,
+      "byte_count": 856073827
+    }
+  ]
+}

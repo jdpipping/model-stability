@@ -1,0 +1,19 @@
+metric,n_train,fixed_winner,fixed_ranking,tuned_winner,tuned_ranking,ranking_changed
+crps,20,set_transformer,set_transformer > lightgbm_multiclass > ridge_sgd_l2 > zoo_cnn,set_transformer,set_transformer > ridge_sgd_l2 > lightgbm_multiclass > zoo_cnn,True
+crps,160,set_transformer,set_transformer > zoo_cnn > lightgbm_multiclass > ridge_sgd_l2,set_transformer,set_transformer > zoo_cnn > lightgbm_multiclass > ridge_sgd_l2,False
+crps,360,set_transformer,set_transformer > zoo_cnn > lightgbm_multiclass > ridge_sgd_l2,set_transformer,set_transformer > zoo_cnn > lightgbm_multiclass > ridge_sgd_l2,False
+mean_width,20,lightgbm_multiclass,lightgbm_multiclass > set_transformer > ridge_sgd_l2 > zoo_cnn,lightgbm_multiclass,lightgbm_multiclass > set_transformer > ridge_sgd_l2 > zoo_cnn,False
+mean_width,160,lightgbm_multiclass,lightgbm_multiclass > set_transformer > zoo_cnn > ridge_sgd_l2,lightgbm_multiclass,lightgbm_multiclass > set_transformer > zoo_cnn > ridge_sgd_l2,False
+mean_width,360,lightgbm_multiclass,lightgbm_multiclass > zoo_cnn > set_transformer > ridge_sgd_l2,lightgbm_multiclass,lightgbm_multiclass > zoo_cnn > set_transformer > ridge_sgd_l2,False
+mean_width_inclusive,20,lightgbm_multiclass,lightgbm_multiclass > set_transformer > ridge_sgd_l2 > zoo_cnn,lightgbm_multiclass,lightgbm_multiclass > set_transformer > ridge_sgd_l2 > zoo_cnn,False
+mean_width_inclusive,160,lightgbm_multiclass,lightgbm_multiclass > set_transformer > zoo_cnn > ridge_sgd_l2,lightgbm_multiclass,lightgbm_multiclass > set_transformer > zoo_cnn > ridge_sgd_l2,False
+mean_width_inclusive,360,lightgbm_multiclass,lightgbm_multiclass > zoo_cnn > set_transformer > ridge_sgd_l2,lightgbm_multiclass,lightgbm_multiclass > zoo_cnn > set_transformer > ridge_sgd_l2,False
+crps_game_equal,20,set_transformer,set_transformer > lightgbm_multiclass > ridge_sgd_l2 > zoo_cnn,set_transformer,set_transformer > ridge_sgd_l2 > lightgbm_multiclass > zoo_cnn,True
+crps_game_equal,160,set_transformer,set_transformer > zoo_cnn > lightgbm_multiclass > ridge_sgd_l2,set_transformer,set_transformer > zoo_cnn > lightgbm_multiclass > ridge_sgd_l2,False
+crps_game_equal,360,set_transformer,set_transformer > zoo_cnn > lightgbm_multiclass > ridge_sgd_l2,set_transformer,set_transformer > zoo_cnn > lightgbm_multiclass > ridge_sgd_l2,False
+mean_width_game_equal,20,lightgbm_multiclass,lightgbm_multiclass > set_transformer > ridge_sgd_l2 > zoo_cnn,lightgbm_multiclass,lightgbm_multiclass > set_transformer > ridge_sgd_l2 > zoo_cnn,False
+mean_width_game_equal,160,lightgbm_multiclass,lightgbm_multiclass > set_transformer > zoo_cnn > ridge_sgd_l2,lightgbm_multiclass,lightgbm_multiclass > set_transformer > zoo_cnn > ridge_sgd_l2,False
+mean_width_game_equal,360,lightgbm_multiclass,lightgbm_multiclass > zoo_cnn > set_transformer > ridge_sgd_l2,lightgbm_multiclass,lightgbm_multiclass > zoo_cnn > set_transformer > ridge_sgd_l2,False
+mean_width_inclusive_game_equal,20,lightgbm_multiclass,lightgbm_multiclass > set_transformer > ridge_sgd_l2 > zoo_cnn,lightgbm_multiclass,lightgbm_multiclass > set_transformer > ridge_sgd_l2 > zoo_cnn,False
+mean_width_inclusive_game_equal,160,lightgbm_multiclass,lightgbm_multiclass > set_transformer > zoo_cnn > ridge_sgd_l2,lightgbm_multiclass,lightgbm_multiclass > set_transformer > zoo_cnn > ridge_sgd_l2,False
+mean_width_inclusive_game_equal,360,lightgbm_multiclass,lightgbm_multiclass > zoo_cnn > set_transformer > ridge_sgd_l2,lightgbm_multiclass,lightgbm_multiclass > zoo_cnn > set_transformer > ridge_sgd_l2,False

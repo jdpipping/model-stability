@@ -1,0 +1,204 @@
+{
+  "analysis": "BDB2020 presentation-layer 90% sensitivity analysis",
+  "confidence": 0.9,
+  "coverage": {
+    "bound": "family-adjusted one-sided simultaneous lower confidence bound",
+    "target": 0.9
+  },
+  "derivation_script": {
+    "path": "presentations/cassis2026/prepare_bdb2020_90pct.py",
+    "sha256": "d83ee6f6db9ffcedf5ba556699a6ce96785c3b840d738f94a6f57f02f26cb66b"
+  },
+  "descriptive_rerun_range": {
+    "interpretation": "central 90% of the 100 observed complete-rerun scores",
+    "lower_quantile": 0.05,
+    "upper_quantile": 0.95
+  },
+  "metric_columns": [
+    "crps",
+    "coverage",
+    "mean_width",
+    "mean_width_inclusive",
+    "mean_q",
+    "crps_game_equal",
+    "coverage_game_equal",
+    "mean_width_game_equal",
+    "mean_width_inclusive_game_equal"
+  ],
+  "models": [
+    "ridge_sgd_l2",
+    "lightgbm_multiclass",
+    "zoo_cnn",
+    "set_transformer"
+  ],
+  "notes": [
+    "This is a presentation-layer sensitivity analysis, not a replacement for the frozen terminal 95% inference.",
+    "q05--q95 ranges are descriptive rerun variation, not confidence intervals and not per-play predictive intervals."
+  ],
+  "outputs": {
+    "controlled_sharpness": {
+      "path": "presentations/cassis2026/data/bdb2020_90pct/controlled_sharpness_90.csv",
+      "rows": 144,
+      "sha256": "53d76b196348b60025e0973be56aa9a0dc7406b8d8fb350b6fd88af469bd4ef4"
+    },
+    "coverage_qualification": {
+      "path": "presentations/cassis2026/data/bdb2020_90pct/coverage_qualification_90.csv",
+      "rows": 48,
+      "sha256": "fe8653cf47f1dbfca6d442403b0b662007c48c286fd8494164d66cfbbd35ceb1"
+    },
+    "model_contrasts": {
+      "path": "presentations/cassis2026/data/bdb2020_90pct/model_contrasts_90.csv",
+      "rows": 324,
+      "sha256": "33476e9a5fd42f6fcaa1dc4bd4dd347df606cc9f784c2cfc0477f0e7d6cb93a2"
+    },
+    "summary_q05_q95": {
+      "path": "presentations/cassis2026/data/bdb2020_90pct/summary_q05_q95.csv",
+      "rows": 216,
+      "sha256": "0fba8f3840dd1a4d11c08d275092a3f18c453978f19d0b910f091b0be27ff644"
+    },
+    "supported_best_crps": {
+      "path": "presentations/cassis2026/data/bdb2020_90pct/supported_best_crps_90.csv",
+      "rows": 48,
+      "sha256": "1f9defe89eaaa2c321c312cfc290fee0c9706d7d70384775d6240cf7d8eb8567"
+    }
+  },
+  "paired_inference": {
+    "bootstrap_draws": 10000,
+    "bootstrap_seed": 511090374,
+    "bootstrap_unit": "whole repeat vector",
+    "family_contrasts": 324,
+    "implementation": {
+      "path": "rushing_study/analysis.py",
+      "sha256": "94d44baaeb83da7cbcc77c2656bb2934bd76202e35636fcfd8b6d79a22a9aaef"
+    },
+    "method": "same studentized repeat-block max-t implementation as terminal analysis",
+    "orientation": "model_a - model_b and size_to - size_from"
+  },
+  "repeat_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+  ],
+  "schema_version": 1,
+  "sizes": [
+    20,
+    40,
+    80,
+    160,
+    240,
+    360
+  ],
+  "source_run": "results/rushing/full100-confirmatory-20260820",
+  "sources": {
+    "analysis_manifest": {
+      "path": "results/rushing/full100-confirmatory-20260820/final/main/analysis_manifest.json",
+      "sha256": "853bed83ad8fad2aa456082060cf5f7260dc3adf8f7313873e580795a6070bac"
+    },
+    "config": {
+      "path": "results/rushing/full100-confirmatory-20260820/config.json",
+      "sha256": "b66fe36a1c8aa0ebedc64fac3b063f0a6d6f46d104e502752b5ac2d7256ed5bf"
+    },
+    "metrics": {
+      "path": "results/rushing/full100-confirmatory-20260820/final/metrics.csv",
+      "sha256": "4c146f813b665d71b1ffb08de4c6dab32503bb362c32370cf6bf6cddf9f6ccd6"
+    }
+  },
+  "terminal_results_modified": false
+}

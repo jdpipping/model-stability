@@ -1,0 +1,173 @@
+{
+  "schema_version": "bdb-betty-capacity-probe-v1",
+  "decision_id": "20260822_betty_fastest_lane_for_pilot10_attempt7",
+  "observed_at_betty": "2026-08-22T14:36:44-04:00",
+  "account": "ajw-wharton",
+  "purpose": "read_only_operational_capacity_and_equal_workload_lane_selection",
+  "scientific_scope": {
+    "protocol_changed": false,
+    "predictive_scores_inspected": false,
+    "description": "Resource selection only; no TaskSpec, seed, model configuration, tuning rule, or analysis rule changed."
+  },
+  "scheduler_limits": {
+    "gpu_qos": {
+      "name": "wharton-dgx-b200",
+      "max_tres_per_account": {
+        "field": "MaxTRESPA",
+        "gres/gpu": 4,
+        "scope": "one account in this QoS"
+      },
+      "qos_group_tres": {
+        "field": "GrpTRES",
+        "gres/gpu": 16,
+        "scope": "all accounts sharing this QoS"
+      },
+      "interpretation": "The QoS-wide group allowance of 16 GPUs does not override this account's four-GPU MaxTRESPA ceiling."
+    },
+    "cpu_qos": {
+      "name": "wharton-genoa",
+      "max_tres_per_account": {
+        "field": "MaxTRESPA",
+        "cpu": 128,
+        "scope": "one account in this QoS"
+      }
+    },
+    "reset_sensitive_limits": {
+      "max_jobs_present": false,
+      "max_submit_jobs_present": false,
+      "group_tres_run_minutes_present": false
+    }
+  },
+  "probe_workload": {
+    "device": "gpu",
+    "examples": 4096,
+    "selection_epochs": 1,
+    "refit_epochs": 1,
+    "models": [
+      "zoo_cnn",
+      "set_transformer"
+    ],
+    "benchmark_source": {
+      "path": "hpc/betty/benchmark_models.py",
+      "bytes": 6002,
+      "sha256": "adde7fc6f3fbea8468461407d66e5d950bb23973aa76bc16e64e0af74bcf635d"
+    }
+  },
+  "gpu_probes": [
+    {
+      "job_id": "7776667",
+      "resource_class": "mig45",
+      "partition": "b200-mig45",
+      "qos": "wharton-dgx-b200",
+      "allocated_gpus": 1,
+      "gpu_memory_gb": 45,
+      "allocated_cpus": 6,
+      "allocated_memory": "56G",
+      "model_seconds": {
+        "set_transformer": 17.045494148973376,
+        "zoo_cnn": 12.175264270976186
+      },
+      "total_model_seconds": 29.220758419949562,
+      "four_lane_workloads_per_second": 0.136888986333398,
+      "wrapper": {
+        "path": "hpc/betty/mig45.sbatch",
+        "bytes": 792,
+        "sha256": "d60c4ba16aaf677dc008373aa08cc905764bbb3bb4c121dc6a62c973280eb230"
+      }
+    },
+    {
+      "job_id": "7776669",
+      "resource_class": "mig90",
+      "partition": "b200-mig90",
+      "qos": "wharton-dgx-b200",
+      "allocated_gpus": 1,
+      "gpu_memory_gb": 90,
+      "allocated_cpus": 14,
+      "allocated_memory": "112G",
+      "model_seconds": {
+        "set_transformer": 15.0921211540699,
+        "zoo_cnn": 10.766169019043446
+      },
+      "total_model_seconds": 25.858290173113346,
+      "four_lane_workloads_per_second": 0.15468926882718165,
+      "wrapper": {
+        "path": "hpc/betty/mig90.sbatch",
+        "bytes": 792,
+        "sha256": "f1359ad046d0002ecd882ee8d657fbc052e39580c2545ea7597e32411f60cec0"
+      }
+    },
+    {
+      "job_id": "7776670",
+      "resource_class": "full_b200",
+      "partition": "dgx-b200",
+      "qos": "wharton-dgx-b200",
+      "allocated_gpus": 1,
+      "gpu_memory_gb": null,
+      "allocated_cpus": 28,
+      "allocated_memory": "224G",
+      "model_seconds": {
+        "set_transformer": 14.87581096868962,
+        "zoo_cnn": 11.766304546035826
+      },
+      "total_model_seconds": 26.642115514725446,
+      "four_lane_workloads_per_second": 0.1501382274913247,
+      "wrapper": {
+        "path": "hpc/betty/b200.sbatch",
+        "bytes": 789,
+        "sha256": "eeac50fe41f29d3b953a3c91ffe4479e6c90361f2056f53ddeb191a741be6aa0"
+      }
+    }
+  ],
+  "availability_at_observation": {
+    "account_active_jobs": 0,
+    "mig90_free_slices_at_least": 7,
+    "partition_capacity_available": true,
+    "monthly_usage_percent_approximate": 51.9,
+    "monthly_headroom_available": true
+  },
+  "decision": {
+    "gpu_resource_class": "mig90",
+    "gpu_lanes": 4,
+    "gpu_cpus_per_lane": 14,
+    "gpu_lane_cpus": 56,
+    "cpu_resource_class": "genoa-std-mem",
+    "cpu_lanes": 6,
+    "cpu_cpus_per_lane": 12,
+    "cpu_lane_cpus": 72,
+    "execution_wrappers": {
+      "gpu": {
+        "path": "hpc/betty/mig90_14cpu.sbatch",
+        "bytes": 825,
+        "sha256": "7914f6a3af34e1444d68a2633e71a13f57a6ff1c0a7a16777ad20d07382d7944"
+      },
+      "cpu": {
+        "path": "hpc/betty/cpu.sbatch",
+        "bytes": 940,
+        "sha256": "8f20100ea40fad2773302911e7fb48a3198458d91182028bf546d7379229e553"
+      }
+    },
+    "peak_scheduled_cpus": 128,
+    "account_cpu_limit": 128,
+    "account_gpu_limit": 4,
+    "spare_cpus_at_peak": 0,
+    "spare_gpus_at_peak": 0,
+    "throughput_formula": "four_lane_workloads_per_second = 4 / total_model_seconds",
+    "mig90_throughput_advantage_percent": {
+      "over_mig45": 13.00344386394274,
+      "over_full_b200": 3.031234224554791
+    },
+    "selected_layout": "4 x MIG90 at 14 CPU each plus 6 x CPU-only at 12 CPU each",
+    "wait_for_reset": false,
+    "wait_conclusion": "Waiting cannot raise the four-GPU MaxTRESPA ceiling, and no active-job, submission-count, run-minute, partition-capacity, or monthly-headroom condition was blocking launch at the observation time."
+  },
+  "evidence_provenance": {
+    "cluster": "Betty",
+    "recording_mode": "read_only_after_completed_operational_probes",
+    "sources": [
+      "sacct job allocation and elapsed evidence for jobs 7776667, 7776669, and 7776670",
+      "sacctmgr QoS MaxTRESPA and GrpTRES policy evidence",
+      "squeue account activity evidence",
+      "partition and MIG availability evidence"
+    ]
+  }
+}

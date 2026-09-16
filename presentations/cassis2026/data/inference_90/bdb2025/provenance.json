@@ -1,0 +1,100 @@
+{
+  "bdb2020_coverage_family_members": 30,
+  "bdb2020_width_family_contrasts": 60,
+  "clear_winner_rule": "all four simultaneous candidate-minus-comparator upper bounds strictly below zero",
+  "code": {
+    "bdb_study/analysis.py": "20fb29784050e5d3ae615fd78da38b7719ee40938e91f068a61d0ece15a87f70",
+    "bdb_study/design.py": "d64cad45013ca5e8fa88377d15a58bcad191bb437e08779bf2863f6b1cde0c2a",
+    "presentations/cassis2026/prepare_deck_inference_90.py": "4b9121f524478727ac65666d54dde8c044b76e76498b734dad7b2e1f50ce0bac",
+    "presentations/cassis2026/prepare_max_t_90_sensitivity.py": "01dfc08b8b0e27c63c2eb25d21483ea152277216790810250861bd02792986d2"
+  },
+  "comparison_sidedness": "two_sided",
+  "confidence_level": 0.9,
+  "coverage_sidedness": "one_sided_lower",
+  "inference_family_scope": "separate complete primary-loss, interval-width, and coverage families; no claim of joint 90% confidence across families",
+  "method": "single-step studentized complete-repeat max-t; higher empirical quantile with Student-t floor",
+  "outputs": {
+    "bdb2025/paired_contrasts.csv": "7019e1b3cc10b64956000e1933a4eb81293cbb0b7e5079fd959193fabde28810",
+    "bdb2025/supported_best.csv": "77faf98c09f6a22bd0b383aa631a0ed5d39140c78bda6e440bf8a1124cf427fc"
+  },
+  "prediction_coverage_target": 0.9,
+  "primary_family_contrasts_per_problem": 60,
+  "reproduction_tolerances": {
+    "absolute": 1e-11,
+    "relative": 1e-10
+  },
+  "schema_version": "cassis2026-deck-inference-90-v1",
+  "sources": {
+    "data/bdb_suite_runs/definitive/bdb2020_rushing_harmonized/full100/final/controlled_sharpness.csv": "0dbe5801a495afbb42ab538177832a95df081355d41cf90cc43347f479767e44",
+    "data/bdb_suite_runs/definitive/bdb2020_rushing_harmonized/full100/final/coverage_lower_bounds.csv": "366418105ae63074152e2e6e21f7666d3afe01bbb7899196e19f75c7c3d39568",
+    "data/bdb_suite_runs/definitive/bdb2020_rushing_harmonized/full100/final/interval_width_contrasts.csv": "7670cd4433bb1e94faf223c2ca5e4db29e7a8d3f8d5797922040acc1867d6373",
+    "data/bdb_suite_runs/definitive/bdb2020_rushing_harmonized/full100/final/paired_contrasts.csv": "fe6fd9fae4fe34c1ae2444f2e6095c57cebccc154a71c007059054199367c695",
+    "data/bdb_suite_runs/definitive/bdb2020_rushing_harmonized/full100/final/primary_metrics.csv": "478d2d9d187d2234c945bb7a1fce05dc61d6b9ce952fd8f2a0426303e55d8d77",
+    "data/bdb_suite_runs/definitive/bdb2020_rushing_harmonized/full100/final/supported_best.csv": "2987ba4abb01ec716f63de2a16f456d23b4f2b18b98e4ba233e143552a95e3d9",
+    "presentations/cassis2026/data/max_t_90_sensitivity/bootstrap_maxima.npz": "3a989b2110403a8676a89c5206eb86d78496759afe3ce2ed7c2d07eda2567e39",
+    "presentations/cassis2026/data/max_t_90_sensitivity/paired_comparisons.csv": "23f7d8d6d57c01d688533cafacd67de6a676d96d8d75f9d35011686ab995f6b8",
+    "presentations/cassis2026/data/max_t_90_sensitivity/provenance.json": "842cbec4e62102ddc2a2645ad3f996986c689d70a0fd07775bf61a314f5d5afb",
+    "presentations/cassis2026/data/max_t_90_sensitivity/winners_by_training_size.csv": "23ba9b40d3cd9fe62fca422fb06a61493dea65a8c1d89169d37a854cf62b6bce",
+    "presentations/cassis2026/data/raw_terminal/bdb2021/primary_metrics.csv": "04cf01c9fa575251aa9bfd715efd9150b7aec0ec545c0a3d8b4ede5e281673f7",
+    "presentations/cassis2026/data/raw_terminal/bdb2022/primary_metrics.csv": "5337ea2f8fb17fe6b9ebd5776b4b0a91a7d716ab71662bd5f91384a70fa0e14f",
+    "presentations/cassis2026/data/terminal_inference/bdb2021/paired_contrasts.csv": "ade9abac5186de954223eb9c211392f5961e8aeb322abd1631048db5a66e305e",
+    "presentations/cassis2026/data/terminal_inference/bdb2021/supported_best.csv": "5379c7df21e6799ad92457744e1985f1c3d9ffd7f67ca07294792848684d8fe6",
+    "presentations/cassis2026/data/terminal_inference/bdb2022/paired_contrasts.csv": "b85082c44b348a7e9b1f7dce4dcee8cfa190a4eee932c4072ed3802586bcce1f",
+    "presentations/cassis2026/data/terminal_inference/bdb2022/supported_best.csv": "ebf6f3f3130fa591be7c9b86159d222cea32bdc7be578875df58e37dcf2a1b2c",
+    "presentations/cassis2026/data/terminal_inference/bdb2024/paired_contrasts.csv": "0533e22b2e3f88e05609e535d8369a0fc243fbf904dcef2b51c7be24997e6d49",
+    "presentations/cassis2026/data/terminal_inference/bdb2024/supported_best.csv": "15bfb49d9b6d8882ebfe58cad7be3545a5973e2c83465e46902ab7ae52bde25e",
+    "presentations/cassis2026/data/terminal_inference/bdb2025/paired_contrasts.csv": "091c3adeefc9822fac4dd568481f78f9ef48ff68d7108171589a62f38d462738",
+    "presentations/cassis2026/data/terminal_inference/bdb2025/supported_best.csv": "f4caa2f90b0d450dc13b47ba6fc75460c2d56e3ca4270642a7988701983cbf79",
+    "results/bdb/full100_serial_bdb2023_attempt1/final/paired_contrasts.csv": "abb8983da73ca66a53ba76cc8d42dc60585c5a4b9e839fc01cb40ff773375fca",
+    "results/bdb/full100_serial_bdb2023_attempt1/final/primary_metrics.csv": "bb5ece118b4e23df8ee33f2b4a64aa8d2a865694c6f27c3ba5dc4c5b9fccbf5c",
+    "results/bdb/full100_serial_bdb2023_attempt1/final/supported_best.csv": "302e22b9ad44144e5a79b8a01ebfd5dc599ae94247e4ed95d0022e4435c8cad1",
+    "results/bdb/full100_serial_bdb2024_attempt1/final/primary_metrics.csv": "45b46554a018e43ce95cb1c0c942a6add1a396ce5fcaa3344a3f7fc897c1249c",
+    "results/bdb/full100_serial_bdb2025_attempt1/final/primary_metrics.csv": "d7cc58a35cc974292a7a1e0887cdfde20f2e2f38e9249fd3632cd8be190f131c"
+  },
+  "sources_unchanged_after_calculation": true,
+  "task_details": {
+    "anchors": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60
+    ],
+    "bootstrap_draws": 10000,
+    "bootstrap_index_sha256": "f8f0745ccf207943416b542ed7fc492579139bf980b582b5fff773a1cd93e82f",
+    "bootstrap_seed": 915534192,
+    "models": [
+      "linear_structure",
+      "boosted_structure",
+      "relnet",
+      "attn_relnet",
+      "set_transformer"
+    ],
+    "primary_90_raw_moment_max_absolute_errors": {
+      "mean_difference": 8.673617379884035e-18,
+      "standard_error": 1.0842021724855044e-18
+    },
+    "primary_95_reproduction_max_absolute_errors": {
+      "bootstrap_draws": 0.0,
+      "confidence_level": 0.0,
+      "family_contrasts": 0.0,
+      "max_t_critical": 0.0,
+      "mean_difference": 0.0,
+      "n_train": 0.0,
+      "simultaneous_lower": 0.0,
+      "simultaneous_upper": 0.0,
+      "standard_error": 0.0
+    },
+    "primary_clear_winners_90": 4,
+    "primary_clear_winners_95": 3,
+    "problem": "Man/Zone",
+    "strict_all_four_rule_verified_against_core_95_and_sensitivity_90": true,
+    "task_id": "bdb2025_man_zone",
+    "year": 2025
+  },
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  }
+}

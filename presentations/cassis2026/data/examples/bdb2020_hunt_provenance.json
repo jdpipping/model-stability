@@ -1,0 +1,280 @@
+{
+  "alignment_checks": {
+    "derived_vs_stored_token_max_absolute_delta": 0.0,
+    "set_token_shape": [
+      22,
+      10
+    ],
+    "tracking_rows": 22
+  },
+  "elapsed_seconds": 915.2365149580874,
+  "environment": {
+    "deterministic_variables": {
+      "OMP_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "20260817",
+      "TF_DETERMINISTIC_OPS": "1",
+      "TF_NUM_INTEROP_THREADS": "1",
+      "TF_NUM_INTRAOP_THREADS": "1"
+    },
+    "executable": "/Users/Jonathan/research/ron/zoo/.venv/bin/python",
+    "machine": "arm64",
+    "matches_frozen_betty_runtime": false,
+    "packages": {
+      "keras": "3.13.2",
+      "lightgbm": "4.6.0",
+      "numpy": "2.0.2",
+      "pandas": "3.0.1",
+      "scikit-learn": "1.8.0",
+      "tensorflow": "2.18.1",
+      "tensorflow-metal": "1.2.0"
+    },
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "tensorflow_physical_devices": [
+      {
+        "device_type": "CPU",
+        "name": "/physical_device:CPU:0"
+      }
+    ]
+  },
+  "generated_at_utc": "2026-09-03T23:59:00.024659+00:00",
+  "generator": {
+    "path": "presentations/cassis2026/prepare_rushing_example.py",
+    "sha256": "af6f5a013ef109d1848a77831e68c718307d76f03c99b413e45292c73b7b1f45"
+  },
+  "manifest": {
+    "file_sha256": "af67be72b39c09820075c0882967f63cb58e36d2e514a05cf54b971761dd34e1",
+    "manifest_hash": "9c5f075e997fceb3fc44b4180209091435c495fb2a260a383b1a3efd8787f877",
+    "path": "results/rushing/full100-confirmatory-20260820/manifest.json",
+    "run_hash": "9c5f075e997fceb3fc44b418"
+  },
+  "outputs": {
+    "bdb2020_hunt_example.json": {
+      "sha256": "3e841526e20db51e2ebc3fb65314255036bd4711143fbe730a5250c9187430ef",
+      "size_bytes": 3227
+    },
+    "bdb2020_hunt_handoff_tracking.csv": {
+      "sha256": "a053338faf51ddb7b9460eebd2fd08464807d6e803d6759882f55caf3e391a08",
+      "size_bytes": 13249
+    },
+    "bdb2020_hunt_predictions.csv": {
+      "sha256": "4ca6fa272d024ba2bbbfdc3be0f8da191797a08fc6521a278e5e1cac443c8791",
+      "size_bytes": 25632
+    }
+  },
+  "replay_vs_committed_cell": {
+    "lightgbm_multiclass": {
+      "byte_environment_replay_tolerance_met": true,
+      "committed_metrics_path": "results/rushing/full100-confirmatory-20260820/cells/main/repeat_005/n_0360/lightgbm_multiclass/metrics.json",
+      "committed_metrics_sha256": "a6866b88dc3a2c3425744fb1106bd76976c7c90d96f477048a816df73ac4827b",
+      "deltas_replay_minus_committed": {
+        "coverage": 0.0,
+        "coverage_game_equal": 0.0,
+        "crps": 0.0,
+        "crps_game_equal": 0.0,
+        "mean_q": 0.0,
+        "mean_width": 0.0,
+        "mean_width_game_equal": 0.0
+      },
+      "fields": [
+        "crps",
+        "coverage",
+        "mean_width",
+        "mean_q",
+        "crps_game_equal",
+        "coverage_game_equal",
+        "mean_width_game_equal"
+      ],
+      "max_absolute_delta": 0.0,
+      "note": "A nonzero neural delta is expected outside the frozen Betty CUDA/TensorFlow runtime; the exact runtime is recorded below."
+    },
+    "set_transformer": {
+      "byte_environment_replay_tolerance_met": false,
+      "committed_metrics_path": "results/rushing/full100-confirmatory-20260820/cells/main/repeat_005/n_0360/set_transformer/metrics.json",
+      "committed_metrics_sha256": "7923fa331101ed7473e18a8783a164833156d0820a35a3224ad3611dd5f16415",
+      "deltas_replay_minus_committed": {
+        "coverage": -0.0038672252658716877,
+        "coverage_game_equal": -0.004096993954149086,
+        "crps": -6.678200100553727e-05,
+        "crps_game_equal": -6.221106686678246e-05,
+        "mean_q": 0.08878504672897197,
+        "mean_width": -0.48791492104414935,
+        "mean_width_game_equal": -0.48823776976310107
+      },
+      "fields": [
+        "crps",
+        "coverage",
+        "mean_width",
+        "mean_q",
+        "crps_game_equal",
+        "coverage_game_equal",
+        "mean_width_game_equal"
+      ],
+      "max_absolute_delta": 0.48823776976310107,
+      "note": "A nonzero neural delta is expected outside the frozen Betty CUDA/TensorFlow runtime; the exact runtime is recorded below."
+    }
+  },
+  "schema_version": 1,
+  "verified_frozen_sources": {
+    "neural_models": {
+      "manifest_sha256": "8ea2929df39ed7cb719e8d67f0adcf83c8aa15de44102bfd11013b121903951e",
+      "matches_manifest": true,
+      "path": "neural_models.py",
+      "sha256": "8ea2929df39ed7cb719e8d67f0adcf83c8aa15de44102bfd11013b121903951e",
+      "size_bytes": 18941,
+      "used_by_refit": true
+    },
+    "prepare_data": {
+      "manifest_sha256": "d487b5e15f8dfd6ca52b3721ddee5bd5efab17a9fb4d8453b18c41c499476329",
+      "matches_manifest": true,
+      "path": "prepare_data.py",
+      "sha256": "d487b5e15f8dfd6ca52b3721ddee5bd5efab17a9fb4d8453b18c41c499476329",
+      "size_bytes": 8091,
+      "used_by_refit": true
+    },
+    "raw_train": {
+      "manifest_sha256": "a1fa3185e218c96a12e534c14a1ec0c17c3a9c7fb2fd8ccd058bbe4be784152a",
+      "matches_manifest": true,
+      "path": "data/raw/train.csv",
+      "sha256": "a1fa3185e218c96a12e534c14a1ec0c17c3a9c7fb2fd8ccd058bbe4be784152a",
+      "size_bytes": 248677952,
+      "used_by_refit": true
+    },
+    "requirements_lock": {
+      "manifest_sha256": "1e1fa7b32c8e22102cfbb94041f09414e0d6fc92c7007d1ccbc0e42bfe39441a",
+      "matches_manifest": true,
+      "path": "requirements-lock.txt",
+      "sha256": "1e1fa7b32c8e22102cfbb94041f09414e0d6fc92c7007d1ccbc0e42bfe39441a",
+      "size_bytes": 6161,
+      "used_by_refit": false
+    },
+    "rushing_study___init__": {
+      "manifest_sha256": "94050cf88c00a2752f260eb79bc7654f8b7d3bf3bd3cc938c61e7c1fb0e2f43e",
+      "matches_manifest": true,
+      "path": "rushing_study/__init__.py",
+      "sha256": "94050cf88c00a2752f260eb79bc7654f8b7d3bf3bd3cc938c61e7c1fb0e2f43e",
+      "size_bytes": 149,
+      "used_by_refit": true
+    },
+    "rushing_study___main__": {
+      "manifest_sha256": "ef7678c6203318c27ab7afbe9006bff24814b3161d611fde2dd297d5c99a2629",
+      "matches_manifest": true,
+      "path": "rushing_study/__main__.py",
+      "sha256": "ef7678c6203318c27ab7afbe9006bff24814b3161d611fde2dd297d5c99a2629",
+      "size_bytes": 89,
+      "used_by_refit": false
+    },
+    "rushing_study_analysis": {
+      "manifest_sha256": "94d44baaeb83da7cbcc77c2656bb2934bd76202e35636fcfd8b6d79a22a9aaef",
+      "matches_manifest": true,
+      "path": "rushing_study/analysis.py",
+      "sha256": "94d44baaeb83da7cbcc77c2656bb2934bd76202e35636fcfd8b6d79a22a9aaef",
+      "size_bytes": 98179,
+      "used_by_refit": false
+    },
+    "rushing_study_cli": {
+      "manifest_sha256": "0d78c6f1d478fc9cb24de584242d0cbe07f322258a24c8721b341d4ecf737798",
+      "matches_manifest": false,
+      "path": "rushing_study/cli.py",
+      "sha256": "c0d472c11f821fd21977b9701bf1a6a41dc297f67c4fe7c5d705cc67490b8e62",
+      "size_bytes": 43466,
+      "used_by_refit": false
+    },
+    "rushing_study_data": {
+      "manifest_sha256": "2ccc2cbfd63c0cf186b81ea586a8b358f4d667575ada40037a722579dcc90b0b",
+      "matches_manifest": true,
+      "path": "rushing_study/data.py",
+      "sha256": "2ccc2cbfd63c0cf186b81ea586a8b358f4d667575ada40037a722579dcc90b0b",
+      "size_bytes": 4661,
+      "used_by_refit": true
+    },
+    "rushing_study_design": {
+      "manifest_sha256": "fceed78456eb4d456bcd2049e54b438057f960f6652f63bd5b6140b4b0efca5b",
+      "matches_manifest": true,
+      "path": "rushing_study/design.py",
+      "sha256": "fceed78456eb4d456bcd2049e54b438057f960f6652f63bd5b6140b4b0efca5b",
+      "size_bytes": 70467,
+      "used_by_refit": true
+    },
+    "rushing_study_execution": {
+      "manifest_sha256": "7d459ec7a2cf89aa3ad010723be975916513e895541a1b45a8d9e2d16cbd159f",
+      "matches_manifest": true,
+      "path": "rushing_study/execution.py",
+      "sha256": "7d459ec7a2cf89aa3ad010723be975916513e895541a1b45a8d9e2d16cbd159f",
+      "size_bytes": 57711,
+      "used_by_refit": false
+    },
+    "rushing_study_metrics": {
+      "manifest_sha256": "a39063e577bdf2039c237993195cf4bed70d3d71c2ee03e1035fbb59d262a7fb",
+      "matches_manifest": true,
+      "path": "rushing_study/metrics.py",
+      "sha256": "a39063e577bdf2039c237993195cf4bed70d3d71c2ee03e1035fbb59d262a7fb",
+      "size_bytes": 4950,
+      "used_by_refit": true
+    },
+    "rushing_study_models": {
+      "manifest_sha256": "305b57d44b72001429bce1f73c5233c3cf3a115340d68c6fecfa24a24cfab68e",
+      "matches_manifest": true,
+      "path": "rushing_study/models.py",
+      "sha256": "305b57d44b72001429bce1f73c5233c3cf3a115340d68c6fecfa24a24cfab68e",
+      "size_bytes": 12818,
+      "used_by_refit": true
+    },
+    "rushing_study_runner": {
+      "manifest_sha256": "fb520d3ea607ab54c39215f55f06ecfa9f99a02b9331c8ec52587e4fb18c9a52",
+      "matches_manifest": true,
+      "path": "rushing_study/runner.py",
+      "sha256": "fb520d3ea607ab54c39215f55f06ecfa9f99a02b9331c8ec52587e4fb18c9a52",
+      "size_bytes": 16565,
+      "used_by_refit": true
+    },
+    "rushing_study_storage": {
+      "manifest_sha256": "4634d881351c5424402a95f459f7f2b462f2e8133b34a41785b9474dcbc5ce90",
+      "matches_manifest": true,
+      "path": "rushing_study/storage.py",
+      "sha256": "4634d881351c5424402a95f459f7f2b462f2e8133b34a41785b9474dcbc5ce90",
+      "size_bytes": 41222,
+      "used_by_refit": true
+    },
+    "study_config": {
+      "manifest_sha256": "c67254733643f13bd63b8a34144e283c238111f6f8a212120b4e8077fc838cca",
+      "matches_manifest": true,
+      "path": "configs/rushing_confirmatory_v1.json",
+      "sha256": "c67254733643f13bd63b8a34144e283c238111f6f8a212120b4e8077fc838cca",
+      "size_bytes": 10972,
+      "used_by_refit": true
+    },
+    "train_x": {
+      "manifest_sha256": "0fc35cfd2dbafddbdf459c45044a45a4d31da6748278816031ddbaff1b0506dd",
+      "matches_manifest": true,
+      "path": "data/processed/train_x.npy",
+      "sha256": "0fc35cfd2dbafddbdf459c45044a45a4d31da6748278816031ddbaff1b0506dd",
+      "size_bytes": 189886528,
+      "used_by_refit": true
+    },
+    "train_x_set": {
+      "manifest_sha256": "d41f155801649872e05a34061e9352b07f9e7a3dd249ed41f810b03b01049077",
+      "matches_manifest": true,
+      "path": "data/processed/train_x_set.npy",
+      "sha256": "d41f155801649872e05a34061e9352b07f9e7a3dd249ed41f810b03b01049077",
+      "size_bytes": 37977408,
+      "used_by_refit": true
+    },
+    "train_y": {
+      "manifest_sha256": "dd8d86f784bc0e4a8b8b46472ee49a455f0dcbee788a61bf680ea37c78c61dd1",
+      "matches_manifest": true,
+      "path": "data/processed/train_y.pkl",
+      "sha256": "dd8d86f784bc0e4a8b8b46472ee49a455f0dcbee788a61bf680ea37c78c61dd1",
+      "size_bytes": 2164513,
+      "used_by_refit": true
+    },
+    "training_size_sweep": {
+      "manifest_sha256": "30489f48df86277dd79452c32f82e94736617b76ec43442af97657e286071c36",
+      "matches_manifest": true,
+      "path": "training_size_sweep.py",
+      "sha256": "30489f48df86277dd79452c32f82e94736617b76ec43442af97657e286071c36",
+      "size_bytes": 29953,
+      "used_by_refit": true
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "example_selection": {
+    "prediction_independent": true,
+    "rule": "Fixed GameId/PlayId selected before refitting: recognizable rusher, moderate positive gain, and membership in repeat 5's held-out test split."
+  },
+  "models": {
+    "lightgbm_multiclass": {
+      "actual_class": 32,
+      "actual_yards": 4,
+      "best_epoch": null,
+      "central_interval": {
+        "hi_class": 38,
+        "hi_yards": 10,
+        "lo_class": 28,
+        "lo_yards": 0
+      },
+      "conformal_interval": {
+        "covered": true,
+        "hi_class": 38,
+        "hi_yards": 10,
+        "lo_class": 28,
+        "lo_yards": 0,
+        "width_inclusive": 11,
+        "width_index_gap": 10
+      },
+      "conformal_padding_classes": 0.0,
+      "crps": 0.002857614489774766,
+      "model": "LightGBM",
+      "model_config_hash": "5689446e19bdea1df411111e1e4b5cc50183c270622d0757b33c51d0a5938a1c",
+      "model_id": "lightgbm_multiclass",
+      "parameter_count": 12800,
+      "pmf_sum": 1.0,
+      "predictive_entropy": 2.401625227126359,
+      "predictive_mean_yards": 4.009081965532192,
+      "predictive_median_yards": 4,
+      "predictive_mode_yards": 4,
+      "predictive_sd_yards": 3.5489547567423507,
+      "refit_elapsed_seconds": 22.6918195001781,
+      "seeds": {
+        "fit_seed": 1762576241
+      }
+    },
+    "set_transformer": {
+      "actual_class": 32,
+      "actual_yards": 4,
+      "best_epoch": 49,
+      "central_interval": {
+        "hi_class": 44,
+        "hi_yards": 16,
+        "lo_class": 29,
+        "lo_yards": 1
+      },
+      "conformal_interval": {
+        "covered": true,
+        "hi_class": 44,
+        "hi_yards": 16,
+        "lo_class": 29,
+        "lo_yards": 1,
+        "width_inclusive": 16,
+        "width_index_gap": 15
+      },
+      "conformal_padding_classes": 0.0,
+      "crps": 0.004576457277799077,
+      "model": "Set Transformer",
+      "model_config_hash": "6f4dec421d8ca8a60ca233da0707302c871aa8127caae786bc585c163e11c567",
+      "model_id": "set_transformer",
+      "parameter_count": 157416,
+      "pmf_sum": 1.0,
+      "predictive_entropy": 2.782688642463474,
+      "predictive_mean_yards": 6.12834185941548,
+      "predictive_median_yards": 5,
+      "predictive_mode_yards": 4,
+      "predictive_sd_yards": 5.690413779565518,
+      "refit_elapsed_seconds": 888.6921311249025,
+      "seeds": {
+        "refit_seed": 1389944337,
+        "selection_seed": 1167835653
+      }
+    }
+  },
+  "play": {
+    "actual_yards": 4,
+    "away_team": "WAS",
+    "distance": 10,
+    "down": 1,
+    "game_clock": "14:53:00",
+    "game_id": "2017100200",
+    "home_team": "KC",
+    "play_direction": "right",
+    "play_id": "20171002002089",
+    "possession_team": "KC",
+    "quarter": 3,
+    "rusher": "Kareem Hunt",
+    "rusher_nfl_id": "2557917",
+    "season": 2017,
+    "time_handoff": "2017-10-03T02:15:03.000Z",
+    "time_snap": "2017-10-03T02:15:01.000Z",
+    "week": 4,
+    "yard_line": 21
+  },
+  "schema_version": 1,
+  "study_cell": {
+    "branch": "main",
+    "calibration_games": 137,
+    "fixed_play_is_in_test_split": true,
+    "n_train_games": 360,
+    "repeat": 5,
+    "split_hash": "92f07dc8c36e90aa5f30a8acd4d2afb11be806a53339e85d84c059a402168ee6",
+    "test_games": 137
+  }
+}

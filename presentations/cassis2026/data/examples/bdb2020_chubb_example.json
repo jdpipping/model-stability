@@ -1,0 +1,90 @@
+{
+  "example_selection": {
+    "key": "chubb",
+    "prediction_independent": false,
+    "rule": "Descriptive teaching example selected from repeat 5's held-out test plays because the observed gain is close to the frozen LightGBM predictive mean and equals its mode while the locally weighted conformal padding remains nonzero. This selection is not used for performance inference."
+  },
+  "models": {
+    "lightgbm_multiclass": {
+      "actual_class": 32,
+      "actual_yards": 4,
+      "best_epoch": null,
+      "calibration_plays": 6126,
+      "central_interval": {
+        "hi_class": 39,
+        "hi_yards": 11,
+        "lo_class": 26,
+        "lo_yards": -2
+      },
+      "conformal_interval": {
+        "covered": true,
+        "hi_class": 42,
+        "hi_yards": 14,
+        "lo_class": 23,
+        "lo_yards": -5,
+        "width_inclusive": 20,
+        "width_index_gap": 19
+      },
+      "conformal_padding_classes": 3.0,
+      "crps": 0.005705179068679136,
+      "model": "LightGBM",
+      "model_config_hash": "5689446e19bdea1df411111e1e4b5cc50183c270622d0757b33c51d0a5938a1c",
+      "model_id": "lightgbm_multiclass",
+      "parameter_count": 12800,
+      "pmf_sum": 1.0,
+      "predictive_entropy": 2.682688809181612,
+      "predictive_mean_yards": 2.962213100694763,
+      "predictive_median_yards": 2,
+      "predictive_mode_yards": 4,
+      "predictive_sd_yards": 5.1037614133016325,
+      "refit_elapsed_seconds": 22.215340708382428,
+      "seeds": {
+        "fit_seed": 1762576241
+      },
+      "test_plays": 6206
+    }
+  },
+  "play": {
+    "actual_yards": 4,
+    "away_team": "CLE",
+    "distance": 2,
+    "down": 2,
+    "game_clock": "14:19:00",
+    "game_id": "2019091600",
+    "home_team": "NYJ",
+    "play_direction": "right",
+    "play_id": "20190916000078",
+    "possession_team": "CLV",
+    "quarter": 1,
+    "rusher": "Nick Chubb",
+    "rusher_nfl_id": "2561021",
+    "season": 2019,
+    "time_handoff": "2019-09-17T00:17:00.000Z",
+    "time_snap": "2019-09-17T00:16:59.000Z",
+    "week": 2,
+    "yard_line": 27
+  },
+  "schema_version": 1,
+  "study_cell": {
+    "branch": "main",
+    "calibration_games": 137,
+    "fixed_play_is_in_test_split": true,
+    "n_train_games": 360,
+    "repeat": 5,
+    "split_hash": "92f07dc8c36e90aa5f30a8acd4d2afb11be806a53339e85d84c059a402168ee6",
+    "test_games": 137
+  },
+  "uncertainty_method": {
+    "alpha": 0.1,
+    "calibration": "locally_weighted_conformal_padding",
+    "central_interval": "alpha_over_2_equal_tail",
+    "kernel": "gaussian",
+    "local_k": 200,
+    "locality_features": [
+      "predictive_mean",
+      "predictive_standard_deviation",
+      "predictive_entropy"
+    ],
+    "width_definition": "hi_minus_lo_index_gap"
+  }
+}

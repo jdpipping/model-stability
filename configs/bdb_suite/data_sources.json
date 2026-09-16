@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "imports": [
+    {
+      "release": 2021,
+      "source_id": "nfl_big_data_bowl_2021",
+      "destination": "data/bdb2021/raw"
+    },
+    {
+      "release": 2022,
+      "source_id": "nfl_big_data_bowl_2022",
+      "destination": "data/bdb2022/raw"
+    },
+    {
+      "release": 2024,
+      "source_id": "nfl_big_data_bowl_2024",
+      "destination": "data/bdb2024/raw"
+    }
+  ]
+}

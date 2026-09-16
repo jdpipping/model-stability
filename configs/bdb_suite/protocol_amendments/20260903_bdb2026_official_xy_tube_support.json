@@ -1,0 +1,98 @@
+{
+  "schema_version": "bdb-protocol-amendment-v1",
+  "amendment_id": "20260903_bdb2026_official_xy_tube_support",
+  "recorded_at_utc": "2026-09-03T18:16:29Z",
+  "evidence_status": "post_operational_failure_before_any_predictive_score_inspection",
+  "applies_to": {
+    "namespace": "full100_serial_bdb2026_attempt1",
+    "task_id": "bdb2026_trajectory",
+    "profile": "full100",
+    "source_manifest_file_sha256": "5a17c1b63313ecb015869e53bce5ac5cd2294a1738d4523ad49c268c2ebc7730",
+    "source_manifest_hash": "5ec31993100d06d22a47ae0afc9da6b9edb0344a665e975ff852f972552b1002",
+    "source_scheduler_journal_file_sha256": "278e3e7897dc824c4ff7b93d508bca67d2b7577bc44c7eb056b8148be6993285",
+    "source_scheduler_journal_hash": "5b2c11fcfe4942da8e5f3c9f09cfc107e4f7f5e259ee9fbfdd1ff007a394586d"
+  },
+  "incident": {
+    "failure_class": "official_trajectory_target_outside_painted_field_rectangle",
+    "failing_guard": "pathwise_conformal_tube_requires_every_valid_target_center_inside_legal_field_bounds",
+    "scheduler_summary": {
+      "completed": 4,
+      "failed": 12,
+      "cancelled": 2759,
+      "restarts": 0
+    },
+    "failed_cpu_job_ids": [
+      "8082978",
+      "8082980",
+      "8082982",
+      "8082983",
+      "8082984",
+      "8082985",
+      "8082986",
+      "8082987"
+    ],
+    "failed_gpu_refit_job_ids": [
+      "8082989",
+      "8083709",
+      "8084418",
+      "8085135"
+    ],
+    "superseded_aggregate_job_id": "8085846",
+    "superseded_year_finalizer_job_id": "8085847",
+    "exit_code": "2:0",
+    "oom_or_timeout": false,
+    "environment_or_resource_drift": false
+  },
+  "prepared_target_support_audit": {
+    "source": "checksum_bound_official_target_values_and_target_mask_only",
+    "prepared_hash": "37e8e6fb22dc1eb6ceeff8f1fb1576b05120575298c90fbf9eddc4b8007f076c",
+    "prepared_semantic_hash": "7cc57fc5ee72468478086cd96055ef8ca9de62335cd341f65b447bd9cde6dedf",
+    "target_shape": [46045, 94, 2],
+    "valid_future_frames": 562936,
+    "canonical_playing_surface_yards": [0.0, 120.0, 0.0, 53.333333333333336],
+    "observed_valid_target_ranges_yards": {
+      "x": [7.46, 120.83000183105469],
+      "y": [0.33, 53.720001220703125]
+    },
+    "off_surface_valid_frames": 3,
+    "off_surface_paths": 1,
+    "off_surface_games": 1,
+    "source_rows_are_official_and_unmodified": true,
+    "predictive_artifacts_opened_or_values_read": false
+  },
+  "amended_uncertainty_support": {
+    "prior_label": "disk_intersect_legal_field_rectangle",
+    "replacement": "unbounded_official_tracking_xy_v1",
+    "coordinate_support": "R_squared_in_official_tracking_yards",
+    "coverage_region": "whole_path_horizon_scaled_radial_disk",
+    "calibration_unit": "game",
+    "nominal_coverage": 0.9,
+    "whole_plane_bounds_sentinel": ["-Infinity", "Infinity", "-Infinity", "Infinity"],
+    "target_or_prediction_clipping": false,
+    "primary_prediction_or_loss_changed": false,
+    "horizon_scale_changed": false,
+    "split_seed_or_model_selection_changed": false,
+    "reason": "Official requested-player centers can remain in tracking data after crossing the painted boundary. A field-intersected set cannot cover such an official target; the radial tube must therefore use the official coordinate plane as its support."
+  },
+  "retained_cell_compatibility": {
+    "retained_checksum_valid_cells": 603,
+    "retained_primary_cpu_cells": 588,
+    "retained_primary_gpu_cells": 15,
+    "retained_structural_ablation_cells": 0,
+    "proof": "The superseded implementation used field bounds only as a precondition. Its quantile, radius, path-coverage event, diameter, predictions, and primary losses were computed solely from masked radial errors. Every retained cell passed the precondition, so replaying its finite canonical bounds is numerically identical to whole-plane replay.",
+    "resubmission_policy": "resume_must_skip_every_checksum_valid_cell",
+    "predictive_score_values_inspected": false
+  },
+  "recovery_policy": {
+    "mode": "additive_runtime_adapter_with_immutable_source_code",
+    "source_manifest_and_frozen_runtime_files_modified": false,
+    "required_cells": 3080,
+    "missing_primary_cells_at_incident": 2397,
+    "missing_structural_ablation_cells_at_incident": 80,
+    "persistent_gpu_workers": 4,
+    "cpu_lanes": 8,
+    "automatic_start": false,
+    "successor_task": "bdb2027_unconfigured",
+    "successor_submissions": 0
+  }
+}

@@ -1,0 +1,7 @@
+# Large per-cell exports and execution logs stay in the local research archive.
+/rushing/*/cells/
+/rushing/*/logs/
+
+# Row-level exports are reproducible. Retain compact summaries and checksums.
+**/*_predictions.csv
+**/*_reliability.csv

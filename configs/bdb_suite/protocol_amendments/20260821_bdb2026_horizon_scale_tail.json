@@ -1,0 +1,83 @@
+{
+  "schema_version": "bdb-protocol-amendment-v1",
+  "amendment_id": "20260821_bdb2026_horizon_scale_tail",
+  "recorded_at_utc": "2026-08-21T11:49:59Z",
+  "evidence_status": "outcome_blind_before_freeze_smoke_or_pilot_prediction",
+  "superseded_campaign": {
+    "namespace": "pilot10_attempt4",
+    "campaign_hash": "be61aff7e8cacda750ac226b0bfd6d4296337a79f1439d968a441c190c995357",
+    "submitted_jobs": 856,
+    "journal_file_sha256": "d6d36d10bf7d074c758ddd3a062811289e7d4b4143fe3f32212b2b8647d3b556",
+    "receipt_file_sha256": "055bee4c8ec5ab29f0eb496eefea08400d7a6b23831f2910fa2d8166871e7e6a",
+    "terminal_dispatch_job_id": 7727105,
+    "terminal_states": {
+      "completed": 314,
+      "failed": 1,
+      "cancelled": 541
+    },
+    "failure": {
+      "job_id": 7727025,
+      "stage": "pilot:bdb2026_trajectory:development-reduce:glm",
+      "exit_code": "2:0",
+      "message": "BDB2026 development games do not observe horizon 34",
+      "stderr_sha256": "d6c695d66232fb4ea86e57a462f8446b7fe1e725404e4fa7d8099e3d442279eb"
+    },
+    "pilot_prediction_cells_created": 0,
+    "frozen_task_specs_created": 0,
+    "model_scores_or_checkpoint_metrics_inspected": false,
+    "archive": {
+      "path": "data/bdb_suite_runs/archive/pilot10_attempt4_20260821",
+      "files": 346,
+      "bytes": 10079649,
+      "inventory_sha256": "131dad6b810100f1f4792fe63c4f8399590f9abfbf8afbcfb8a51c9378278ba0"
+    }
+  },
+  "support_audit": {
+    "source": "prepared_target_masks_and_frozen_game_registry_only",
+    "prepared_hash": "37e8e6fb22dc1eb6ceeff8f1fb1576b05120575298c90fbf9eddc4b8007f076c",
+    "prepared_semantic_hash": "7cc57fc5ee72468478086cd96055ef8ca9de62335cd341f65b447bd9cde6dedf",
+    "game_registry_hash": "e9f2a64c5fa8f6a31834dc79eb145a52b699ea59b241b791dc04586a3af403f7",
+    "development": {
+      "games": 36,
+      "paths": 6280,
+      "observed_through_horizon": 33,
+      "paths_at_horizon_33": 7,
+      "zero_count_horizons": [34, 94]
+    },
+    "confirmatory": {
+      "games": 236,
+      "paths": 39765,
+      "observed_through_horizon": 94,
+      "paths_at_horizon_34": 60,
+      "paths_at_horizon_94": 8,
+      "games_with_any_horizon_34_or_later": 9
+    },
+    "pilot_test_repeats_requiring_horizon_34": 10,
+    "pilot_test_repeats_requiring_horizon_94": [4, 6, 9],
+    "target_coordinates_read": false,
+    "predictions_or_losses_read": false
+  },
+  "amended_scale_rule": {
+    "applies_to_families": [
+      "glm",
+      "lightgbm",
+      "relnet",
+      "attn_relnet",
+      "set_transformer"
+    ],
+    "observed_prefix": "count_weighted_fold_median_then_floor_0.25_and_nondecreasing_pava",
+    "support_requirement": "pooled_positive_counts_form_nonempty_prefix_v1",
+    "unobserved_tail_policy": "carry_forward_last_fitted_pava_level_v1",
+    "horizon_count": 94,
+    "registry_changed": false,
+    "model_selection_changed": false,
+    "coverage_mechanism": "game_level_split_conformal_max_scaled_radial_error",
+    "coverage_scope": "marginal_whole_path_for_one_requested_path_from_a_new_exchangeable_game",
+    "not_claimed": [
+      "horizon_conditional_coverage",
+      "simultaneous_coverage_of_every_player",
+      "learned_tail_efficiency"
+    ]
+  },
+  "replacement_campaign": "pilot10_attempt5"
+}

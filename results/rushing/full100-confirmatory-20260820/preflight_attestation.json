@@ -1,0 +1,511 @@
+{
+  "cells": [
+    {
+      "marker_sha256": "55d1e7a7556364ab11c58766640e3a65fef8641d2884bd90072aa14fa6622eb5",
+      "path": "cells/main/repeat_001/n_0020/lightgbm_multiclass"
+    },
+    {
+      "marker_sha256": "1af9bac7a6e29e6970b45125846d0a3ada60380b554b25f93a86723f124e6fa4",
+      "path": "cells/main/repeat_001/n_0020/ridge_sgd_l2"
+    },
+    {
+      "marker_sha256": "5692c50a6e8b8187230ce06295086c68af61395deeaa114c994667ea7282573c",
+      "path": "cells/main/repeat_001/n_0020/set_transformer"
+    },
+    {
+      "marker_sha256": "50b0b99dedff461407c8438ec51817411bf5ace15383a8f122f22b26e8460ad9",
+      "path": "cells/main/repeat_001/n_0020/zoo_cnn"
+    }
+  ],
+  "code_files_sha256": "d48e0a8505a2b1016a0b693ad8341f3a93eba6d75e3d28a663a9d0d7af4f9eb3",
+  "data_provenance_sha256": "e8d7be91d7e6914a3d949cd243441e6bc9f8c315f78b80ad7d42dab55d7cdbe6",
+  "determinism_receipts": {
+    "set_transformer": {
+      "file": "verification/main_repeat_001_n_0020_set_transformer.json",
+      "payload": {
+        "atol": 0.0,
+        "branch": "main",
+        "comparisons": {
+          "calibration_proba": {
+            "exact": true,
+            "max_abs_difference": 0.0,
+            "within_tolerance": true
+          },
+          "test_proba": {
+            "exact": true,
+            "max_abs_difference": 0.0,
+            "within_tolerance": true
+          }
+        },
+        "device": null,
+        "environment": {
+          "OMP_NUM_THREADS": "1",
+          "PYTHONHASHSEED": "20260817",
+          "TF_DETERMINISTIC_OPS": "1",
+          "TF_NUM_INTEROP_THREADS": "1",
+          "TF_NUM_INTRAOP_THREADS": "1"
+        },
+        "execution_queue": "gpu_neural",
+        "hardware": {
+          "declared_execution_settings": {
+            "environment_variables": {
+              "OMP_NUM_THREADS": "1",
+              "PYTHONHASHSEED": "20260817",
+              "TF_DETERMINISTIC_OPS": "1",
+              "TF_NUM_INTEROP_THREADS": "1",
+              "TF_NUM_INTRAOP_THREADS": "1"
+            },
+            "lightgbm_n_jobs": 1,
+            "profile": "hybrid_cpu12_gpu1",
+            "queues": {
+              "cpu_tabular": {
+                "device": "cpu",
+                "models": [
+                  "ridge_sgd_l2",
+                  "lightgbm_multiclass"
+                ],
+                "workers": 12
+              },
+              "gpu_neural": {
+                "device": "gpu",
+                "models": [
+                  "zoo_cnn",
+                  "set_transformer"
+                ],
+                "workers": 1
+              }
+            },
+            "worker_count": 1
+          },
+          "environment_variables": {
+            "OMP_NUM_THREADS": "1",
+            "PYTHONHASHSEED": "20260817",
+            "TF_CPP_MIN_LOG_LEVEL": "1",
+            "TF_DETERMINISTIC_OPS": "1",
+            "TF_NUM_INTEROP_THREADS": "1",
+            "TF_NUM_INTRAOP_THREADS": "1"
+          },
+          "hardware": {
+            "byteorder": "little",
+            "cpu_count": 224,
+            "machine": "x86_64",
+            "processor": "x86_64"
+          },
+          "os": {
+            "platform": "Linux-6.8.0-117-generic-x86_64-with-glibc2.39",
+            "release": "6.8.0-117-generic",
+            "system": "Linux",
+            "version": "#117-Ubuntu SMP PREEMPT_DYNAMIC Tue May  5 19:26:24 UTC 2026"
+          },
+          "packages": {
+            "Markdown": "3.7",
+            "MarkupSafe": "3.0.2",
+            "Pygments": "2.19.1",
+            "Werkzeug": "3.1.3",
+            "absl-py": "1.0.0",
+            "astunparse": "1.6.3",
+            "certifi": "2024.12.14",
+            "charset-normalizer": "3.4.1",
+            "contourpy": "1.3.3",
+            "cycler": "0.12.1",
+            "flatbuffers": "24.3.25",
+            "fonttools": "4.62.1",
+            "gast": "0.4.0",
+            "google-pasta": "0.2.0",
+            "grpcio": "1.62.1",
+            "h5py": "3.10.0",
+            "idna": "3.10",
+            "joblib": "1.4.2",
+            "keras": "3.3.2",
+            "kiwisolver": "1.5.0",
+            "libclang": "16.0.0",
+            "lightgbm": "4.6.0",
+            "markdown-it-py": "3.0.0",
+            "matplotlib": "3.10.8",
+            "mdurl": "0.1.2",
+            "ml_dtypes": "0.3.2",
+            "namex": "0.0.8",
+            "numpy": "1.26.4",
+            "opt_einsum": "3.3.0",
+            "optree": "0.14.0",
+            "packaging": "23.2",
+            "pandas": "3.0.1",
+            "pillow": "12.1.1",
+            "protobuf": "4.25.3",
+            "pyparsing": "3.2.1",
+            "python-dateutil": "2.9.0.post0",
+            "requests": "2.32.3",
+            "rich": "13.9.4",
+            "scikit-learn": "1.5.2",
+            "scipy": "1.12.0",
+            "setuptools": "70.3.0",
+            "six": "1.16.0",
+            "tensorboard": "2.17.1",
+            "tensorboard-data-server": "0.7.2",
+            "tensorflow": "2.17.0+nv25.2",
+            "termcolor": "1.1.0",
+            "threadpoolctl": "3.5.0",
+            "typing_extensions": "4.12.2",
+            "urllib3": "2.0.7",
+            "venn-abers": "1.5.3",
+            "wheel": "0.45.1",
+            "wrapt": "1.16.0"
+          },
+          "python": {
+            "executable": "/usr/bin/python3",
+            "implementation": "CPython",
+            "version": "3.12.3"
+          },
+          "requirements_lock": {
+            "expected_packages": {
+              "Markdown": "3.7",
+              "MarkupSafe": "3.0.2",
+              "Pygments": "2.19.1",
+              "Werkzeug": "3.1.3",
+              "absl-py": "1.0.0",
+              "astunparse": "1.6.3",
+              "certifi": "2024.12.14",
+              "charset-normalizer": "3.4.1",
+              "contourpy": "1.3.3",
+              "cycler": "0.12.1",
+              "flatbuffers": "24.3.25",
+              "fonttools": "4.62.1",
+              "gast": "0.4.0",
+              "google-pasta": "0.2.0",
+              "grpcio": "1.62.1",
+              "h5py": "3.10.0",
+              "idna": "3.10",
+              "joblib": "1.4.2",
+              "keras": "3.3.2",
+              "kiwisolver": "1.5.0",
+              "libclang": "16.0.0",
+              "lightgbm": "4.6.0",
+              "markdown-it-py": "3.0.0",
+              "matplotlib": "3.10.8",
+              "mdurl": "0.1.2",
+              "ml_dtypes": "0.3.2",
+              "namex": "0.0.8",
+              "numpy": "1.26.4",
+              "opt_einsum": "3.3.0",
+              "optree": "0.14.0",
+              "packaging": "23.2",
+              "pandas": "3.0.1",
+              "pillow": "12.1.1",
+              "protobuf": "4.25.3",
+              "pyparsing": "3.2.1",
+              "python-dateutil": "2.9.0.post0",
+              "requests": "2.32.3",
+              "rich": "13.9.4",
+              "scikit-learn": "1.5.2",
+              "scipy": "1.12.0",
+              "setuptools": "70.3.0",
+              "six": "1.16.0",
+              "tensorboard": "2.17.1",
+              "tensorboard-data-server": "0.7.2",
+              "tensorflow": "2.17.0+nv25.2",
+              "termcolor": "1.1.0",
+              "threadpoolctl": "3.5.0",
+              "typing_extensions": "4.12.2",
+              "urllib3": "2.0.7",
+              "venn-abers": "1.5.3",
+              "wheel": "0.45.1",
+              "wrapt": "1.16.0"
+            },
+            "package_count": 52,
+            "path": "requirements-lock.txt",
+            "sha256": "1e1fa7b32c8e22102cfbb94041f09414e0d6fc92c7007d1ccbc0e42bfe39441a",
+            "size_bytes": 6161
+          },
+          "tensorflow": {
+            "available": true,
+            "build_info": {
+              "cpu_compiler": "/opt/rh/gcc-toolset-11/root/usr/bin/gcc",
+              "cuda_compute_capabilities": [
+                "sm_100",
+                "sm_120",
+                "sm_75",
+                "sm_80",
+                "sm_86",
+                "compute_90"
+              ],
+              "cuda_version": "12.8",
+              "cudnn_version": "9",
+              "is_cuda_build": true,
+              "is_rocm_build": false,
+              "is_tensorrt_build": true
+            },
+            "physical_devices": [
+              {
+                "device_type": "CPU",
+                "name": "/physical_device:CPU:0"
+              },
+              {
+                "device_type": "GPU",
+                "name": "/physical_device:GPU:0"
+              }
+            ],
+            "runtime_threading": {
+              "inter_op_threads": 0,
+              "intra_op_threads": 0
+            },
+            "version": "2.17.0"
+          }
+        },
+        "manifest_hash": "72b994e2daed18b29e1c2f225358634f455128cec0cee0ceae94f45243e981b0",
+        "model": "set_transformer",
+        "n_train": 20,
+        "passed": true,
+        "repeat": 1,
+        "rtol": 0.0,
+        "timestamp_utc": "2026-08-20T05:20:52.240749+00:00"
+      },
+      "sha256": "ab4bf06a123d5dd730e7305fafc475f79a30718762769692bd36d906d7d07196"
+    },
+    "zoo_cnn": {
+      "file": "verification/main_repeat_001_n_0020_zoo_cnn.json",
+      "payload": {
+        "atol": 0.0,
+        "branch": "main",
+        "comparisons": {
+          "calibration_proba": {
+            "exact": true,
+            "max_abs_difference": 0.0,
+            "within_tolerance": true
+          },
+          "test_proba": {
+            "exact": true,
+            "max_abs_difference": 0.0,
+            "within_tolerance": true
+          }
+        },
+        "device": null,
+        "environment": {
+          "OMP_NUM_THREADS": "1",
+          "PYTHONHASHSEED": "20260817",
+          "TF_DETERMINISTIC_OPS": "1",
+          "TF_NUM_INTEROP_THREADS": "1",
+          "TF_NUM_INTRAOP_THREADS": "1"
+        },
+        "execution_queue": "gpu_neural",
+        "hardware": {
+          "declared_execution_settings": {
+            "environment_variables": {
+              "OMP_NUM_THREADS": "1",
+              "PYTHONHASHSEED": "20260817",
+              "TF_DETERMINISTIC_OPS": "1",
+              "TF_NUM_INTEROP_THREADS": "1",
+              "TF_NUM_INTRAOP_THREADS": "1"
+            },
+            "lightgbm_n_jobs": 1,
+            "profile": "hybrid_cpu12_gpu1",
+            "queues": {
+              "cpu_tabular": {
+                "device": "cpu",
+                "models": [
+                  "ridge_sgd_l2",
+                  "lightgbm_multiclass"
+                ],
+                "workers": 12
+              },
+              "gpu_neural": {
+                "device": "gpu",
+                "models": [
+                  "zoo_cnn",
+                  "set_transformer"
+                ],
+                "workers": 1
+              }
+            },
+            "worker_count": 1
+          },
+          "environment_variables": {
+            "OMP_NUM_THREADS": "1",
+            "PYTHONHASHSEED": "20260817",
+            "TF_CPP_MIN_LOG_LEVEL": "1",
+            "TF_DETERMINISTIC_OPS": "1",
+            "TF_NUM_INTEROP_THREADS": "1",
+            "TF_NUM_INTRAOP_THREADS": "1"
+          },
+          "hardware": {
+            "byteorder": "little",
+            "cpu_count": 224,
+            "machine": "x86_64",
+            "processor": "x86_64"
+          },
+          "os": {
+            "platform": "Linux-6.8.0-117-generic-x86_64-with-glibc2.39",
+            "release": "6.8.0-117-generic",
+            "system": "Linux",
+            "version": "#117-Ubuntu SMP PREEMPT_DYNAMIC Tue May  5 19:26:24 UTC 2026"
+          },
+          "packages": {
+            "Markdown": "3.7",
+            "MarkupSafe": "3.0.2",
+            "Pygments": "2.19.1",
+            "Werkzeug": "3.1.3",
+            "absl-py": "1.0.0",
+            "astunparse": "1.6.3",
+            "certifi": "2024.12.14",
+            "charset-normalizer": "3.4.1",
+            "contourpy": "1.3.3",
+            "cycler": "0.12.1",
+            "flatbuffers": "24.3.25",
+            "fonttools": "4.62.1",
+            "gast": "0.4.0",
+            "google-pasta": "0.2.0",
+            "grpcio": "1.62.1",
+            "h5py": "3.10.0",
+            "idna": "3.10",
+            "joblib": "1.4.2",
+            "keras": "3.3.2",
+            "kiwisolver": "1.5.0",
+            "libclang": "16.0.0",
+            "lightgbm": "4.6.0",
+            "markdown-it-py": "3.0.0",
+            "matplotlib": "3.10.8",
+            "mdurl": "0.1.2",
+            "ml_dtypes": "0.3.2",
+            "namex": "0.0.8",
+            "numpy": "1.26.4",
+            "opt_einsum": "3.3.0",
+            "optree": "0.14.0",
+            "packaging": "23.2",
+            "pandas": "3.0.1",
+            "pillow": "12.1.1",
+            "protobuf": "4.25.3",
+            "pyparsing": "3.2.1",
+            "python-dateutil": "2.9.0.post0",
+            "requests": "2.32.3",
+            "rich": "13.9.4",
+            "scikit-learn": "1.5.2",
+            "scipy": "1.12.0",
+            "setuptools": "70.3.0",
+            "six": "1.16.0",
+            "tensorboard": "2.17.1",
+            "tensorboard-data-server": "0.7.2",
+            "tensorflow": "2.17.0+nv25.2",
+            "termcolor": "1.1.0",
+            "threadpoolctl": "3.5.0",
+            "typing_extensions": "4.12.2",
+            "urllib3": "2.0.7",
+            "venn-abers": "1.5.3",
+            "wheel": "0.45.1",
+            "wrapt": "1.16.0"
+          },
+          "python": {
+            "executable": "/usr/bin/python3",
+            "implementation": "CPython",
+            "version": "3.12.3"
+          },
+          "requirements_lock": {
+            "expected_packages": {
+              "Markdown": "3.7",
+              "MarkupSafe": "3.0.2",
+              "Pygments": "2.19.1",
+              "Werkzeug": "3.1.3",
+              "absl-py": "1.0.0",
+              "astunparse": "1.6.3",
+              "certifi": "2024.12.14",
+              "charset-normalizer": "3.4.1",
+              "contourpy": "1.3.3",
+              "cycler": "0.12.1",
+              "flatbuffers": "24.3.25",
+              "fonttools": "4.62.1",
+              "gast": "0.4.0",
+              "google-pasta": "0.2.0",
+              "grpcio": "1.62.1",
+              "h5py": "3.10.0",
+              "idna": "3.10",
+              "joblib": "1.4.2",
+              "keras": "3.3.2",
+              "kiwisolver": "1.5.0",
+              "libclang": "16.0.0",
+              "lightgbm": "4.6.0",
+              "markdown-it-py": "3.0.0",
+              "matplotlib": "3.10.8",
+              "mdurl": "0.1.2",
+              "ml_dtypes": "0.3.2",
+              "namex": "0.0.8",
+              "numpy": "1.26.4",
+              "opt_einsum": "3.3.0",
+              "optree": "0.14.0",
+              "packaging": "23.2",
+              "pandas": "3.0.1",
+              "pillow": "12.1.1",
+              "protobuf": "4.25.3",
+              "pyparsing": "3.2.1",
+              "python-dateutil": "2.9.0.post0",
+              "requests": "2.32.3",
+              "rich": "13.9.4",
+              "scikit-learn": "1.5.2",
+              "scipy": "1.12.0",
+              "setuptools": "70.3.0",
+              "six": "1.16.0",
+              "tensorboard": "2.17.1",
+              "tensorboard-data-server": "0.7.2",
+              "tensorflow": "2.17.0+nv25.2",
+              "termcolor": "1.1.0",
+              "threadpoolctl": "3.5.0",
+              "typing_extensions": "4.12.2",
+              "urllib3": "2.0.7",
+              "venn-abers": "1.5.3",
+              "wheel": "0.45.1",
+              "wrapt": "1.16.0"
+            },
+            "package_count": 52,
+            "path": "requirements-lock.txt",
+            "sha256": "1e1fa7b32c8e22102cfbb94041f09414e0d6fc92c7007d1ccbc0e42bfe39441a",
+            "size_bytes": 6161
+          },
+          "tensorflow": {
+            "available": true,
+            "build_info": {
+              "cpu_compiler": "/opt/rh/gcc-toolset-11/root/usr/bin/gcc",
+              "cuda_compute_capabilities": [
+                "sm_100",
+                "sm_120",
+                "sm_75",
+                "sm_80",
+                "sm_86",
+                "compute_90"
+              ],
+              "cuda_version": "12.8",
+              "cudnn_version": "9",
+              "is_cuda_build": true,
+              "is_rocm_build": false,
+              "is_tensorrt_build": true
+            },
+            "physical_devices": [
+              {
+                "device_type": "CPU",
+                "name": "/physical_device:CPU:0"
+              },
+              {
+                "device_type": "GPU",
+                "name": "/physical_device:GPU:0"
+              }
+            ],
+            "runtime_threading": {
+              "inter_op_threads": 0,
+              "intra_op_threads": 0
+            },
+            "version": "2.17.0"
+          }
+        },
+        "manifest_hash": "72b994e2daed18b29e1c2f225358634f455128cec0cee0ceae94f45243e981b0",
+        "model": "zoo_cnn",
+        "n_train": 20,
+        "passed": true,
+        "repeat": 1,
+        "rtol": 0.0,
+        "timestamp_utc": "2026-08-20T05:20:01.817901+00:00"
+      },
+      "sha256": "398f7c89c640d96613e2d440a9a3c0cf9571bde2a21b2feda08f0b3a0f703323"
+    }
+  },
+  "environment_provenance_sha256": "952bd66743afcada53c60fadcf7af76177bdf6895b5068e118e87f605af0d7dc",
+  "protocol": "one-repeat-one-epoch-smoke-preflight-v1",
+  "schema_version": 1,
+  "source_manifest_hash": "72b994e2daed18b29e1c2f225358634f455128cec0cee0ceae94f45243e981b0",
+  "source_run_hash": "72b994e2daed18b29e1c2f22"
+}

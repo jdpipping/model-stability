@@ -1,0 +1,502 @@
+{
+  "analysis": {
+    "bootstrap_draws": 10000,
+    "bootstrap_seed_key": [
+      "analysis",
+      "bootstrap"
+    ],
+    "confidence": 0.95,
+    "coverage_metrics": [
+      "coverage",
+      "coverage_game_equal"
+    ],
+    "coverage_target": 0.9,
+    "metric_columns": [
+      "crps",
+      "coverage",
+      "mean_width",
+      "mean_width_inclusive",
+      "mean_q",
+      "crps_game_equal",
+      "coverage_game_equal",
+      "mean_width_game_equal",
+      "mean_width_inclusive_game_equal"
+    ],
+    "plot_metrics": [
+      "crps",
+      "mean_width",
+      "coverage"
+    ]
+  },
+  "base_seed": 20260817,
+  "data": {
+    "df_season": "data/processed/df_season.pkl",
+    "processed_dir": "data/processed",
+    "raw_train_csv": "data/raw/train.csv",
+    "train_x": "data/processed/train_x.npy",
+    "train_x_set": "data/processed/train_x_set.npy",
+    "train_y": "data/processed/train_y.pkl"
+  },
+  "data_assumptions": {
+    "expected_seasons": [
+      2017,
+      2018,
+      2019
+    ],
+    "game_id_column": "GameId",
+    "one_row_per_game": true,
+    "play_id_column": "PlayId",
+    "reject_augmented_suffix": "_aug",
+    "season_column": "Season"
+  },
+  "description": "Immutable confirmatory design for the BDB 2020 rushing-yard training-size study.",
+  "execution": {
+    "confirmatory_repeats": 100,
+    "environment": {
+      "OMP_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "20260817",
+      "TF_DETERMINISTIC_OPS": "1",
+      "TF_NUM_INTEROP_THREADS": "1",
+      "TF_NUM_INTRAOP_THREADS": "1"
+    },
+    "lightgbm_n_jobs": 1,
+    "plan": "final",
+    "profile": "hybrid_cpu12_gpu1",
+    "queues": {
+      "cpu_tabular": {
+        "device": "cpu",
+        "models": [
+          "ridge_sgd_l2",
+          "lightgbm_multiclass"
+        ],
+        "workers": 12
+      },
+      "gpu_neural": {
+        "device": "gpu",
+        "models": [
+          "zoo_cnn",
+          "set_transformer"
+        ],
+        "workers": 1
+      }
+    },
+    "require_tensorflow_deterministic_ops": true,
+    "retune_hyperparameters": false,
+    "workers": 1
+  },
+  "features": {
+    "ridge_and_tree": "per-channel min/mean/max/std from the 11x10x10 Zoo tensor",
+    "set_transformer": "train_x_set.npy with shape [play,22,10]",
+    "use_mirror_augmentation": false,
+    "zoo_cnn": "train_x.npy with shape [play,11,10,10]"
+  },
+  "label": {
+    "class_offset": 71,
+    "column": "YardIndexClipped",
+    "maximum": 150,
+    "minimum": 71,
+    "num_classes": 80
+  },
+  "model_id_map": {
+    "lightgbm_multiclass": "tree_multiclass_hgbt",
+    "ridge_sgd_l2": "ridge_multinomial",
+    "set_transformer": "set_transformer_distributional",
+    "zoo_cnn": "zoo_cnn_distributional"
+  },
+  "models": {
+    "lightgbm_multiclass": {
+      "boosting_type": "gbdt",
+      "colsample_bytree": 1.0,
+      "frozen": true,
+      "implementation": "lightgbm.LGBMClassifier",
+      "learning_rate": 0.05,
+      "max_depth": 5,
+      "min_child_samples": 50,
+      "min_child_weight": 0.001,
+      "min_split_gain": 0.0,
+      "n_estimators": 200,
+      "num_class": 80,
+      "num_leaves": 31,
+      "objective": "multiclass",
+      "pilot_source": "results/sweep_5_config.json",
+      "reg_alpha": 0.5,
+      "reg_lambda": 0.5,
+      "subsample": 1.0,
+      "subsample_freq": 0
+    },
+    "ridge_sgd_l2": {
+      "alpha": 0.3333333333333333,
+      "average": false,
+      "batch_size": 64,
+      "epochs": 50,
+      "eta0": 0.01,
+      "fit_intercept": true,
+      "frozen": true,
+      "implementation": "sklearn.linear_model.SGDClassifier",
+      "learning_rate": "optimal",
+      "loss": "log_loss",
+      "penalty": "l2",
+      "pilot_source": "results/sweep_5_config.json"
+    },
+    "set_transformer": {
+      "d_model": 64,
+      "dense_units": [
+        64,
+        16
+      ],
+      "dropout": 0.3,
+      "expected_parameters": 157416,
+      "ff_dim": 256,
+      "frozen": true,
+      "implementation": "neural_models.get_set_transformer",
+      "input_shape": [
+        22,
+        10
+      ],
+      "key_dim": 32,
+      "num_heads": 2,
+      "num_layers": 3,
+      "output_units": 80,
+      "pilot_source": "results/sweep_5.csv",
+      "pooling": "global_average"
+    },
+    "zoo_cnn": {
+      "conv1d_filters": [
+        160,
+        96,
+        96
+      ],
+      "conv2d_filters": [
+        128,
+        160,
+        128
+      ],
+      "dense_units": [
+        96,
+        256
+      ],
+      "dropout": 0.3,
+      "expected_parameters": 145584,
+      "frozen": true,
+      "implementation": "neural_models.get_conv_net",
+      "input_shape": [
+        11,
+        10,
+        10
+      ],
+      "output_units": 80,
+      "pilot_source": "original Zoo architecture and results/sweep_5.csv",
+      "pooling_weights": {
+        "average": 0.7,
+        "max": 0.3
+      }
+    }
+  },
+  "neural_training": {
+    "batch_size": 64,
+    "early_stopping_metric": "val_CRPS",
+    "early_stopping_mode": "min",
+    "early_stopping_patience": 10,
+    "learning_rate": 0.001,
+    "loss": "crps_scaled_by_199",
+    "max_epochs": 50,
+    "optimizer": "Adam",
+    "restore_best_weights": true
+  },
+  "provenance": {
+    "code_files": {
+      "neural_models": "neural_models.py",
+      "prepare_data": "prepare_data.py",
+      "requirements_lock": "requirements-lock.txt",
+      "rushing_study___init__": "rushing_study/__init__.py",
+      "rushing_study___main__": "rushing_study/__main__.py",
+      "rushing_study_analysis": "rushing_study/analysis.py",
+      "rushing_study_cli": "rushing_study/cli.py",
+      "rushing_study_data": "rushing_study/data.py",
+      "rushing_study_design": "rushing_study/design.py",
+      "rushing_study_execution": "rushing_study/execution.py",
+      "rushing_study_metrics": "rushing_study/metrics.py",
+      "rushing_study_models": "rushing_study/models.py",
+      "rushing_study_runner": "rushing_study/runner.py",
+      "rushing_study_storage": "rushing_study/storage.py",
+      "study_config": "configs/rushing_confirmatory_v1.json",
+      "training_size_sweep": "training_size_sweep.py"
+    },
+    "data_files": {
+      "raw_train": "data/raw/train.csv",
+      "train_x": "data/processed/train_x.npy",
+      "train_x_set": "data/processed/train_x_set.npy",
+      "train_y": "data/processed/train_y.pkl"
+    },
+    "environment_variables": [
+      "OMP_NUM_THREADS",
+      "PYTHONHASHSEED",
+      "TF_DETERMINISTIC_OPS",
+      "TF_CPP_MIN_LOG_LEVEL",
+      "TF_NUM_INTEROP_THREADS",
+      "TF_NUM_INTRAOP_THREADS"
+    ],
+    "packages": [
+      "absl-py",
+      "astunparse",
+      "certifi",
+      "charset-normalizer",
+      "contourpy",
+      "cycler",
+      "flatbuffers",
+      "fonttools",
+      "gast",
+      "google-pasta",
+      "grpcio",
+      "h5py",
+      "idna",
+      "joblib",
+      "keras",
+      "kiwisolver",
+      "libclang",
+      "lightgbm",
+      "Markdown",
+      "markdown-it-py",
+      "MarkupSafe",
+      "matplotlib",
+      "mdurl",
+      "ml_dtypes",
+      "namex",
+      "numpy",
+      "opt_einsum",
+      "optree",
+      "packaging",
+      "pandas",
+      "pillow",
+      "protobuf",
+      "Pygments",
+      "pyparsing",
+      "python-dateutil",
+      "requests",
+      "rich",
+      "scikit-learn",
+      "scipy",
+      "setuptools",
+      "six",
+      "tensorboard",
+      "tensorboard-data-server",
+      "tensorflow",
+      "tensorflow-metal",
+      "termcolor",
+      "threadpoolctl",
+      "typing_extensions",
+      "urllib3",
+      "venn-abers",
+      "Werkzeug",
+      "wheel",
+      "wrapt"
+    ]
+  },
+  "schema_version": 1,
+  "seed_algorithm": "hmac-sha256-31bit-v1",
+  "sensitivity": {
+    "extension": {
+      "additional_repeat_ids": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "target_total_repeats": 50
+    },
+    "grids": {
+      "lightgbm_multiclass": [
+        {
+          "learning_rate": 0.05,
+          "max_depth": 5,
+          "min_child_samples": 50,
+          "reg_alpha": 0.5,
+          "reg_lambda": 0.5
+        },
+        {
+          "learning_rate": 0.05,
+          "max_depth": 5,
+          "min_child_samples": 20,
+          "reg_alpha": 0.1,
+          "reg_lambda": 0.1
+        },
+        {
+          "learning_rate": 0.05,
+          "max_depth": 7,
+          "min_child_samples": 20,
+          "reg_alpha": 0.1,
+          "reg_lambda": 0.1
+        },
+        {
+          "learning_rate": 0.1,
+          "max_depth": 5,
+          "min_child_samples": 20,
+          "reg_alpha": 0.1,
+          "reg_lambda": 0.1
+        }
+      ],
+      "ridge_sgd_l2": {
+        "parameter": "alpha",
+        "values": [
+          0.3333333333333333,
+          10.0,
+          3.3333333333333335,
+          1.0,
+          0.1
+        ]
+      },
+      "set_transformer": [
+        {
+          "dropout": 0.3,
+          "learning_rate": 0.001
+        },
+        {
+          "dropout": 0.1,
+          "learning_rate": 0.0003
+        },
+        {
+          "dropout": 0.3,
+          "learning_rate": 0.0003
+        },
+        {
+          "dropout": 0.1,
+          "learning_rate": 0.001
+        }
+      ],
+      "zoo_cnn": [
+        {
+          "dropout": 0.3,
+          "learning_rate": 0.001
+        },
+        {
+          "dropout": 0.1,
+          "learning_rate": 0.0003
+        },
+        {
+          "dropout": 0.3,
+          "learning_rate": 0.0003
+        },
+        {
+          "dropout": 0.1,
+          "learning_rate": 0.001
+        }
+      ]
+    },
+    "reuse_main_split_manifests": true,
+    "stage1": {
+      "anchors": [
+        20,
+        160,
+        360
+      ],
+      "repeat_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "repeats": 20
+    }
+  },
+  "splits": {
+    "anchor_allocation": "largest_remainder_proportional_by_sweep_capacity",
+    "largest_remainder_tie_break": "repeat_seeded_season_order",
+    "nested_train_anchors": [
+      20,
+      40,
+      80,
+      160,
+      240,
+      360
+    ],
+    "neural_inner_split": {
+      "shared_across_neural_models": true,
+      "stratify_by": "Season",
+      "train_fraction": 0.8,
+      "validation_fraction": 0.2
+    },
+    "outer_counts": {
+      "2017": {
+        "calibration": 51,
+        "test": 51,
+        "train": 154
+      },
+      "2018": {
+        "calibration": 51,
+        "test": 51,
+        "train": 154
+      },
+      "2019": {
+        "calibration": 35,
+        "test": 35,
+        "train": 106
+      }
+    },
+    "season_order": [
+      2017,
+      2018,
+      2019
+    ],
+    "tune_reserve_counts": {
+      "2017": 15,
+      "2018": 15,
+      "2019": 10
+    }
+  },
+  "study_id": "rushing_confirmatory_v1",
+  "uncertainty": {
+    "alpha": 0.1,
+    "calibration": "locally_weighted_conformal_padding",
+    "central_interval": "alpha_over_2_equal_tail",
+    "kernel": "gaussian",
+    "local_k": 200,
+    "locality_features": [
+      "predictive_mean",
+      "predictive_standard_deviation",
+      "predictive_entropy"
+    ],
+    "width_definition": "hi_minus_lo_index_gap"
+  }
+}

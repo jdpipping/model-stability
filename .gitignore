@@ -1,0 +1,73 @@
+# Project-local material. Kept on disk; never included in the repository.
+/archive/
+/internal/
+/data/
+/output/
+/outputs/
+/tmp/
+
+# Environments, credentials, and installed dependencies.
+.venv*/
+venv/
+env/
+node_modules
+.env
+.env.*
+!.env.example
+!.env.template
+.pypirc
+.Renviron
+
+# Operating-system and editor debris.
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# Python caches, build products, and test output.
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+build/
+dist/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+.ipynb_checkpoints/
+
+# R session and rendering caches.
+.Rhistory
+.RData
+.RDataTmp
+.Rproj.user/
+Rplots.pdf
+.quarto/
+
+# LaTeX build products. Keep .tex, .bib, and intentional figure assets.
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+
+# Folder-specific rules live beside the outputs they describe:
+# paper/, abstract/, presentations/, results/, scripts/betty/, configs/bdb_suite/sources/.

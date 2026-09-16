@@ -1,0 +1,6 @@
+# Local benchmark measurements and logs.
+/benchmarks/
+
+# Default Slurm logs written in this directory.
+/slurm-*.out
+/slurm-*.err

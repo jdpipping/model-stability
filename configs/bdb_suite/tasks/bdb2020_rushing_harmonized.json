@@ -1,0 +1,211 @@
+{
+  "schema_version": "bdb-task-spec-v2",
+  "task_id": "bdb2020_rushing_harmonized",
+  "release_year": 2020,
+  "outcome_type": "distribution",
+  "primary_metric": "crps",
+  "total_games": 688,
+  "development_games": 40,
+  "confirmatory_games": 648,
+  "outer_counts": {"train": 374, "calibration": 137, "test": 137},
+  "anchors": [20, 40, 80, 160, 240, 360],
+  "event_cutoff": {
+    "event": "supplied handoff snapshot",
+    "fallback_rules": ["exclude a play without one structurally valid 22-player handoff snapshot"]
+  },
+  "cohort": {
+    "description": "Rushing-yard distribution from the supplied handoff snapshot",
+    "eligibility": [
+      "one supplied handoff snapshot with exactly 22 unique players",
+      "exactly one rusher is identified",
+      "11 offensive and 11 defensive players are present",
+      "rushing yards are observed"
+    ],
+    "exclusions": [
+      "legacy mirrored augmentation",
+      "missing or structurally invalid handoff snapshots",
+      "missing rushing-yard outcomes"
+    ],
+    "expected_examples": 31007,
+    "expected_games": 688
+  },
+  "features": {
+    "allowlist": [
+      "quarter", "down", "yardsToGo", "yardsFromOwnGoal", "gameClockSeconds",
+      "offenseScoreBeforePlay", "defenseScoreBeforePlay", "scoreDifferentialBeforePlay",
+      "defendersInTheBox", "offenseFormation", "offensePersonnel", "defensePersonnel",
+      "handoff_player_tracking"
+    ],
+    "denylist": [
+      "Yards", "PlayId", "GameId", "NflId", "NflIdRusher", "PossessionTeam",
+      "FieldPosition", "HomeTeamAbbr", "VisitorTeamAbbr", "PlayerCollegeName",
+      "DisplayName", "GameWeather", "WindSpeed", "Temperature", "Humidity"
+    ],
+    "channels": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other"
+    ],
+    "coordinate_normalization": "orient offensive progress toward increasing x, center on the rusher, and leave the football channel identically zero because no football row is observed"
+  },
+  "outcome": {
+    "target": "integer Yards clipped to the frozen support -28 through 51",
+    "support": [-28, 51],
+    "null_model": "training-subset empirical rushing-yard distribution"
+  },
+  "prepared_contract": {
+    "schema_version": "bdb-prepared-semantics-v2",
+    "task_id": "bdb2020_rushing_harmonized",
+    "outcome_type": "distribution",
+    "primary_metric": "crps",
+    "examples": 31007,
+    "games": 688,
+    "tabular_feature_order": [
+      "quarter", "down", "yardsToGo", "yardsFromOwnGoal", "gameClockSeconds",
+      "offenseScoreBeforePlay", "defenseScoreBeforePlay", "scoreDifferentialBeforePlay",
+      "defendersInTheBox", "offenseFormation", "offensePersonnel", "defensePersonnel"
+    ],
+    "channel_names": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other"
+    ],
+    "arrays": {
+      "player_tokens": {"axes": ["example", "time", "tracked_object", "channel"], "shape": [31007, 1, 23, 24], "dtype": "float32"},
+      "player_mask": {"axes": ["example", "time", "tracked_object"], "shape": [31007, 1, 23], "dtype": "bool"},
+      "frame_mask": {"axes": ["example", "time"], "shape": [31007, 1], "dtype": "bool"},
+      "y": {"axes": ["example"], "shape": [31007], "dtype": "int16"},
+      "target_values": null,
+      "target_mask": null,
+      "target_baseline": null
+    },
+    "support": {
+      "count": 80,
+      "minimum": -28.0,
+      "maximum": 51.0,
+      "values_sha256": "4cb0edfe185a5a6e6b3a90b99da5ebd482e4249e3773088b29135a801212d8a7"
+    },
+    "mask_contract": {
+      "player_mask": {
+        "meaning": "true_iff_tracked_object_slot_is_observed",
+        "observed_frame_slot_layout": "stable_per_play_slots_with_sparse_observation",
+        "slot_identity": "alignment_only_never_a_model_feature",
+        "masked_token_value": 0.0,
+        "requires_observed_frame": true
+      },
+      "frame_mask": {"meaning": "true_iff_time_slot_is_observed_not_padding", "layout": "all_observed"},
+      "target_mask": null
+    },
+    "target_contract": {
+      "encoding": "zero_based_support_index",
+      "examples_target": "equals_support_at_y",
+      "model_output": "ordered_support_probability_vector"
+    },
+    "adapter_metadata": {
+      "coordinate_normalization": "orient offensive progress toward increasing x and center on rusher",
+      "cutoff": "competition handoff snapshot",
+      "graph": "rusher, blocker, and defender relations at handoff",
+      "history_frames": 1,
+      "learned_preprocessing": "split-local only",
+      "missing_direction": "offense forward and defense backward after direction normalization",
+      "missing_orientation": "zero vector",
+      "output_head": "punt_cdf_residual_v1",
+      "padding": "one observed frame; one masked tracked-object slot",
+      "speed_correction": "season 2017 speed equals 10 times displacement",
+      "stable_player_slots": "play_global_focal_independent_v1; offense_then_defense_numeric_nflId_alignment_only_v1; nflId never encoded",
+      "structural_ablation": "remove_blocker_defender_edges",
+      "support_max": 51,
+      "support_min": -28,
+      "tabular_columns": [
+        "quarter", "down", "yardsToGo", "yardsFromOwnGoal", "gameClockSeconds",
+        "offenseScoreBeforePlay", "defenseScoreBeforePlay", "scoreDifferentialBeforePlay",
+        "defendersInTheBox", "offenseFormation", "offensePersonnel", "defensePersonnel"
+      ],
+      "target_clipping": "clip raw rushing yards to frozen support -28..51",
+      "team_identity_primary": "excluded"
+    },
+    "semantic_hash": "45e95856f1d3c31f36c8c001e8b1d75f163790bc070939346e5209a1e87ead6f"
+  },
+  "history": {
+    "scope": "causal_tracking_history",
+    "endpoint": "supplied handoff snapshot, inclusive",
+    "max_frames": 1,
+    "padding": "none",
+    "stable_player_slots": true,
+    "slot_policy": "play_global_focal_independent_v1"
+  },
+  "graph": {
+    "node_types": ["rusher", "blocker", "defender"],
+    "edge_types": ["returner_blocker", "returner_coverer", "blocker_coverer", "same_team_lane"],
+    "construction": "rusher-centered blocker and defender relations at the observed handoff; implementation edge IDs retain the shared suite architecture while representing rusher-blocker, rusher-defender, blocker-defender, and same-side lane relations",
+    "masked_aggregation": "observed_nodes_and_edges_only"
+  },
+  "identity_policy": {
+    "player_ids": "stable_slot_assignment_only",
+    "player_id_feature": false,
+    "team_identity_primary": false,
+    "team_identity_sensitivity": false
+  },
+  "model_roles": {
+    "primary": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"],
+    "shared_tabular_summary": true,
+    "shared_neural_inputs": ["tokenization", "causal_history", "player_and_frame_masks", "time_to_event", "context", "output_head", "loss", "tuning_grid", "seeds", "training_protocol"],
+    "relational_pair_shared_inputs": ["graph_edges", "relational_temporal_encoder"],
+    "set_transformer_structure": {"relation_scope": "global_masked_all_player_self_attention", "typed_graph_edges_consumed": false, "temporal_encoder": "factorized_masked_temporal_attention"},
+    "parameter_match_tolerance_fraction": 0.05,
+    "flop_match_tolerance_fraction": 0.15,
+    "neural_parameter_cap": 350000
+  },
+  "output_head": {
+    "id": "punt_cdf_residual_v1",
+    "prediction": "bounded PAVA-projected full-support PMF over integer rushing yards -28 through 51",
+    "training_loss": "crps",
+    "baseline": "train_only_empirical_cdf",
+    "projection": "bounded_pava"
+  },
+  "uncertainty": {
+    "primary_method": "game_clustered_central_interval_padding_v1",
+    "secondary_diagnostic": null,
+    "secondary_score_source": null,
+    "field_intersection": null,
+    "horizon_scale_learner": null,
+    "calibration_unit": "game",
+    "nominal_coverage": 0.9,
+    "report": ["game_equal_coverage", "game_equal_interval_width"]
+  },
+  "joint_neural_target_selection": null,
+  "structural_ablation": {
+    "id": "remove_blocker_defender_edges",
+    "description": "remove blocker-defender edges while retaining all nodes, the handoff snapshot, and other edges",
+    "models": ["relnet", "attn_relnet"],
+    "anchors": [20, 360],
+    "repeats": 20
+  },
+  "sensitivities": [],
+  "models": {
+    "linear_structure": {"role": "linear_structure", "family": "glm", "display_name": "Linear-Structure", "alpha_grid": [10.0, 3.3333333333333335, 1.0, 0.3333333333333333, 0.1]},
+    "boosted_structure": {"role": "boosted_structure", "family": "lightgbm", "display_name": "Boosted-Structure", "grid_id": "bdb_suite_lgbm_four_v1"},
+    "relnet": {"role": "relnet", "family": "relnet", "display_name": "RelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "attn_relnet": {"role": "attn_relnet", "family": "attn_relnet", "display_name": "AttnRelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "set_transformer": {"role": "set_transformer", "family": "set_transformer", "display_name": "Global Set Transformer", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]}
+  },
+  "artifacts": {
+    "metrics": ["raw_crps", "game_equal_crps", "skill", "coverage", "interval_width", "coverage_game_equal", "width_game_equal", "inclusive_class_count"],
+    "predictions": ["class_probabilities", "interval_lower", "interval_upper", "per_example_crps", "inclusive_class_count"]
+  },
+  "source_receipts": [],
+  "source_tree_receipts": [
+    {
+      "schema_version": "bdb-source-tree-receipt-v1",
+      "source_id": "nfl_big_data_bowl_2020",
+      "receipt_path": "configs/bdb_suite/sources/bdb2020_local.json",
+      "receipt_sha256": "a3d7705b94c366dd34e615e4e2247a2181b7c1e2b2ab2f3a1a5be44dd640c699",
+      "tree_sha256": "9f539b011406d97176ca99b504dcf01c4521e8826c88b4db36e43911dcecf81c",
+      "destination": "data/bdb2020/raw",
+      "file_count": 1,
+      "byte_count": 248677952
+    }
+  ]
+}

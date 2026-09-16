@@ -1,0 +1,91 @@
+{
+  "byte_count": 5003924109,
+  "catalog_receipts": [
+    {
+      "byte_count": 1500427940,
+      "dataset_id": "nfl_bdb_2022_tracking",
+      "manifest_sha256": "add98c201616baae3bff6dcfc218e922c4e64b5f551c3bd09ad4aff015c25144",
+      "row_count": 36769985,
+      "run_id": "20260719T062953Z-2e4890a5a16e",
+      "source_id": "nfl_big_data_bowl_2022"
+    },
+    {
+      "byte_count": 15383,
+      "dataset_id": "nfl_bdb_2022_games",
+      "manifest_sha256": "e697317d396b407f120c36f779752d39efa5a38fc05ef268597bb1338407a583",
+      "row_count": 764,
+      "run_id": "20260719T062632Z-86a22d475d7c",
+      "source_id": "nfl_big_data_bowl_2022"
+    },
+    {
+      "byte_count": 122117,
+      "dataset_id": "nfl_bdb_2022_players",
+      "manifest_sha256": "dfcece3ed16581630ac5ae463099a627899e9126315117e97afedb268a9598b2",
+      "row_count": 2732,
+      "run_id": "20260719T062633Z-752849f110bb",
+      "source_id": "nfl_big_data_bowl_2022"
+    },
+    {
+      "byte_count": 1431188,
+      "dataset_id": "nfl_bdb_2022_plays",
+      "manifest_sha256": "8476fbf6bed5c4be1f4c2f89da8a1fb15345e9a076d15a8f4d8b3ee3b40224d7",
+      "row_count": 19979,
+      "run_id": "20260719T062633Z-86aae424385c",
+      "source_id": "nfl_big_data_bowl_2022"
+    },
+    {
+      "byte_count": 578081,
+      "dataset_id": "nfl_bdb_2022_pff_scouting",
+      "manifest_sha256": "8e3d082bcac4bb85833da3d8c33634ff7f634b5de454930ce20d7365eda2ef01",
+      "row_count": 19979,
+      "run_id": "20260719T062633Z-a2495c6a068a",
+      "source_id": "nfl_big_data_bowl_2022"
+    }
+  ],
+  "destination": "data/bdb2022/raw",
+  "file_count": 7,
+  "files": [
+    {
+      "bytes": 2056451,
+      "path": "PFFScoutingData.csv",
+      "sha256": "b7503df8109fee6f514e77e658b8b32e7f77d632f1e654bf1cca7df384de7275"
+    },
+    {
+      "bytes": 40596,
+      "path": "games.csv",
+      "sha256": "5a203b23e67386d070e372fb526ee6e5f2544ac80d7c3c5d4a7e5126c82d7983"
+    },
+    {
+      "bytes": 175869,
+      "path": "players.csv",
+      "sha256": "6b1811685b22b654bcef7c024c1fa9cbaf167d23dbc1450dc457cb7118a50fcf"
+    },
+    {
+      "bytes": 4040236,
+      "path": "plays.csv",
+      "sha256": "44ad3c48d7641100f38eb83a4c2e6a09b0d5e7ca65ef825ae20b9c4564043cbc"
+    },
+    {
+      "bytes": 1736922582,
+      "path": "tracking2018.csv",
+      "sha256": "8d3c2a530c1593b91fa16d4c61b77e24f6cf310bac6cd1180a0e6a86d3b9c8f2"
+    },
+    {
+      "bytes": 1653130011,
+      "path": "tracking2019.csv",
+      "sha256": "f5ebe2b7161b8d006e6a6f23e819db5fee8dabe6527a7cc6241b4143a9fdf0bd"
+    },
+    {
+      "bytes": 1607558364,
+      "path": "tracking2020.csv",
+      "sha256": "658952ec7958892db20abcb2115ee5b12ff368a20a957afcd3254c18c061fca8"
+    }
+  ],
+  "receipt_sha256": "63670efa01ae96cceb7c278a578f3c448774bcb9c15fe1c5bd8171cdc66be94c",
+  "release": 2022,
+  "schema_version": 1,
+  "source_id": "nfl_big_data_bowl_2022",
+  "source_path_observed": "/Users/Jonathan/wsabi/data/lake/imports/nfl/bdb_2022",
+  "tree_sha256": "0799d4b1790cf9516a4f662fcfde4759d3e5d81d462972baeb6fe0a723b1401d",
+  "verified_at_utc": "2026-08-19T20:08:54.579004+00:00"
+}

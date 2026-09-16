@@ -1,0 +1,439 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/bdb-study/task_spec.schema.json",
+  "title": "BDB Study TaskSpec v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "task_id", "release_year", "outcome_type",
+    "primary_metric", "total_games", "development_games",
+    "confirmatory_games", "outer_counts", "anchors", "event_cutoff",
+    "cohort", "features", "outcome", "prepared_contract", "history", "graph",
+    "identity_policy", "model_roles", "output_head", "uncertainty",
+    "structural_ablation", "sensitivities", "models", "artifacts"
+  ],
+  "properties": {
+    "schema_version": {"const": "bdb-task-spec-v2"},
+    "task_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+    "release_year": {"type": "integer", "minimum": 2020, "maximum": 2026},
+    "outcome_type": {"enum": ["binary", "distribution", "frame_event", "trajectory"]},
+    "primary_metric": {"enum": ["brier", "crps", "rmse"]},
+    "total_games": {"type": "integer", "minimum": 1},
+    "development_games": {"type": "integer", "minimum": 1},
+    "confirmatory_games": {"type": "integer", "minimum": 1},
+    "outer_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["train", "calibration", "test"],
+      "properties": {
+        "train": {"type": "integer", "minimum": 1},
+        "calibration": {"type": "integer", "minimum": 1},
+        "test": {"type": "integer", "minimum": 1}
+      }
+    },
+    "anchors": {
+      "type": "array", "minItems": 6, "maxItems": 6,
+      "uniqueItems": true, "items": {"type": "integer", "minimum": 1}
+    },
+    "event_cutoff": {
+      "type": "object", "required": ["event", "fallback_rules"],
+      "properties": {
+        "event": {"type": "string", "minLength": 1},
+        "fallback_rules": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "cohort": {
+      "type": "object", "required": ["description", "eligibility", "exclusions"],
+      "properties": {
+        "description": {"type": "string", "minLength": 1},
+        "eligibility": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "exclusions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "features": {
+      "type": "object",
+      "required": ["allowlist", "denylist", "channels", "coordinate_normalization"],
+      "properties": {
+        "allowlist": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "denylist": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "channels": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "coordinate_normalization": {"type": "string", "minLength": 1}
+      }
+    },
+    "outcome": {
+      "type": "object", "required": ["target", "null_model"],
+      "properties": {
+        "target": {"type": "string", "minLength": 1},
+        "null_model": {"type": "string", "minLength": 1},
+        "positive_label": {},
+        "support": {
+          "type": "array", "minItems": 2, "maxItems": 2,
+          "items": {"type": "integer"}
+        }
+      }
+    },
+    "prepared_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "task_id", "outcome_type", "primary_metric",
+        "examples", "games", "tabular_feature_order", "channel_names",
+        "arrays", "support", "mask_contract", "target_contract",
+        "adapter_metadata", "semantic_hash"
+      ],
+      "properties": {
+        "schema_version": {"const": "bdb-prepared-semantics-v2"},
+        "task_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+        "outcome_type": {"enum": ["binary", "distribution", "frame_event", "trajectory"]},
+        "primary_metric": {"enum": ["brier", "crps", "rmse"]},
+        "examples": {"type": "integer", "minimum": 1},
+        "games": {"type": "integer", "minimum": 1},
+        "tabular_feature_order": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "channel_names": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "arrays": {
+          "type": "object", "additionalProperties": false,
+          "required": [
+            "player_tokens", "player_mask", "frame_mask", "y",
+            "target_values", "target_mask", "target_baseline"
+          ],
+          "properties": {
+            "player_tokens": {"$ref": "#/$defs/preparedArray"},
+            "player_mask": {"$ref": "#/$defs/preparedArray"},
+            "frame_mask": {"$ref": "#/$defs/preparedArray"},
+            "y": {"anyOf": [{"$ref": "#/$defs/preparedArray"}, {"type": "null"}]},
+            "target_values": {"anyOf": [{"$ref": "#/$defs/preparedArray"}, {"type": "null"}]},
+            "target_mask": {"anyOf": [{"$ref": "#/$defs/preparedArray"}, {"type": "null"}]},
+            "target_baseline": {"anyOf": [{"$ref": "#/$defs/preparedArray"}, {"type": "null"}]}
+          }
+        },
+        "support": {
+          "anyOf": [
+            {"type": "null"},
+            {
+              "type": "object", "additionalProperties": false,
+              "required": ["count", "minimum", "maximum", "values_sha256"],
+              "properties": {
+                "count": {"type": "integer", "minimum": 1},
+                "minimum": {"type": "number"},
+                "maximum": {"type": "number"},
+                "values_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+              }
+            }
+          ]
+        },
+        "mask_contract": {
+          "type": "object", "additionalProperties": false,
+          "required": ["player_mask", "frame_mask", "target_mask"],
+          "properties": {
+            "player_mask": {
+              "type": "object", "additionalProperties": false,
+              "required": ["meaning", "observed_frame_slot_layout", "slot_identity", "masked_token_value", "requires_observed_frame"],
+              "properties": {
+                "meaning": {"const": "true_iff_tracked_object_slot_is_observed"},
+                "observed_frame_slot_layout": {"const": "stable_per_play_slots_with_sparse_observation"},
+                "slot_identity": {"const": "alignment_only_never_a_model_feature"},
+                "masked_token_value": {"const": 0.0},
+                "requires_observed_frame": {"const": true}
+              }
+            },
+            "frame_mask": {
+              "type": "object", "additionalProperties": false,
+              "required": ["meaning", "layout"],
+              "properties": {
+                "meaning": {"const": "true_iff_time_slot_is_observed_not_padding"},
+                "layout": {"enum": ["all_observed", "left_padded", "right_padded"]}
+              }
+            },
+            "target_mask": {"type": ["object", "null"]}
+          }
+        },
+        "target_contract": {"type": "object"},
+        "adapter_metadata": {"type": "object"},
+        "semantic_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "history": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scope", "endpoint", "max_frames", "padding", "stable_player_slots", "slot_policy"],
+      "properties": {
+        "scope": {"const": "causal_tracking_history"},
+        "endpoint": {"type": "string", "minLength": 1},
+        "max_frames": {"type": "integer", "minimum": 1},
+        "padding": {"enum": ["none", "left_masked"]},
+        "stable_player_slots": {"const": true},
+        "slot_policy": {"const": "play_global_focal_independent_v1"}
+      }
+    },
+    "graph": {
+      "type": "object", "additionalProperties": false,
+      "required": ["node_types", "edge_types", "construction", "masked_aggregation"],
+      "properties": {
+        "node_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "edge_types": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "construction": {"type": "string", "minLength": 1},
+        "masked_aggregation": {"const": "observed_nodes_and_edges_only"}
+      }
+    },
+    "identity_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["player_ids", "player_id_feature", "team_identity_primary", "team_identity_sensitivity"],
+      "properties": {
+        "player_ids": {"const": "stable_slot_assignment_only"},
+        "player_id_feature": {"const": false},
+        "team_identity_primary": {"const": false},
+        "team_identity_sensitivity": {"type": "boolean"}
+      }
+    },
+    "model_roles": {
+      "type": "object", "additionalProperties": false,
+      "required": ["primary", "shared_tabular_summary", "shared_neural_inputs", "relational_pair_shared_inputs", "set_transformer_structure", "parameter_match_tolerance_fraction", "flop_match_tolerance_fraction", "neural_parameter_cap"],
+      "properties": {
+        "primary": {
+          "const": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"]
+        },
+        "shared_tabular_summary": {"const": true},
+        "shared_neural_inputs": {
+          "const": ["tokenization", "causal_history", "player_and_frame_masks", "time_to_event", "context", "output_head", "loss", "tuning_grid", "seeds", "training_protocol"]
+        },
+        "relational_pair_shared_inputs": {
+          "const": ["graph_edges", "relational_temporal_encoder"]
+        },
+        "set_transformer_structure": {
+          "const": {
+            "relation_scope": "global_masked_all_player_self_attention",
+            "typed_graph_edges_consumed": false,
+            "temporal_encoder": "factorized_masked_temporal_attention"
+          }
+        },
+        "parameter_match_tolerance_fraction": {"const": 0.05},
+        "flop_match_tolerance_fraction": {"const": 0.15},
+        "neural_parameter_cap": {"const": 350000}
+      }
+    },
+    "output_head": {
+      "type": "object",
+      "required": ["id", "prediction", "training_loss"],
+      "properties": {
+        "id": {"enum": ["binary_probability_v1", "punt_cdf_residual_v1", "horizon_development_selected_xy_v1", "horizon_residual_xy_v1", "horizon_absolute_xy_v1"]},
+        "scope": {"const": "matched_neural_models"},
+        "prediction": {"type": "string", "minLength": 1},
+        "training_loss": {"type": "string", "minLength": 1},
+        "decoder": {"type": "string", "minLength": 1},
+        "selected_training_target": {"enum": ["residual", "absolute", null]},
+        "reconstruction": {"type": "string", "minLength": 1}
+      }
+    },
+    "uncertainty": {
+      "type": "object", "additionalProperties": false,
+      "required": ["primary_method", "secondary_diagnostic", "secondary_score_source", "field_intersection", "horizon_scale_learner", "calibration_unit", "nominal_coverage", "report"],
+      "properties": {
+        "primary_method": {"enum": ["out_of_game_venn_abers_calibration_v1", "game_clustered_central_interval_padding_v1", "whole_path_scaled_radial_conformal_tube_v1"]},
+        "secondary_diagnostic": {"enum": ["raw_score_class_conditional_conformal_sets_v1", null]},
+        "secondary_score_source": {"enum": ["raw_model_score", null]},
+        "field_intersection": {"enum": ["disk_intersect_legal_field_rectangle", null]},
+        "horizon_scale_learner": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object", "additionalProperties": false,
+              "required": ["source", "fold_statistic", "pooling", "isotonic_projection", "support_requirement", "unobserved_tail_policy", "floor_yards", "horizon_count", "artifact_fields"],
+              "properties": {
+                "source": {"const": "five_grouped_oof_development_game_folds"},
+                "fold_statistic": {"const": "horizon_radial_error_median_and_observed_path_count"},
+                "pooling": {"const": "count_weighted_median_across_folds"},
+                "isotonic_projection": {"const": "observed_count_weighted_nondecreasing_pava"},
+                "support_requirement": {"const": "pooled_positive_counts_form_nonempty_prefix_v1"},
+                "unobserved_tail_policy": {"const": "carry_forward_last_fitted_pava_level_v1"},
+                "floor_yards": {"const": 0.25},
+                "horizon_count": {"const": 94},
+                "artifact_fields": {"const": ["dev_horizon_scale", "dev_horizon_scale_sha256", "dev_horizon_scale_observed_through", "dev_horizon_scale_support_requirement", "dev_horizon_scale_tail_policy"]}
+              }
+            }
+          ]
+        },
+        "calibration_unit": {"const": "game"},
+        "nominal_coverage": {"const": 0.9},
+        "report": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "joint_neural_target_selection": {
+      "anyOf": [
+        {"type": "null"},
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["schema_version", "families", "candidate_targets", "criterion", "tie_rule", "receipt"],
+          "properties": {
+            "schema_version": {"const": "bdb-joint-neural-target-contract-v1"},
+            "families": {"const": ["relnet", "attn_relnet", "set_transformer"]},
+            "candidate_targets": {"const": ["residual", "absolute"]},
+            "criterion": {"const": "pooled_equal_model_weight_grouped_oof_mean_rmse_v1"},
+            "tie_rule": {"const": "first_target_in_frozen_order"},
+            "receipt": {
+              "anyOf": [
+                {"type": "null"},
+                {
+                  "type": "object", "additionalProperties": false,
+                  "required": ["schema_version", "protocol", "path", "file_sha256", "receipt_hash", "selected_target", "source_development_receipt_hashes"],
+                  "properties": {
+                    "schema_version": {"const": "bdb-joint-neural-trajectory-target-v1"},
+                    "protocol": {"const": "pooled_equal_model_weight_grouped_oof_mean_rmse_v1"},
+                    "path": {"type": "string", "minLength": 1},
+                    "file_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                    "receipt_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                    "selected_target": {"enum": ["residual", "absolute"]},
+                    "source_development_receipt_hashes": {
+                      "type": "object", "additionalProperties": false,
+                      "required": ["relnet", "attn_relnet", "set_transformer"],
+                      "properties": {
+                        "relnet": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                        "attn_relnet": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                        "set_transformer": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "structural_ablation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "description", "models", "anchors", "repeats"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+        "description": {"type": "string", "minLength": 1},
+        "models": {"const": ["relnet", "attn_relnet"]},
+        "anchors": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"type": "integer", "minimum": 1}},
+        "repeats": {"const": 20}
+      }
+    },
+    "sensitivities": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "description", "selection", "execution"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+          "description": {"type": "string", "minLength": 1},
+          "selection": {"enum": ["frozen_prespecified", "development_games_only"]},
+          "execution": {
+            "anyOf": [
+              {"type": "null"},
+              {
+                "type": "object", "additionalProperties": false,
+                "required": ["profile", "repeats", "anchors", "models", "prepared_variant"],
+                "properties": {
+                  "profile": {"const": "sensitivity20"},
+                  "repeats": {"const": 20},
+                  "anchors": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"type": "integer", "minimum": 1}},
+                  "models": {"const": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"]},
+                  "prepared_variant": {"type": "string", "minLength": 1}
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "models": {
+      "type": "object", "additionalProperties": false,
+      "required": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"],
+      "properties": {
+        "linear_structure": {"$ref": "#/$defs/linearModel"},
+        "boosted_structure": {"$ref": "#/$defs/boostedModel"},
+        "relnet": {"$ref": "#/$defs/relNetModel"},
+        "attn_relnet": {"$ref": "#/$defs/attnRelNetModel"},
+        "set_transformer": {"$ref": "#/$defs/setTransformerModel"}
+      }
+    },
+    "artifacts": {
+      "type": "object", "required": ["metrics", "predictions"]
+    },
+    "source_receipts": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["schema_version", "source_id", "source_path", "destination_path", "size_bytes", "sha256", "row_count", "columns"],
+        "properties": {
+          "schema_version": {"const": "bdb-source-receipt-v1"},
+          "source_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+          "source_path": {"type": "string", "minLength": 1},
+          "destination_path": {"type": "string", "minLength": 1},
+          "size_bytes": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "row_count": {"type": ["integer", "null"], "minimum": 0},
+          "columns": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+        }
+      }
+    },
+    "source_tree_receipts": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["schema_version", "source_id", "receipt_path", "receipt_sha256", "tree_sha256", "destination", "file_count", "byte_count"],
+        "properties": {
+          "schema_version": {"const": "bdb-source-tree-receipt-v1"},
+          "source_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+          "receipt_path": {"type": "string", "minLength": 1},
+          "receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "tree_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "destination": {"type": "string", "minLength": 1},
+          "file_count": {"type": "integer", "minimum": 1},
+          "byte_count": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "shared_game_registry_with": {
+      "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9_-]*$"
+    }
+  },
+  "$defs": {
+    "linearModel": {
+      "type": "object", "required": ["role", "family", "alpha_grid"],
+      "properties": {"role": {"const": "linear_structure"}, "family": {"const": "glm"}}
+    },
+    "boostedModel": {
+      "type": "object", "required": ["role", "family", "grid_id"],
+      "properties": {"role": {"const": "boosted_structure"}, "family": {"const": "lightgbm"}}
+    },
+    "relNetModel": {
+      "type": "object", "required": ["role", "family", "learning_rates", "dropouts"],
+      "properties": {"role": {"const": "relnet"}, "family": {"const": "relnet"}}
+    },
+    "attnRelNetModel": {
+      "type": "object", "required": ["role", "family", "learning_rates", "dropouts"],
+      "properties": {"role": {"const": "attn_relnet"}, "family": {"const": "attn_relnet"}}
+    },
+    "setTransformerModel": {
+      "type": "object", "required": ["role", "family", "learning_rates", "dropouts"],
+      "properties": {"role": {"const": "set_transformer"}, "family": {"const": "set_transformer"}}
+    },
+    "preparedArray": {
+      "type": "object", "additionalProperties": false,
+      "required": ["axes", "shape", "dtype"],
+      "properties": {
+        "axes": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "shape": {
+          "type": "array", "minItems": 1,
+          "items": {"type": "integer", "minimum": 1}
+        },
+        "dtype": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "anyOf": [
+    {"properties": {"source_receipts": {"minItems": 1}}, "required": ["source_receipts"]},
+    {"properties": {"source_tree_receipts": {"minItems": 1}}, "required": ["source_tree_receipts"]}
+  ]
+}

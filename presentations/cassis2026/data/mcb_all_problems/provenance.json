@@ -1,0 +1,62 @@
+{
+  "assumptions": [
+    "complete reruns are independent sampling units",
+    "paired bootstrap consistently approximates the joint centered loss-difference distribution",
+    "a true best is tagged if population mean losses tie"
+  ],
+  "bootstrap_draws": 20000,
+  "bootstrap_index_sha256": "4f0443f8e4c2cb23f9dcf51d64e15c7cb36c6d04972b40098efc7b29e74564ce",
+  "bootstrap_seed": 20260904,
+  "interpretation": "models not rejected comprise a 95% confidence set for a tagged true best model at that budget; a singleton set identifies the best model",
+  "method": "per-budget comparison-with-the-best candidate tests; maximum of k-1 one-sided paired bootstrap-t statistics; centered complete-repeat resampling; candidate hypotheses use the MCB partition",
+  "outputs": [
+    {
+      "path": "presentations/cassis2026/data/mcb_all_problems/candidate_tests.csv",
+      "sha256": "04f12abf5bdac269f303ebc0c0e4136efe46f9b56e555f902478e13e8d1658ac"
+    },
+    {
+      "path": "presentations/cassis2026/data/mcb_all_problems/best_model_confidence_sets.csv",
+      "sha256": "53f1b8b6034467d58f81df2c516631241f1758ca08a7f3948270b1940d976bac"
+    }
+  ],
+  "schema_version": "cassis2026-mcb-all-problems-v1",
+  "scope": "95% within each game budget; no simultaneous protection across game budgets or problems",
+  "sources": [
+    {
+      "metric": "crps",
+      "path": "results/rushing/full100-confirmatory-20260820/final/metrics.csv",
+      "sha256": "4c146f813b665d71b1ffb08de4c6dab32503bb362c32370cf6bf6cddf9f6ccd6",
+      "task_id": "bdb2020_rushing"
+    },
+    {
+      "metric": "primary_loss",
+      "path": "presentations/cassis2026/data/raw_terminal/bdb2021/primary_metrics.csv",
+      "sha256": "04cf01c9fa575251aa9bfd715efd9150b7aec0ec545c0a3d8b4ede5e281673f7",
+      "task_id": "bdb2021_completion"
+    },
+    {
+      "metric": "primary_loss",
+      "path": "presentations/cassis2026/data/raw_terminal/bdb2022/primary_metrics.csv",
+      "sha256": "5337ea2f8fb17fe6b9ebd5776b4b0a91a7d716ab71662bd5f91384a70fa0e14f",
+      "task_id": "bdb2022_punt_returns"
+    },
+    {
+      "metric": "primary_loss",
+      "path": "results/bdb/full100_serial_bdb2023_attempt1/final/primary_metrics.csv",
+      "sha256": "bb5ece118b4e23df8ee33f2b4a64aa8d2a865694c6f27c3ba5dc4c5b9fccbf5c",
+      "task_id": "bdb2023_sack"
+    },
+    {
+      "metric": "primary_loss",
+      "path": "results/bdb/full100_serial_bdb2024_attempt1/final/primary_metrics.csv",
+      "sha256": "45b46554a018e43ce95cb1c0c942a6add1a396ce5fcaa3344a3f7fc897c1249c",
+      "task_id": "bdb2024_tackle"
+    },
+    {
+      "metric": "primary_loss",
+      "path": "results/bdb/full100_serial_bdb2025_attempt1/final/primary_metrics.csv",
+      "sha256": "d7cc58a35cc974292a7a1e0887cdfde20f2e2f38e9249fd3632cd8be190f131c",
+      "task_id": "bdb2025_man_zone"
+    }
+  ]
+}

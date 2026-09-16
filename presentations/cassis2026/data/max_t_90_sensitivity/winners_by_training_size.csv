@@ -1,0 +1,37 @@
+year,problem,n_train,observed_leader,clear_winner_95,clear_winner_90,new_clear_winner
+2020,Rushing yards,20,boosted_structure,,,False
+2020,Rushing yards,40,linear_structure,linear_structure,linear_structure,False
+2020,Rushing yards,80,linear_structure,linear_structure,linear_structure,False
+2020,Rushing yards,160,linear_structure,,,False
+2020,Rushing yards,240,attn_relnet,,,False
+2020,Rushing yards,360,attn_relnet,attn_relnet,attn_relnet,False
+2021,Pass completion,10,linear_structure,linear_structure,linear_structure,False
+2021,Pass completion,20,linear_structure,linear_structure,linear_structure,False
+2021,Pass completion,40,linear_structure,linear_structure,linear_structure,False
+2021,Pass completion,60,linear_structure,,,False
+2021,Pass completion,100,boosted_structure,boosted_structure,boosted_structure,False
+2021,Pass completion,130,boosted_structure,boosted_structure,boosted_structure,False
+2022,Punt returns,10,relnet,,,False
+2022,Punt returns,20,relnet,,,False
+2022,Punt returns,40,attn_relnet,,,False
+2022,Punt returns,60,attn_relnet,,,False
+2022,Punt returns,160,attn_relnet,,,False
+2022,Punt returns,360,linear_structure,,,False
+2023,Sack probability,10,linear_structure,,,False
+2023,Sack probability,20,linear_structure,,,False
+2023,Sack probability,30,linear_structure,,,False
+2023,Sack probability,40,linear_structure,,,False
+2023,Sack probability,50,linear_structure,,,False
+2023,Sack probability,60,linear_structure,,,False
+2024,Tackle candidate,10,boosted_structure,boosted_structure,boosted_structure,False
+2024,Tackle candidate,20,boosted_structure,boosted_structure,boosted_structure,False
+2024,Tackle candidate,30,boosted_structure,boosted_structure,boosted_structure,False
+2024,Tackle candidate,40,boosted_structure,boosted_structure,boosted_structure,False
+2024,Tackle candidate,50,boosted_structure,boosted_structure,boosted_structure,False
+2024,Tackle candidate,60,boosted_structure,boosted_structure,boosted_structure,False
+2025,Man/Zone,10,boosted_structure,,,False
+2025,Man/Zone,20,boosted_structure,boosted_structure,boosted_structure,False
+2025,Man/Zone,30,boosted_structure,boosted_structure,boosted_structure,False
+2025,Man/Zone,40,boosted_structure,boosted_structure,boosted_structure,False
+2025,Man/Zone,50,boosted_structure,,boosted_structure,True
+2025,Man/Zone,60,set_transformer,,,False

@@ -1,0 +1,175 @@
+{
+  "ablation_cells": 80,
+  "ablation_summary_groups": 108,
+  "artifacts": {
+    "bca_log_sd_ratios": {
+      "file": "bca_log_sd_ratios.csv",
+      "format": "csv",
+      "sha256": "7601bada4363c80c06d26ba7f85218e16bbea773681551d910eb046e34d6eb0f"
+    },
+    "bca_sd_intervals": {
+      "file": "bca_sd_intervals.csv",
+      "format": "csv",
+      "sha256": "179a0dc22e7aa3273554562a1748f3633f6e294c68e052a131571c2281a373d7"
+    },
+    "metrics": {
+      "file": "metrics.csv",
+      "format": "csv",
+      "sha256": "97007601e8cd716098b978e7df1c38b270d182f501c687ad2e47c24127cf705e"
+    },
+    "paired_contrasts": {
+      "file": "paired_contrasts.csv",
+      "format": "csv",
+      "sha256": "abb8983da73ca66a53ba76cc8d42dc60585c5a4b9e839fc01cb40ff773375fca"
+    },
+    "paired_stability": {
+      "file": "paired_stability.csv",
+      "format": "csv",
+      "sha256": "64686adeff928873b885d7c41ff4249bf3c244dc1420acc6fa11f2571ee1c39e"
+    },
+    "primary_metrics": {
+      "file": "primary_metrics.csv",
+      "format": "csv",
+      "sha256": "bb5ece118b4e23df8ee33f2b4a64aa8d2a865694c6f27c3ba5dc4c5b9fccbf5c"
+    },
+    "stability_ribbons": {
+      "file": "stability_ribbons.csv",
+      "format": "csv",
+      "sha256": "83cfc6e655d19a412721e888e1065a98c1d114a95a4c9c91ffb69a5291c5c324"
+    },
+    "structural_ablation_effects": {
+      "file": "structural_ablation_effects.csv",
+      "format": "csv",
+      "sha256": "e8f90ebc4e4090f0f71018f293611290730cfc40b04a4f72a4f3a813dd1a4adc"
+    },
+    "structural_ablation_metrics": {
+      "file": "structural_ablation_metrics.csv",
+      "format": "csv",
+      "sha256": "fab9c0d2e0b2affc240b18b08ba98079b9591144b6c818546243db71c0ed30f4"
+    },
+    "structural_ablation_pairwise": {
+      "file": "structural_ablation_pairwise.csv",
+      "format": "csv",
+      "sha256": "d2cb1db7a1bf96f7f2bc9e21f3b3aab5c1a50f91cf093fe21843f4d7879cc270"
+    },
+    "structural_ablation_summary": {
+      "file": "structural_ablation_summary.csv",
+      "format": "csv",
+      "sha256": "b4714bcf2ce4401af8de5aabc73bd44ac4028633b8b84c17a00d72b4a363e195"
+    },
+    "summary": {
+      "file": "summary.csv",
+      "format": "csv",
+      "sha256": "6b20b4da4a63158237f740be2ba0db6879ecfa3a4af0b17dd691028c0a535f68"
+    },
+    "supported_best": {
+      "file": "supported_best.csv",
+      "format": "csv",
+      "sha256": "302e22b9ad44144e5a79b8a01ebfd5dc599ae94247e4ed95d0022e4435c8cad1"
+    },
+    "training_size_changes": {
+      "file": "training_size_changes.csv",
+      "format": "csv",
+      "sha256": "ff11c27cb1b8f4c3839b59b1b9a881130d18beb56d4409f0e5cf322adfa2cb7a"
+    },
+    "training_size_difference_in_changes": {
+      "file": "training_size_difference_in_changes.csv",
+      "format": "csv",
+      "sha256": "a5e4d4cd2ac161b54fb98e2fcdd4b0fe6e83649346b46c6ce6e3fbf02fe59bff"
+    }
+  },
+  "bca_stability": {
+    "confidence_level": 0.95,
+    "jackknife_unit": "delete_one_complete_repeat_5x6_vector",
+    "metrics": [
+      "calibrated_brier",
+      "calibrated_log_loss",
+      "calibration_bias",
+      "game_equal_calibrated_brier",
+      "game_equal_calibrated_log_loss",
+      "game_equal_calibration_bias",
+      "game_equal_label0_set_coverage",
+      "game_equal_label1_set_coverage",
+      "game_equal_loss",
+      "game_equal_mean_entropy",
+      "game_equal_mean_va_imprecision",
+      "game_equal_p90_va_imprecision",
+      "game_equal_rms_reliability",
+      "game_equal_set_doubleton_rate",
+      "game_equal_set_empty_rate",
+      "game_equal_set_singleton_rate",
+      "label0_set_coverage",
+      "label1_set_coverage",
+      "mean_entropy",
+      "mean_va_imprecision",
+      "p90_va_imprecision",
+      "primary_loss",
+      "rms_reliability",
+      "set_doubleton_rate",
+      "set_empty_rate",
+      "set_singleton_rate",
+      "skill"
+    ],
+    "statistics": [
+      "between_repeat_sd",
+      "paired_log_sd_ratio"
+    ]
+  },
+  "binary_uncertainty": {
+    "concentration_metrics": [
+      "mean_entropy",
+      "mean_va_imprecision"
+    ],
+    "label_conditional_sets": "secondary_diagnostic_only",
+    "primary_object": "calibrated_bernoulli_distribution",
+    "reliability_metrics": [
+      "calibrated_brier",
+      "calibrated_log_loss",
+      "calibration_bias",
+      "rms_reliability"
+    ],
+    "venn_abers_bounds_are_prediction_intervals": false
+  },
+  "bootstrap_draws": 10000,
+  "bootstrap_index_sha256": "809a3f2f1d77cce8aa4e86320f229cd025238ab79be8d1df66d61a601099ba7f",
+  "bootstrap_seed": 1802996521,
+  "bootstrap_unit": "complete_repeat_5x6_vector",
+  "cells": 3080,
+  "cross_task_inference": "none",
+  "manifest_hash": "eeb2ce2771bd5feb5594db75bcb2b58dbd9fa0e1a6cc0f27f4d00d067965af41",
+  "matched_neural_assertions": {
+    "forward_flop_tolerance_fraction": 0.15,
+    "global_set_transformer_typed_edges_consumed": false,
+    "identical_output_head_and_loss": true,
+    "identical_representative_input": true,
+    "identical_shared_tokens_history_masks_time_context": true,
+    "parameter_cap": 350000,
+    "parameter_tolerance_fraction": 0.05,
+    "shared_neural_families": [
+      "relnet",
+      "attn_relnet",
+      "set_transformer"
+    ]
+  },
+  "matched_neural_pair_groups": 640,
+  "max_t_family": "all_ten_model_pairs_by_all_six_task_anchors",
+  "max_t_family_contrasts": 60,
+  "multiplicity_scope": "fixed_main_only",
+  "primary_cells": 3000,
+  "primary_summary_groups": 30,
+  "scientific_revalidation": "ordered_identities_splits_seeds_config_history_predictions_all_metrics",
+  "secondary_branches": {
+    "frozen_sensitivity": "descriptive_paired_to_pinned_full100_not_in_primary_max_t",
+    "structural_ablation": "descriptive_paired_not_in_primary_max_t"
+  },
+  "sensitivity_cells": 0,
+  "sensitivity_effect_groups": 0,
+  "sensitivity_pairwise_groups": 0,
+  "sensitivity_summary_groups": 0,
+  "stability_ribbon": "mean_with_between_repeat_q10_q90",
+  "summary_groups": 30,
+  "supported_best_rule": "simultaneous_mean_loss_ci_beats_every_comparator_at_anchor",
+  "task_id": "bdb2023_sack",
+  "training_size_change": "largest_anchor_minus_20_within_repeat",
+  "training_size_difference_in_changes": "paired_model_difference_of_largest_minus_20_changes_descriptive_outside_primary_max_t"
+}

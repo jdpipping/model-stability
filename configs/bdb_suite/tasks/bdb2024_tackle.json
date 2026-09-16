@@ -1,0 +1,290 @@
+{
+  "schema_version": "bdb-task-spec-v2",
+  "task_id": "bdb2024_tackle",
+  "release_year": 2024,
+  "outcome_type": "binary",
+  "primary_metric": "brier",
+  "total_games": 136,
+  "development_games": 30,
+  "confirmatory_games": 106,
+  "outer_counts": {"train": 64, "calibration": 21, "test": 21},
+  "anchors": [10, 20, 30, 40, 50, 60],
+  "event_cutoff": {
+    "event": "winner candidate state exactly 10 frames before inferred tackle event",
+    "fallback_rules": [
+      "made tackle event is the unique tackle or out_of_bounds frame",
+      "charted miss event is the first minimum-distance frame between defender and ballcarrier",
+      "exclude an event without a complete state at event minus 10 frames"
+    ]
+  },
+  "cohort": {
+    "description": "Winner-fidelity made-versus-missed tackle candidate classifier and framewise opportunity score",
+    "eligibility": [
+      "solo tackle equals 1 or pff_missedTackle equals 1",
+      "assist-only charting is excluded; a row with pff_missedTackle remains a negative",
+      "play is not nullified and foulName1 is missing",
+      "ballcarrier and candidate defender are tracked at the required state"
+    ],
+    "exclusions": [
+      "assist-only rows without a solo tackle or PFF miss",
+      "plays with a recorded or nullifying penalty",
+      "missing or erroneous tracking",
+      "events too early to observe the event-minus-10 state"
+    ],
+    "winner_commit": "8b3de97f1e42351d14e5b69d8cb03f51f244806a",
+    "expected_weeks_1_8": {"made": 8000, "missed": 1583},
+    "expected_week_9": {"made": 836, "missed": 180}
+  },
+  "features": {
+    "allowlist": [
+      "ballcarrier_speed",
+      "relative_x_speed",
+      "absolute_relative_y_speed",
+      "euclidean_distance",
+      "angle_of_attack_cosine",
+      "ballcarrier_voronoi_area",
+      "team_influence_at_ballcarrier",
+      "blocker_influence_at_tackler",
+      "is_run",
+      "event_minus_10_tracking"
+    ],
+    "denylist": [
+      "assist",
+      "forcedFumble",
+      "post_event_tracking",
+      "playResult",
+      "yards_gained_after_state"
+    ],
+    "channels": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other", "carrier"
+    ],
+    "tabular_feature_order": [
+      "ballcarrier_speed", "relative_x_speed", "absolute_relative_y_speed",
+      "euclidean_distance", "angle_of_attack_cosine", "ballcarrier_voronoi_area",
+      "team_influence_at_ballcarrier", "blocker_influence_at_tackler", "is_run"
+    ],
+    "coordinate_normalization": "exact nine-feature fidelity path reflects x only and retains y; suite neural tokens use the common 180-degree x/y rotation and football-centered coordinates"
+  },
+  "outcome": {
+    "target": "solo tackle equals 1 versus PFF charted missed tackle equals 0",
+    "positive_label": "solo tackle",
+    "negative_label": "charted missed tackle",
+    "null_model": "Jeffreys-smoothed training-subset made-tackle prevalence",
+    "score_interpretation": "case-control score, not an unconditional calibrated tackle probability",
+    "opportunity_rule": "strict score above 0.75 for five frames; miss after five subsequent frames at or below 0.75"
+  },
+  "prepared_contract": {
+    "schema_version": "bdb-prepared-semantics-v2",
+    "task_id": "bdb2024_tackle",
+    "outcome_type": "binary",
+    "primary_metric": "brier",
+    "examples": 10599,
+    "games": 136,
+    "tabular_feature_order": [
+      "ballcarrier_speed", "relative_x_speed", "absolute_relative_y_speed",
+      "euclidean_distance", "angle_of_attack_cosine", "ballcarrier_voronoi_area",
+      "team_influence_at_ballcarrier", "blocker_influence_at_tackler", "is_run"
+    ],
+    "channel_names": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other", "carrier"
+    ],
+    "arrays": {
+      "player_tokens": {"axes": ["example", "time", "tracked_object", "channel"], "shape": [10599, 10, 23, 25], "dtype": "float32"},
+      "player_mask": {"axes": ["example", "time", "tracked_object"], "shape": [10599, 10, 23], "dtype": "bool"},
+      "frame_mask": {"axes": ["example", "time"], "shape": [10599, 10], "dtype": "bool"},
+      "y": {"axes": ["example"], "shape": [10599], "dtype": "int8"},
+      "target_values": null,
+      "target_mask": null,
+      "target_baseline": null
+    },
+    "support": null,
+    "mask_contract": {
+      "player_mask": {
+        "meaning": "true_iff_tracked_object_slot_is_observed",
+        "observed_frame_slot_layout": "stable_per_play_slots_with_sparse_observation",
+        "slot_identity": "alignment_only_never_a_model_feature",
+        "masked_token_value": 0.0,
+        "requires_observed_frame": true
+      },
+      "frame_mask": {"meaning": "true_iff_time_slot_is_observed_not_padding", "layout": "left_padded"},
+      "target_mask": null
+    },
+    "target_contract": {
+      "encoding": "zero_one",
+      "examples_target": "equals_y",
+      "model_output": "positive_class_probability"
+    },
+    "adapter_metadata": {
+      "winner_fidelity": {
+        "repository": "https://github.com/mpchang/uncovering-missed-tackle-opportunities",
+        "commit": "8b3de97f1e42351d14e5b69d8cb03f51f244806a",
+        "feature_names": [
+          "ballcarrier_speed", "relative_x_speed", "absolute_relative_y_speed",
+          "euclidean_distance", "angle_of_attack_cosine", "ballcarrier_voronoi_area",
+          "team_influence_at_ballcarrier", "blocker_influence_at_tackler", "is_run"
+        ],
+        "published_display_names": [
+          "Ballcarrier Speed", "Relative X Speed", "|Relative Y Speed|", "Euclidian Distance",
+          "Angle of Attack", "Voronoi Area", "Team Influence", "Blocker Influence", "Is_run"
+        ],
+        "training_offset_frames": 10,
+        "sequence_length": 1,
+        "frame_rate_hz": 10,
+        "expected_counts": {
+          "weeks_1_8": {"made": 8000, "missed": 1583, "total": 9583},
+          "week_9": {"made": 836, "missed": 180, "total": 1016}
+        },
+        "executed_notebook_model": {
+          "implementation": "xgboost.XGBClassifier",
+          "objective": "binary:logistic",
+          "max_depth": 7,
+          "eta": 0.1,
+          "n_estimators": 150,
+          "reg_lambda": 150,
+          "subsample": 0.75,
+          "colsample_bytree": 1,
+          "colsample_bylevel": 1,
+          "scale_pos_weight": "n_negative / n_positive on the fitted split",
+          "eval_metric": "sklearn.metrics.log_loss",
+          "early_stopping_rounds": 20,
+          "validation_fraction": 0.1,
+          "validation_split_seed": 1234
+        },
+        "executable_reference": {
+          "fit_entrypoint": "bdb_study.fidelity.bdb2024.fit_executed_xgboost",
+          "framewise_entrypoint": "bdb_study.fidelity.bdb2024.run_framewise_fidelity_from_raw",
+          "framewise_schema_version": "bdb2024-framewise-fidelity-v1",
+          "optional_dependencies": ["xgboost", "pyarrow"],
+          "persist_entrypoint": "bdb_study.fidelity.bdb2024.persist_reference_artifacts",
+          "reference_schema_version": "bdb2024-xgboost-fidelity-v2",
+          "score_entrypoint": "bdb_study.fidelity.bdb2024.predict_fidelity_score"
+        },
+        "submission_appendix_model": {
+          "n_estimators": 250,
+          "max_depth": 7,
+          "eta": 0.1,
+          "subsample": 0.75,
+          "scale_pos_weight": 0.2,
+          "reg_lambda": 150
+        },
+        "known_discrepancy": {
+          "field": "n_estimators",
+          "executed_notebook": 150,
+          "submission_appendix": 250,
+          "fidelity_choice": 150
+        },
+        "score_interpretation": "case-control made-versus-missed tackle score"
+      },
+      "tabular_geometry": "winner x-only reflection; y retained",
+      "neural_token_geometry": "suite-canonical 180-degree x/y rotation centered on football",
+      "history_frames": 10,
+      "padding": "left, masked",
+      "stable_player_slots": "play_global_focal_independent_v1; nflId alignment only and never encoded",
+      "graph": "candidate defender, official ball carrier, blockers, and defensive-help relations",
+      "carrier_role": "official ballCarrierId used for stable-slot alignment only; identifier never encoded",
+      "structural_ablation": "candidate_carrier_pair_only",
+      "team_identity_primary": "excluded",
+      "cutoff_policy": "primary_candidate_event",
+      "cutoff_sensitivity": "common_closest_approach_minus_ten"
+    },
+    "semantic_hash": "eb975693480c5d7997eee6eabf5b2786e7d44ab7c7204ad4b8cac6055eee1007"
+  },
+  "history": {
+    "scope": "causal_tracking_history",
+    "endpoint": "candidate state exactly ten frames before the inferred event, inclusive",
+    "max_frames": 10,
+    "padding": "left_masked",
+    "stable_player_slots": true,
+    "slot_policy": "play_global_focal_independent_v1"
+  },
+  "graph": {
+    "node_types": ["candidate_defender", "ballcarrier", "blocker", "defensive_help", "football"],
+    "edge_types": ["candidate_carrier", "blocker_candidate", "blocker_carrier", "help_carrier", "same_team_influence"],
+    "construction": "candidate-conditioned carrier, blocker, and defensive-help relations at every retained frame",
+    "masked_aggregation": "observed_nodes_and_edges_only"
+  },
+  "identity_policy": {
+    "player_ids": "stable_slot_assignment_only",
+    "player_id_feature": false,
+    "team_identity_primary": false,
+    "team_identity_sensitivity": false
+  },
+  "model_roles": {
+    "primary": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"],
+    "shared_tabular_summary": true,
+    "shared_neural_inputs": ["tokenization", "causal_history", "player_and_frame_masks", "time_to_event", "context", "output_head", "loss", "tuning_grid", "seeds", "training_protocol"],
+    "relational_pair_shared_inputs": ["graph_edges", "relational_temporal_encoder"],
+    "set_transformer_structure": {"relation_scope": "global_masked_all_player_self_attention", "typed_graph_edges_consumed": false, "temporal_encoder": "factorized_masked_temporal_attention"},
+    "parameter_match_tolerance_fraction": 0.05,
+    "flop_match_tolerance_fraction": 0.15,
+    "neural_parameter_cap": 350000
+  },
+  "output_head": {
+    "id": "binary_probability_v1",
+    "prediction": "made-versus-charted-miss case-control score",
+    "training_loss": "log_loss",
+    "interpretation": "not_an_unconditional_tackle_probability"
+  },
+  "uncertainty": {
+    "primary_method": "out_of_game_venn_abers_calibration_v1",
+    "secondary_diagnostic": "raw_score_class_conditional_conformal_sets_v1",
+    "secondary_score_source": "raw_model_score",
+    "field_intersection": null,
+    "horizon_scale_learner": null,
+    "calibration_unit": "game",
+    "nominal_coverage": 0.9,
+    "report": ["labelwise_coverage", "singleton_rate", "doubleton_rate", "venn_abers_ambiguity"]
+  },
+  "joint_neural_target_selection": null,
+  "structural_ablation": {
+    "id": "candidate_carrier_pair_only",
+    "description": "retain only the candidate-defender and ballcarrier nodes and their pair relation",
+    "models": ["relnet", "attn_relnet"],
+    "anchors": [20, 60],
+    "repeats": 20
+  },
+  "sensitivities": [
+    {
+      "id": "common_closest_approach_minus_ten",
+      "description": "use a common closest-approach-minus-ten cutoff for made and missed candidates",
+      "selection": "frozen_prespecified",
+      "execution": {
+        "profile": "sensitivity20",
+        "repeats": 20,
+        "anchors": [20, 60],
+        "models": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"],
+        "prepared_variant": "common_closest_approach_minus_ten"
+      }
+    }
+  ],
+  "models": {
+    "linear_structure": {"role": "linear_structure", "family": "glm", "display_name": "Linear-Structure", "alpha_grid": [10.0, 3.3333333333333335, 1.0, 0.3333333333333333, 0.1]},
+    "boosted_structure": {"role": "boosted_structure", "family": "lightgbm", "display_name": "Boosted-Structure", "grid_id": "bdb_suite_lgbm_four_v1"},
+    "relnet": {"role": "relnet", "family": "relnet", "display_name": "RelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "attn_relnet": {"role": "attn_relnet", "family": "attn_relnet", "display_name": "AttnRelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "set_transformer": {"role": "set_transformer", "family": "set_transformer", "display_name": "Global Set Transformer", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]}
+  },
+  "artifacts": {
+    "metrics": ["raw_brier", "calibrated_brier", "game_equal_brier", "game_equal_calibrated_brier", "raw_log_loss", "skill", "calibration_bias", "rms_reliability", "mean_entropy", "p90_va_imprecision", "label0_set_coverage", "label1_set_coverage", "set_singleton_rate", "set_doubleton_rate", "set_empty_rate"],
+    "predictions": ["raw_case_control_score", "venn_abers_probability", "venn_abers_p0", "venn_abers_p1", "set_includes_0", "set_includes_1", "conformal_set_size"],
+    "fidelity_branch": ["executed_xgboost_reference", "opportunity_state_machine"]
+  },
+  "source_tree_receipts": [
+    {
+      "schema_version": "bdb-source-tree-receipt-v1",
+      "source_id": "nfl_big_data_bowl_2024",
+      "receipt_path": "configs/bdb_suite/sources/bdb2024_import.json",
+      "receipt_sha256": "224bc802f9f5673bfa2567d48052eea0e6d7d53e1d59c72e61e58cf49a508b48",
+      "tree_sha256": "21d226bf1d498b756984f100b2e1ae923c43fb875797ed7f31de05493b1623b5",
+      "destination": "data/bdb2024/raw",
+      "file_count": 13,
+      "byte_count": 178422486
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# scripts/prepare_data.py
+numpy
+pandas
+# rushing_study (models and analysis plots)
+lightgbm
+matplotlib
+scikit-learn
+venn-abers==1.5.3
+tensorflow>=2.18,<2.19
+# Mac GPU (Apple Silicon)
+tensorflow-metal

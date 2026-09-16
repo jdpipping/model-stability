@@ -1,0 +1,214 @@
+{
+  "schema_version": "bdb-task-spec-v2",
+  "task_id": "bdb2021_completion",
+  "release_year": 2021,
+  "outcome_type": "binary",
+  "primary_metric": "brier",
+  "total_games": 253,
+  "development_games": 30,
+  "confirmatory_games": 223,
+  "outer_counts": {"train": 134, "calibration": 44, "test": 45},
+  "anchors": [10, 20, 40, 60, 100, 130],
+  "event_cutoff": {
+    "event": "earliest pass_forward or pass_shovel",
+    "fallback_rules": [
+      "exclude a play with no observed release event",
+      "exclude a release frame without a valid football coordinate; never impute"
+    ]
+  },
+  "cohort": {
+    "description": "Pass completion prediction at the first observed release frame",
+    "eligibility": [
+      "passResult is C, I, or IN",
+      "tracking contains pass_forward or pass_shovel",
+      "the earliest release frame contains a valid football coordinate"
+    ],
+    "exclusions": [
+      "sacks",
+      "scrambles",
+      "plays without a release event",
+      "one tracking-defective play (gameId 2018101404, playId 2003) whose release frame lacks a valid football coordinate"
+    ],
+    "tracking_quality_exclusions": [
+      {
+        "game_id": 2018101404,
+        "play_id": 2003,
+        "reason": "football unavailable at the release frame"
+      }
+    ],
+    "expected_examples": 17846,
+    "expected_games": 253
+  },
+  "features": {
+    "allowlist": [
+      "quarter", "down", "yardsToGo", "absoluteYardlineNumber", "gameClockSeconds",
+      "preSnapHomeScore", "preSnapVisitorScore", "possessionTeam", "offenseFormation",
+      "personnelO", "personnelD", "defendersInTheBox", "release_tracking"
+    ],
+    "denylist": [
+      "passResult", "offensePlayResult", "playResult", "epa", "isDefensivePI",
+      "penaltyCodes", "penaltyJerseyNumbers", "route", "typeDropback",
+      "numberOfPassRushers"
+    ],
+    "channels": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other"
+    ],
+    "coordinate_normalization": "mirror leftward plays in x and y, rotate vectors 180 degrees, and center every object on the football"
+  },
+  "outcome": {
+    "target": "passResult equals C",
+    "positive_label": "C",
+    "null_model": "Jeffreys-smoothed training-subset completion prevalence"
+  },
+  "prepared_contract": {
+    "schema_version": "bdb-prepared-semantics-v2",
+    "task_id": "bdb2021_completion",
+    "outcome_type": "binary",
+    "primary_metric": "brier",
+    "examples": 17846,
+    "games": 253,
+    "tabular_feature_order": [
+      "quarter", "down", "yardsToGo", "absoluteYardlineNumber", "gameClockSeconds",
+      "preSnapHomeScore", "preSnapVisitorScore", "possessionTeam", "offenseFormation",
+      "personnelO", "personnelD", "defendersInTheBox"
+    ],
+    "channel_names": [
+      "x_rel", "y_rel", "vx", "vy", "speed", "acceleration", "dir_sin", "dir_cos",
+      "orientation_sin", "orientation_cos", "offense", "defense", "football", "focal",
+      "position_qb", "position_rb", "position_wr", "position_te", "position_ol",
+      "position_dl", "position_lb", "position_db", "position_special", "position_other"
+    ],
+    "arrays": {
+      "player_tokens": {"axes": ["example", "time", "tracked_object", "channel"], "shape": [17846, 20, 23, 24], "dtype": "float32"},
+      "player_mask": {"axes": ["example", "time", "tracked_object"], "shape": [17846, 20, 23], "dtype": "bool"},
+      "frame_mask": {"axes": ["example", "time"], "shape": [17846, 20], "dtype": "bool"},
+      "y": {"axes": ["example"], "shape": [17846], "dtype": "int8"},
+      "target_values": null,
+      "target_mask": null,
+      "target_baseline": null
+    },
+    "support": null,
+    "mask_contract": {
+      "player_mask": {
+        "meaning": "true_iff_tracked_object_slot_is_observed",
+        "observed_frame_slot_layout": "stable_per_play_slots_with_sparse_observation",
+        "slot_identity": "alignment_only_never_a_model_feature",
+        "masked_token_value": 0.0,
+        "requires_observed_frame": true
+      },
+      "frame_mask": {"meaning": "true_iff_time_slot_is_observed_not_padding", "layout": "left_padded"},
+      "target_mask": null
+    },
+    "target_contract": {
+      "encoding": "zero_one",
+      "examples_target": "equals_y",
+      "model_output": "positive_class_probability"
+    },
+    "adapter_metadata": {
+      "cutoff": "first pass_forward/pass_shovel frame",
+      "history_frames": 20,
+      "padding": "left, masked",
+      "stable_player_slots": "play_global_focal_independent_v1; nflId alignment only and never encoded",
+      "graph": "quarterback, eligible-receiver, and defender relations",
+      "structural_ablation": "release_snapshot_only",
+      "team_identity_primary": "excluded",
+      "positive_label": "C",
+      "tabular_columns": [
+        "quarter", "down", "yardsToGo", "absoluteYardlineNumber", "gameClockSeconds",
+        "preSnapHomeScore", "preSnapVisitorScore", "possessionTeam", "offenseFormation",
+        "personnelO", "personnelD", "defendersInTheBox"
+      ],
+      "learned_preprocessing": "split-local only",
+      "tracking_quality": "require valid football coordinate at release; no coordinate imputation",
+      "tracking_quality_exclusions": [
+        {
+          "game_id": 2018101404,
+          "play_id": 2003,
+          "reason": "football unavailable at the release frame"
+        }
+      ]
+    },
+    "semantic_hash": "0a0ff74398f5f9f56027cddfd5f1d222100f6581c7fb7e46288319f2e16456de"
+  },
+  "history": {
+    "scope": "causal_tracking_history",
+    "endpoint": "earliest pass_forward or pass_shovel frame, inclusive",
+    "max_frames": 20,
+    "padding": "left_masked",
+    "stable_player_slots": true,
+    "slot_policy": "play_global_focal_independent_v1"
+  },
+  "graph": {
+    "node_types": ["quarterback", "eligible_receiver", "defender", "football"],
+    "edge_types": ["quarterback_receiver", "receiver_defender", "receiver_receiver"],
+    "construction": "typed receiver-coverage relations recomputed at every observed frame",
+    "masked_aggregation": "observed_nodes_and_edges_only"
+  },
+  "identity_policy": {
+    "player_ids": "stable_slot_assignment_only",
+    "player_id_feature": false,
+    "team_identity_primary": false,
+    "team_identity_sensitivity": false
+  },
+  "model_roles": {
+    "primary": ["linear_structure", "boosted_structure", "relnet", "attn_relnet", "set_transformer"],
+    "shared_tabular_summary": true,
+    "shared_neural_inputs": ["tokenization", "causal_history", "player_and_frame_masks", "time_to_event", "context", "output_head", "loss", "tuning_grid", "seeds", "training_protocol"],
+    "relational_pair_shared_inputs": ["graph_edges", "relational_temporal_encoder"],
+    "set_transformer_structure": {"relation_scope": "global_masked_all_player_self_attention", "typed_graph_edges_consumed": false, "temporal_encoder": "factorized_masked_temporal_attention"},
+    "parameter_match_tolerance_fraction": 0.05,
+    "flop_match_tolerance_fraction": 0.15,
+    "neural_parameter_cap": 350000
+  },
+  "output_head": {
+    "id": "binary_probability_v1",
+    "prediction": "released-pass completion probability",
+    "training_loss": "log_loss"
+  },
+  "uncertainty": {
+    "primary_method": "out_of_game_venn_abers_calibration_v1",
+    "secondary_diagnostic": "raw_score_class_conditional_conformal_sets_v1",
+    "secondary_score_source": "raw_model_score",
+    "field_intersection": null,
+    "horizon_scale_learner": null,
+    "calibration_unit": "game",
+    "nominal_coverage": 0.9,
+    "report": ["labelwise_coverage", "singleton_rate", "doubleton_rate", "venn_abers_ambiguity"]
+  },
+  "joint_neural_target_selection": null,
+  "structural_ablation": {
+    "id": "release_snapshot_only",
+    "description": "retain only the release frame while preserving the graph and output head",
+    "models": ["relnet", "attn_relnet"],
+    "anchors": [20, 130],
+    "repeats": 20
+  },
+  "sensitivities": [],
+  "models": {
+    "linear_structure": {"role": "linear_structure", "family": "glm", "display_name": "Linear-Structure", "alpha_grid": [10.0, 3.3333333333333335, 1.0, 0.3333333333333333, 0.1]},
+    "boosted_structure": {"role": "boosted_structure", "family": "lightgbm", "display_name": "Boosted-Structure", "grid_id": "bdb_suite_lgbm_four_v1"},
+    "relnet": {"role": "relnet", "family": "relnet", "display_name": "RelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "attn_relnet": {"role": "attn_relnet", "family": "attn_relnet", "display_name": "AttnRelNet", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]},
+    "set_transformer": {"role": "set_transformer", "family": "set_transformer", "display_name": "Global Set Transformer", "learning_rates": [0.001, 0.0003], "dropouts": [0.3, 0.1]}
+  },
+  "artifacts": {
+    "metrics": ["raw_brier", "game_equal_brier", "game_equal_calibrated_brier", "raw_log_loss", "skill", "calibration_bias", "rms_reliability", "mean_entropy", "p90_va_imprecision", "label0_set_coverage", "label1_set_coverage", "set_singleton_rate", "set_doubleton_rate", "set_empty_rate"],
+    "predictions": ["raw_probability", "venn_abers_probability", "venn_abers_p0", "venn_abers_p1", "set_includes_0", "set_includes_1", "conformal_set_size"]
+  },
+  "source_receipts": [],
+  "source_tree_receipts": [
+    {
+      "schema_version": "bdb-source-tree-receipt-v1",
+      "source_id": "nfl_big_data_bowl_2021",
+      "receipt_path": "configs/bdb_suite/sources/bdb2021_import.json",
+      "receipt_sha256": "4154122daf2bdf95d4d640792d966accdcb9568c61e579e6a6f5744c9b788a6f",
+      "tree_sha256": "bd38e94a291d26212b18bbd6df34cc2f1514d2e5c0a7e9ec233147776b32a911",
+      "destination": "data/bdb2021/raw",
+      "file_count": 20,
+      "byte_count": 2334575123
+    }
+  ]
+}

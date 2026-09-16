@@ -1,0 +1,15 @@
+{
+  "analysis_implementation": "bdb_study.analysis.paired_max_t_intervals + supported_best_conclusions",
+  "analysis_seed": 915534192,
+  "bootstrap_draws": 10000,
+  "bootstrap_index_sha256": "f8f0745ccf207943416b542ed7fc492579139bf980b582b5fff773a1cd93e82f",
+  "max_t_critical": 3.768875189863706,
+  "outputs": {
+    "paired_contrasts.csv": "091c3adeefc9822fac4dd568481f78f9ef48ff68d7108171589a62f38d462738",
+    "supported_best.csv": "f4caa2f90b0d450dc13b47ba6fc75460c2d56e3ca4270642a7988701983cbf79"
+  },
+  "schema_version": "cassis2026-derived-terminal-inference-v1",
+  "source": "results/bdb/full100_serial_bdb2025_attempt1/final/primary_metrics.csv",
+  "source_sha256": "d7cc58a35cc974292a7a1e0887cdfde20f2e2f38e9249fd3632cd8be190f131c",
+  "task_id": "bdb2025_man_zone"
+}

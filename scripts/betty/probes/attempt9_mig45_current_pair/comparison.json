@@ -1,0 +1,249 @@
+{
+  "allocation_shape": "independent_allocations",
+  "cell": {
+    "anchor": 130,
+    "branch": "fixed_main",
+    "model_id": "attn_relnet",
+    "repeat": 1
+  },
+  "comparison": {
+    "arrays": {
+      "equal": true,
+      "left": {
+        "arrays": {
+          "binary_calibration_calibrated_probability": {
+            "dtype": "float64",
+            "sha256": "0342635b0fe892d7a09c12f747a3f20052586528875c981ac8f12fa0a897ef51",
+            "shape": [
+              3080
+            ]
+          },
+          "binary_reliability_boundaries": {
+            "dtype": "float64",
+            "sha256": "3fb0b88727865a23b0949f521b8cf8b080886196a8ae6c30d496631235c8d6d8",
+            "shape": [
+              8
+            ]
+          },
+          "binary_set_label0_calibration_indices": {
+            "dtype": "int64",
+            "sha256": "e3f135e388146670e00828eef6e5d3b1f0f663779ab6c246928ad10da31d2c56",
+            "shape": [
+              44
+            ]
+          },
+          "binary_set_label1_calibration_indices": {
+            "dtype": "int64",
+            "sha256": "2ab842335df4725962fa610626cc6a0aa28c56edb8cda5044afcc556702e4cf8",
+            "shape": [
+              44
+            ]
+          },
+          "binary_set_quantiles": {
+            "dtype": "float64",
+            "sha256": "fa3e9b05384f041ee29e7d731886ecfeca56b4c05ff6942583b853d293078fbd",
+            "shape": [
+              2
+            ]
+          },
+          "binary_set_ranks": {
+            "dtype": "int64",
+            "sha256": "275389182013d8fb3c67bd80a7e3afad404e9ebdbfc77d298079e05e21fca7a0",
+            "shape": [
+              2
+            ]
+          },
+          "uncertainty_subsample_seed": {
+            "dtype": "int64",
+            "sha256": "fddb73150742fa389f90a2761d5344a66f80ab4cf8d35ae5ece0df4274a8729e",
+            "shape": [
+              1
+            ]
+          }
+        },
+        "type": "named_arrays"
+      },
+      "right": {
+        "arrays": {
+          "binary_calibration_calibrated_probability": {
+            "dtype": "float64",
+            "sha256": "0342635b0fe892d7a09c12f747a3f20052586528875c981ac8f12fa0a897ef51",
+            "shape": [
+              3080
+            ]
+          },
+          "binary_reliability_boundaries": {
+            "dtype": "float64",
+            "sha256": "3fb0b88727865a23b0949f521b8cf8b080886196a8ae6c30d496631235c8d6d8",
+            "shape": [
+              8
+            ]
+          },
+          "binary_set_label0_calibration_indices": {
+            "dtype": "int64",
+            "sha256": "e3f135e388146670e00828eef6e5d3b1f0f663779ab6c246928ad10da31d2c56",
+            "shape": [
+              44
+            ]
+          },
+          "binary_set_label1_calibration_indices": {
+            "dtype": "int64",
+            "sha256": "2ab842335df4725962fa610626cc6a0aa28c56edb8cda5044afcc556702e4cf8",
+            "shape": [
+              44
+            ]
+          },
+          "binary_set_quantiles": {
+            "dtype": "float64",
+            "sha256": "fa3e9b05384f041ee29e7d731886ecfeca56b4c05ff6942583b853d293078fbd",
+            "shape": [
+              2
+            ]
+          },
+          "binary_set_ranks": {
+            "dtype": "int64",
+            "sha256": "275389182013d8fb3c67bd80a7e3afad404e9ebdbfc77d298079e05e21fca7a0",
+            "shape": [
+              2
+            ]
+          },
+          "uncertainty_subsample_seed": {
+            "dtype": "int64",
+            "sha256": "fddb73150742fa389f90a2761d5344a66f80ab4cf8d35ae5ece0df4274a8729e",
+            "shape": [
+              1
+            ]
+          }
+        },
+        "type": "named_arrays"
+      }
+    },
+    "history_without_timing": {
+      "differing_fields": [],
+      "equal": true,
+      "left_sha256": "4c4f9d346b8e0cfe74e150f0323f56ac2116c014ca0cfb12ea164ad04d7d0780",
+      "right_sha256": "4c4f9d346b8e0cfe74e150f0323f56ac2116c014ca0cfb12ea164ad04d7d0780"
+    },
+    "phase_history": {
+      "refit_history": {
+        "equal": true,
+        "left_sha256": "22f3c0c23b5f0cada2bca46426800610bde80a337735bcb25ab86b336ea13b89",
+        "right_sha256": "22f3c0c23b5f0cada2bca46426800610bde80a337735bcb25ab86b336ea13b89"
+      },
+      "selector_history": {
+        "equal": true,
+        "left_sha256": "0ff7354dd04de47eb025129d9713e6afc6f17e060b9e716dc0f9d6cb71c7eb87",
+        "right_sha256": "0ff7354dd04de47eb025129d9713e6afc6f17e060b9e716dc0f9d6cb71c7eb87"
+      }
+    },
+    "predictions": {
+      "equal": true,
+      "left": {
+        "columns": [
+          "partition",
+          "example_id",
+          "game_id",
+          "stratum",
+          "target",
+          "raw_probability",
+          "calibrated_probability",
+          "venn_abers_p0",
+          "venn_abers_p1",
+          "venn_abers_imprecision",
+          "loss_contribution",
+          "venn_abers_probability",
+          "set_includes_0",
+          "set_includes_1",
+          "conformal_set_size"
+        ],
+        "dtypes": [
+          "str",
+          "str",
+          "int64",
+          "str",
+          "int64",
+          "float64",
+          "float64",
+          "float64",
+          "float64",
+          "float64",
+          "float64",
+          "float64",
+          "object",
+          "object",
+          "float64"
+        ],
+        "sha256": "eae40f7753a2ccf35947a07552dd6313178e0d1b8295f0cc438a2ebbc859f69f",
+        "shape": [
+          6195,
+          15
+        ],
+        "type": "dataframe"
+      },
+      "right": {
+        "columns": [
+          "partition",
+          "example_id",
+          "game_id",
+          "stratum",
+          "target",
+          "raw_probability",
+          "calibrated_probability",
+          "venn_abers_p0",
+          "venn_abers_p1",
+          "venn_abers_imprecision",
+          "loss_contribution",
+          "venn_abers_probability",
+          "set_includes_0",
+          "set_includes_1",
+          "conformal_set_size"
+        ],
+        "dtypes": [
+          "str",
+          "str",
+          "int64",
+          "str",
+          "int64",
+          "float64",
+          "float64",
+          "float64",
+          "float64",
+          "float64",
+          "float64",
+          "float64",
+          "object",
+          "object",
+          "float64"
+        ],
+        "sha256": "eae40f7753a2ccf35947a07552dd6313178e0d1b8295f0cc438a2ebbc859f69f",
+        "shape": [
+          6195,
+          15
+        ],
+        "type": "dataframe"
+      }
+    },
+    "scientific_metrics": {
+      "differing_fields": [],
+      "equal": true,
+      "left_sha256": "9e465090d2cdc30397fe6bde2f55c8af0f2116d9c27a42f8bb977ab1fc7f77bd",
+      "right_sha256": "9e465090d2cdc30397fe6bde2f55c8af0f2116d9c27a42f8bb977ab1fc7f77bd"
+    }
+  },
+  "full_diagnostic_equal": true,
+  "manifest_hash": "bc8fe1e808b7405b5246123ac1563ba7c70982e5b685e0570b0ea1b64653088a",
+  "preflight_contract_equal": true,
+  "probe_hash": "ad790e2cb3929ea5b535f69fcc93dd5d1e9ec77bc237489ad8f990c253b2efe1",
+  "run_a": "/workspace/zoo-bdb-v2/data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_a",
+  "run_b": "/workspace/zoo-bdb-v2/data/bdb_suite_runs/determinism_probes/attempt9_mig45_current_pair/run_b",
+  "schema_version": "bdb2021-attn-determinism-probe-v1",
+  "slurm": {
+    "cuda_visible_devices": null,
+    "job_id": "7784275",
+    "node_list": "epyc-2-10",
+    "partition": "genoa-std-mem"
+  },
+  "task_id": "bdb2021_completion",
+  "tf32_mode_a": "default",
+  "tf32_mode_b": "default"
+}

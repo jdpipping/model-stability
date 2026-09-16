@@ -1,0 +1,214 @@
+{
+  "analysis_code_sha256": "20fb29784050e5d3ae615fd78da38b7719ee40938e91f068a61d0ece15a87f70",
+  "family_contrasts_per_problem": 60,
+  "levels": [
+    0.95,
+    0.9
+  ],
+  "method": "single-step studentized complete-repeat max-t; higher empirical quantile with ordinary two-sided t critical floor",
+  "outputs": {
+    "bootstrap_maxima.npz": "3a989b2110403a8676a89c5206eb86d78496759afe3ce2ed7c2d07eda2567e39",
+    "comparison.md": "ea4bc74bdf4d8f151cae61e227bcd1bf3f2f731e328250ce321fbc7b073bb1d1",
+    "paired_comparisons.csv": "23f7d8d6d57c01d688533cafacd67de6a676d96d8d75f9d35011686ab995f6b8",
+    "summary_by_problem.csv": "ab57f7f87af12d4f19d38c7666d2fecf77f860887a1c01a878d31b8cd8305009",
+    "winners_by_training_size.csv": "23ba9b40d3cd9fe62fca422fb06a61493dea65a8c1d89169d37a854cf62b6bce"
+  },
+  "protected_presentation_unchanged": true,
+  "schema_version": "cassis2026-max-t-90-sensitivity-v1",
+  "scope": "primary_loss_only",
+  "script_sha256": "01dfc08b8b0e27c63c2eb25d21483ea152277216790810250861bd02792986d2",
+  "sources": {
+    "data/bdb_suite_runs/definitive/bdb2020_rushing_harmonized/full100/final/paired_contrasts.csv": "fe6fd9fae4fe34c1ae2444f2e6095c57cebccc154a71c007059054199367c695",
+    "data/bdb_suite_runs/definitive/bdb2020_rushing_harmonized/full100/final/primary_metrics.csv": "478d2d9d187d2234c945bb7a1fce05dc61d6b9ce952fd8f2a0426303e55d8d77",
+    "data/bdb_suite_runs/definitive/bdb2020_rushing_harmonized/full100/final/supported_best.csv": "2987ba4abb01ec716f63de2a16f456d23b4f2b18b98e4ba233e143552a95e3d9",
+    "presentations/cassis2026/data/raw_terminal/bdb2021/primary_metrics.csv": "04cf01c9fa575251aa9bfd715efd9150b7aec0ec545c0a3d8b4ede5e281673f7",
+    "presentations/cassis2026/data/raw_terminal/bdb2022/primary_metrics.csv": "5337ea2f8fb17fe6b9ebd5776b4b0a91a7d716ab71662bd5f91384a70fa0e14f",
+    "presentations/cassis2026/data/terminal_inference/bdb2021/paired_contrasts.csv": "ade9abac5186de954223eb9c211392f5961e8aeb322abd1631048db5a66e305e",
+    "presentations/cassis2026/data/terminal_inference/bdb2021/supported_best.csv": "5379c7df21e6799ad92457744e1985f1c3d9ffd7f67ca07294792848684d8fe6",
+    "presentations/cassis2026/data/terminal_inference/bdb2022/paired_contrasts.csv": "b85082c44b348a7e9b1f7dce4dcee8cfa190a4eee932c4072ed3802586bcce1f",
+    "presentations/cassis2026/data/terminal_inference/bdb2022/supported_best.csv": "ebf6f3f3130fa591be7c9b86159d222cea32bdc7be578875df58e37dcf2a1b2c",
+    "presentations/cassis2026/data/terminal_inference/bdb2024/paired_contrasts.csv": "0533e22b2e3f88e05609e535d8369a0fc243fbf904dcef2b51c7be24997e6d49",
+    "presentations/cassis2026/data/terminal_inference/bdb2024/supported_best.csv": "15bfb49d9b6d8882ebfe58cad7be3545a5973e2c83465e46902ab7ae52bde25e",
+    "presentations/cassis2026/data/terminal_inference/bdb2025/paired_contrasts.csv": "091c3adeefc9822fac4dd568481f78f9ef48ff68d7108171589a62f38d462738",
+    "presentations/cassis2026/data/terminal_inference/bdb2025/supported_best.csv": "f4caa2f90b0d450dc13b47ba6fc75460c2d56e3ca4270642a7988701983cbf79",
+    "results/bdb/full100_serial_bdb2023_attempt1/final/paired_contrasts.csv": "abb8983da73ca66a53ba76cc8d42dc60585c5a4b9e839fc01cb40ff773375fca",
+    "results/bdb/full100_serial_bdb2023_attempt1/final/primary_metrics.csv": "bb5ece118b4e23df8ee33f2b4a64aa8d2a865694c6f27c3ba5dc4c5b9fccbf5c",
+    "results/bdb/full100_serial_bdb2023_attempt1/final/supported_best.csv": "302e22b9ad44144e5a79b8a01ebfd5dc599ae94247e4ed95d0022e4435c8cad1",
+    "results/bdb/full100_serial_bdb2024_attempt1/final/primary_metrics.csv": "45b46554a018e43ce95cb1c0c942a6add1a396ce5fcaa3344a3f7fc897c1249c",
+    "results/bdb/full100_serial_bdb2025_attempt1/final/primary_metrics.csv": "d7cc58a35cc974292a7a1e0887cdfde20f2e2f38e9249fd3632cd8be190f131c"
+  },
+  "task_details": [
+    {
+      "anchors": [
+        20,
+        40,
+        80,
+        160,
+        240,
+        360
+      ],
+      "bootstrap_draws": 10000,
+      "bootstrap_index_sha256": "44b259cde98049d40866fb4f6daff7797b4de886b8c9f77ffd58af7231c7bde6",
+      "bootstrap_seed": 383642359,
+      "models": [
+        "linear_structure",
+        "boosted_structure",
+        "relnet",
+        "attn_relnet",
+        "set_transformer"
+      ],
+      "reproduced_95_max_absolute_errors": {
+        "max_t_critical": 0.0,
+        "mean_difference": 0.0,
+        "simultaneous_lower": 0.0,
+        "simultaneous_upper": 0.0,
+        "standard_error": 0.0
+      },
+      "task_id": "bdb2020_rushing_harmonized"
+    },
+    {
+      "anchors": [
+        10,
+        20,
+        40,
+        60,
+        100,
+        130
+      ],
+      "bootstrap_draws": 10000,
+      "bootstrap_index_sha256": "93e68f5ec81e1b3dff9621a6251b6fc02ec6ae5b4645f15a0d8a3a7574dd70fd",
+      "bootstrap_seed": 179706174,
+      "models": [
+        "linear_structure",
+        "boosted_structure",
+        "relnet",
+        "attn_relnet",
+        "set_transformer"
+      ],
+      "reproduced_95_max_absolute_errors": {
+        "max_t_critical": 0.0,
+        "mean_difference": 0.0,
+        "simultaneous_lower": 0.0,
+        "simultaneous_upper": 0.0,
+        "standard_error": 0.0
+      },
+      "task_id": "bdb2021_completion"
+    },
+    {
+      "anchors": [
+        10,
+        20,
+        40,
+        60,
+        160,
+        360
+      ],
+      "bootstrap_draws": 10000,
+      "bootstrap_index_sha256": "663668e53153c4dda1d4c7f60117df3a4e2c95f32c6f8ea784f0b2dd97bf4b4f",
+      "bootstrap_seed": 1501149455,
+      "models": [
+        "linear_structure",
+        "boosted_structure",
+        "relnet",
+        "attn_relnet",
+        "set_transformer"
+      ],
+      "reproduced_95_max_absolute_errors": {
+        "max_t_critical": 0.0,
+        "mean_difference": 0.0,
+        "simultaneous_lower": 0.0,
+        "simultaneous_upper": 0.0,
+        "standard_error": 0.0
+      },
+      "task_id": "bdb2022_punt_returns"
+    },
+    {
+      "anchors": [
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "bootstrap_draws": 10000,
+      "bootstrap_index_sha256": "809a3f2f1d77cce8aa4e86320f229cd025238ab79be8d1df66d61a601099ba7f",
+      "bootstrap_seed": 1802996521,
+      "models": [
+        "linear_structure",
+        "boosted_structure",
+        "relnet",
+        "attn_relnet",
+        "set_transformer"
+      ],
+      "reproduced_95_max_absolute_errors": {
+        "max_t_critical": 0.0,
+        "mean_difference": 0.0,
+        "simultaneous_lower": 0.0,
+        "simultaneous_upper": 0.0,
+        "standard_error": 0.0
+      },
+      "task_id": "bdb2023_sack"
+    },
+    {
+      "anchors": [
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "bootstrap_draws": 10000,
+      "bootstrap_index_sha256": "9c11ed27a3943f37582fa4341b969071cf379164a6b71636cbd7c1c2a3e6b236",
+      "bootstrap_seed": 668529568,
+      "models": [
+        "linear_structure",
+        "boosted_structure",
+        "relnet",
+        "attn_relnet",
+        "set_transformer"
+      ],
+      "reproduced_95_max_absolute_errors": {
+        "max_t_critical": 0.0,
+        "mean_difference": 0.0,
+        "simultaneous_lower": 0.0,
+        "simultaneous_upper": 0.0,
+        "standard_error": 0.0
+      },
+      "task_id": "bdb2024_tackle"
+    },
+    {
+      "anchors": [
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "bootstrap_draws": 10000,
+      "bootstrap_index_sha256": "f8f0745ccf207943416b542ed7fc492579139bf980b582b5fff773a1cd93e82f",
+      "bootstrap_seed": 915534192,
+      "models": [
+        "linear_structure",
+        "boosted_structure",
+        "relnet",
+        "attn_relnet",
+        "set_transformer"
+      ],
+      "reproduced_95_max_absolute_errors": {
+        "max_t_critical": 7.549516567451064e-15,
+        "mean_difference": 8.673617379884035e-18,
+        "simultaneous_lower": 1.9081958235744878e-17,
+        "simultaneous_upper": 1.8214596497756474e-17,
+        "standard_error": 1.0842021724855044e-18
+      },
+      "task_id": "bdb2025_man_zone"
+    }
+  ],
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  }
+}

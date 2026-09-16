@@ -1,0 +1,12 @@
+# Quarto caches and compiled browser/print editions.
+/.quarto/
+**/*.quarto_ipynb
+/index.html
+/PRINT-reveals.html
+/index_files/
+__pycache__/
+
+# Keep the compact, checksummed example exports and terminal summaries.
+# These support the presentation; the root data/ tree is local study data.
+!data/
+!data/**

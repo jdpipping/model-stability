@@ -1,0 +1,84 @@
+{
+  "schema_version": "bdb2020-harmonized-protocol-amendment-v1",
+  "amendment_id": "20260906_bdb2020_harmonized_five_role",
+  "recorded_at_utc": "2026-09-06T21:00:00Z",
+  "evidence_status": "retrospective_harmonization_separate_from_legacy_confirmatory_evidence",
+  "legacy_evidence_policy": {
+    "task_id": "bdb2020_rushing",
+    "status": "completed_read_only",
+    "overwrite_or_relabel_allowed": false
+  },
+  "new_task": {
+    "task_id": "bdb2020_rushing_harmonized",
+    "cohort": "31007 nonaugmented handoff snapshots from 688 games",
+    "development_games": 40,
+    "confirmatory_games": 648,
+    "outer_counts": {
+      "train": 374,
+      "calibration": 137,
+      "test": 137
+    },
+    "anchors": [20, 40, 80, 160, 240, 360],
+    "repeats": 100
+  },
+  "model_roles": [
+    "linear_structure",
+    "boosted_structure",
+    "relnet",
+    "attn_relnet",
+    "set_transformer"
+  ],
+  "development_policy": {
+    "selection_unit": "game",
+    "folds": 5,
+    "grid_policy": "same five model classes as BDB2021-2026 with the suite's frozen outcome-appropriate family grids",
+    "outcome_access": "development games only"
+  },
+  "representation": {
+    "cutoff": "supplied handoff snapshot",
+    "history_frames": 1,
+    "tracked_players": 22,
+    "padded_slots": 23,
+    "coordinate_center": "rusher",
+    "play_direction": "normalized toward increasing x",
+    "football_node": "absent_not_fabricated",
+    "player_and_team_identity_features": false,
+    "season_2017_speed": "10_times_Dis"
+  },
+  "ordered_target": {
+    "raw_field": "Yards",
+    "support": [-28, 51],
+    "encoding": "clip_then_zero_based_support_index",
+    "loss": "crps",
+    "head": "train_only_empirical_cdf_plus_bounded_pava_residual"
+  },
+  "relational_graph": {
+    "node_roles": ["rusher", "blocker", "defender"],
+    "edge_semantics": [
+      "rusher_blocker",
+      "rusher_defender",
+      "blocker_defender",
+      "same_side_lane"
+    ],
+    "implementation_edge_ids": [
+      "returner_blocker",
+      "returner_coverer",
+      "blocker_coverer",
+      "same_team_lane"
+    ],
+    "structural_ablation": {
+      "id": "remove_blocker_defender_edges",
+      "models": ["relnet", "attn_relnet"],
+      "anchors": [20, 360],
+      "repeats": 20
+    }
+  },
+  "execution": {
+    "profile": "full100",
+    "primary_cells": 3000,
+    "structural_ablation_cells": 80,
+    "paired_smoke_replays": 2,
+    "benchmark_anchors": [20, 360],
+    "successor_automatic_start": false
+  }
+}

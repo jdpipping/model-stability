@@ -1,0 +1,11 @@
+{
+  "bootstrap_draws": 50000,
+  "bootstrap_seed": 20260904,
+  "method": "per-budget selection-aware complete-repeat bootstrap; cutoff is the largest 95th percentile over every possible tied-best subset",
+  "output": "presentations/cassis2026/data/terminal_inference/bdb2025/mcb_sensitivity.csv",
+  "output_sha256": "d1dbacb0f330850f1e7f2bfeca2ef16afb4d0786f03947a2a861dcfb6a1a81ab",
+  "schema_version": "cassis2026-bdb2025-mcb-sensitivity-v1",
+  "scope": "95% within each budget; no adjustment across six budgets",
+  "source": "results/bdb/full100_serial_bdb2025_attempt1/final/primary_metrics.csv",
+  "source_sha256": "d7cc58a35cc974292a7a1e0887cdfde20f2e2f38e9249fd3632cd8be190f131c"
+}
