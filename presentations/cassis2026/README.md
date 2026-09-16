@@ -4,6 +4,9 @@
 Playbook: Comparing Predictive Uncertainty Across Model Classes for NFL Big
 Data Bowl Problems*. The talk presents the completed BDB2020–2025 studies.
 
+[`presentation.pdf`](presentation.pdf) is the flat PDF edition: one page per
+slide, with all reveals visible and no transitions.
+
 ## Render the presentation
 
 The retained figures, fonts, theme, and bibliography are sufficient to render
